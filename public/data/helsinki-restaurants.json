@@ -1,0 +1,475 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.945831, 60.192059]
+      },
+      "properties": {
+        "id": "restaurant-001",
+        "name": "Ravintola Nokka",
+        "type": "restaurant",
+        "cuisine": "Finnish",
+        "address": "Kanavaranta 7, Helsinki",
+        "phone": "+358 9 6128 5800",
+        "website": "https://ravintolaNokka.fi",
+        "donations": 1247,
+        "meals": 3118,
+        "lastDonation": "2024-01-15",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.938094, 60.169856]
+      },
+      "properties": {
+        "id": "restaurant-002",
+        "name": "Restaurant Olo",
+        "type": "restaurant",
+        "cuisine": "Fine Dining",
+        "address": "Pohjoisesplanadi 5, Helsinki",
+        "phone": "+358 10 320 6250",
+        "website": "https://olo-ravintola.fi",
+        "donations": 892,
+        "meals": 2230,
+        "lastDonation": "2024-01-14",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.941325, 60.164717]
+      },
+      "properties": {
+        "id": "restaurant-003",
+        "name": "Savoy",
+        "type": "restaurant",
+        "cuisine": "Finnish",
+        "address": "Eteläesplanadi 14, Helsinki",
+        "phone": "+358 9 6128 5300",
+        "website": "https://ravintolasavoy.fi",
+        "donations": 1456,
+        "meals": 3640,
+        "lastDonation": "2024-01-13",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.933333, 60.171111]
+      },
+      "properties": {
+        "id": "cafe-001",
+        "name": "Café Regatta",
+        "type": "cafe",
+        "cuisine": "Café",
+        "address": "Merikannontie 8, Helsinki",
+        "phone": "+358 40 730 2346",
+        "donations": 456,
+        "meals": 1140,
+        "lastDonation": "2024-01-16",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.952500, 60.175833]
+      },
+      "properties": {
+        "id": "restaurant-004",
+        "name": "Juuri",
+        "type": "restaurant",
+        "cuisine": "Finnish Tapas",
+        "address": "Korkeavuorenkatu 27, Helsinki",
+        "phone": "+358 9 635 732",
+        "donations": 678,
+        "meals": 1695,
+        "lastDonation": "2024-01-15",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.939167, 60.168056]
+      },
+      "properties": {
+        "id": "restaurant-005",
+        "name": "Kuurna",
+        "type": "restaurant",
+        "cuisine": "Finnish",
+        "address": "Eerikinkatu 27, Helsinki",
+        "phone": "+358 44 071 5151",
+        "donations": 534,
+        "meals": 1335,
+        "lastDonation": "2024-01-14",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.948611, 60.169722]
+      },
+      "properties": {
+        "id": "restaurant-006",
+        "name": "Demo",
+        "type": "restaurant",
+        "cuisine": "Modern Nordic",
+        "address": "Uudenmaankatu 9-11, Helsinki",
+        "phone": "+358 9 2289 0840",
+        "donations": 1123,
+        "meals": 2808,
+        "lastDonation": "2024-01-16",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.936944, 60.163889]
+      },
+      "properties": {
+        "id": "restaurant-007",
+        "name": "Palace Restaurant",
+        "type": "restaurant",
+        "cuisine": "Finnish Fine Dining",
+        "address": "Eteläranta 10, Helsinki",
+        "phone": "+358 9 1345 6735",
+        "donations": 987,
+        "meals": 2468,
+        "lastDonation": "2024-01-15",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.943056, 60.170556]
+      },
+      "properties": {
+        "id": "bakery-001",
+        "name": "Ekberg Bakery",
+        "type": "bakery",
+        "cuisine": "Bakery & Café",
+        "address": "Bulevardi 9, Helsinki",
+        "phone": "+358 9 681 2860",
+        "donations": 723,
+        "meals": 1808,
+        "lastDonation": "2024-01-16",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.940278, 60.167778]
+      },
+      "properties": {
+        "id": "restaurant-008",
+        "name": "Sea Horse",
+        "type": "restaurant",
+        "cuisine": "Finnish Traditional",
+        "address": "Kapteeninkatu 11, Helsinki",
+        "phone": "+358 9 628 169",
+        "donations": 812,
+        "meals": 2030,
+        "lastDonation": "2024-01-14",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.951389, 60.188611]
+      },
+      "properties": {
+        "id": "restaurant-009",
+        "name": "Grön",
+        "type": "restaurant",
+        "cuisine": "Vegetarian Fine Dining",
+        "address": "Albertinkatu 36, Helsinki",
+        "phone": "+358 50 325 6767",
+        "donations": 645,
+        "meals": 1613,
+        "lastDonation": "2024-01-15",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.944722, 60.172222]
+      },
+      "properties": {
+        "id": "restaurant-010",
+        "name": "Zetor",
+        "type": "restaurant",
+        "cuisine": "Finnish Pub Food",
+        "address": "Kaivokatu 10, Helsinki",
+        "phone": "+358 10 766 4450",
+        "donations": 934,
+        "meals": 2335,
+        "lastDonation": "2024-01-16",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.947500, 60.165833]
+      },
+      "properties": {
+        "id": "restaurant-011",
+        "name": "Ateljé Finne",
+        "type": "restaurant",
+        "cuisine": "Finnish",
+        "address": "Arkadiankatu 14, Helsinki",
+        "phone": "+358 10 766 3900",
+        "donations": 1089,
+        "meals": 2723,
+        "lastDonation": "2024-01-14",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.935556, 60.169444]
+      },
+      "properties": {
+        "id": "cafe-002",
+        "name": "Good Life Coffee",
+        "type": "cafe",
+        "cuisine": "Café",
+        "address": "Kolmas linja 17, Helsinki",
+        "phone": "+358 44 907 0909",
+        "donations": 378,
+        "meals": 945,
+        "lastDonation": "2024-01-15",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.949167, 60.173333]
+      },
+      "properties": {
+        "id": "restaurant-012",
+        "name": "Chez Dominique",
+        "type": "restaurant",
+        "cuisine": "French",
+        "address": "Rikhardinkatu 4, Helsinki",
+        "phone": "+358 10 766 4200",
+        "donations": 1245,
+        "meals": 3113,
+        "lastDonation": "2024-01-16",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.941944, 60.166111]
+      },
+      "properties": {
+        "id": "restaurant-013",
+        "name": "Salve",
+        "type": "restaurant",
+        "cuisine": "Italian",
+        "address": "Hietalahdenranta 11, Helsinki",
+        "phone": "+358 9 742 5500",
+        "donations": 756,
+        "meals": 1890,
+        "lastDonation": "2024-01-14",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.953889, 60.177778]
+      },
+      "properties": {
+        "id": "restaurant-014",
+        "name": "Ravintola Aino",
+        "type": "restaurant",
+        "cuisine": "Finnish",
+        "address": "Pohjoisesplanadi 21, Helsinki",
+        "phone": "+358 9 135 6356",
+        "donations": 867,
+        "meals": 2168,
+        "lastDonation": "2024-01-15",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.937222, 60.171667]
+      },
+      "properties": {
+        "id": "restaurant-015",
+        "name": "Restaurant Ask",
+        "type": "restaurant",
+        "cuisine": "Nordic",
+        "address": "Vironkatu 8, Helsinki",
+        "phone": "+358 44 234 9090",
+        "donations": 698,
+        "meals": 1745,
+        "lastDonation": "2024-01-16",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.950000, 60.168889]
+      },
+      "properties": {
+        "id": "restaurant-016",
+        "name": "Boulevard Social",
+        "type": "restaurant",
+        "cuisine": "International",
+        "address": "Bulevardi 6, Helsinki",
+        "phone": "+358 50 431 3031",
+        "donations": 923,
+        "meals": 2308,
+        "lastDonation": "2024-01-14",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.932778, 60.164444]
+      },
+      "properties": {
+        "id": "restaurant-017",
+        "name": "Mami",
+        "type": "restaurant",
+        "cuisine": "Asian Fusion",
+        "address": "Korkeav​uorenkatu 6, Helsinki",
+        "phone": "+358 40 587 9220",
+        "donations": 612,
+        "meals": 1530,
+        "lastDonation": "2024-01-15",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.946111, 60.174444]
+      },
+      "properties": {
+        "id": "restaurant-018",
+        "name": "Gaijin",
+        "type": "restaurant",
+        "cuisine": "Asian",
+        "address": "Ludviginkatu 3-5, Helsinki",
+        "phone": "+358 40 189 9290",
+        "donations": 789,
+        "meals": 1973,
+        "lastDonation": "2024-01-16",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.954722, 60.180556]
+      },
+      "properties": {
+        "id": "restaurant-019",
+        "name": "Restaurant Farouge",
+        "type": "restaurant",
+        "cuisine": "Middle Eastern",
+        "address": "Korkeavuorenkatu 3, Helsinki",
+        "phone": "+358 50 408 9940",
+        "donations": 834,
+        "meals": 2085,
+        "lastDonation": "2024-01-14",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.938611, 60.172500]
+      },
+      "properties": {
+        "id": "restaurant-020",
+        "name": "Spis",
+        "type": "restaurant",
+        "cuisine": "Scandinavian",
+        "address": "Kasarmikatu 26, Helsinki",
+        "phone": "+358 40 575 7001",
+        "donations": 701,
+        "meals": 1753,
+        "lastDonation": "2024-01-15",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.942500, 60.195000]
+      },
+      "properties": {
+        "id": "receiver-001",
+        "name": "Pelastusarmeija",
+        "type": "receiver",
+        "address": "Alppikatu 1, Helsinki",
+        "lastDonation": "2024-01-14",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.956389, 60.185278]
+      },
+      "properties": {
+        "id": "receiver-002",
+        "name": "Helsinki Food Bank",
+        "type": "receiver",
+        "address": "Sturenkatu 27, Helsinki",
+        "lastDonation": "2024-01-15",
+        "status": "active"
+      }
+    }
+  ]
+}

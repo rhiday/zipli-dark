@@ -1,0 +1,32 @@
+{
+  "nodes": [
+    { "id": "casserole", "co2eq": 72.0473333333, "mass": 20 },
+    { "id": "sauce", "co2eq": 30.7146666667, "mass": 12 },
+    { "id": "side", "co2eq": 1.75, "mass": 7 },
+    { "id": "soup", "co2eq": 35.3391666667, "mass": 11 },
+    { "id": "stew", "co2eq": 59.02, "mass": 12 },
+    { "id": "beef", "co2eq": 156.5202777778, "mass": 16 },
+    { "id": "fish", "co2eq": 13.357, "mass": 6 },
+    { "id": "pork", "co2eq": 10.1048888889, "mass": 4 },
+    { "id": "veg", "co2eq": 17.139, "mass": 29 },
+    { "id": "total", "co2eq": 198.8711666667, "mass": 62.0 }
+  ],
+  "links": [
+    { "source": "casserole", "target": "beef", "co2eq": 54.1708333333, "mass": 5 },
+    { "source": "casserole", "target": "fish", "co2eq": 13.357, "mass": 6 },
+    { "source": "casserole", "target": "veg", "co2eq": 4.5195, "mass": 9 },
+    { "source": "sauce", "target": "beef", "co2eq": 15.4844444444, "mass": 2 },
+    { "source": "sauce", "target": "pork", "co2eq": 10.1048888889, "mass": 4 },
+    { "source": "sauce", "target": "veg", "co2eq": 5.1253333333, "mass": 6 },
+    { "source": "soup", "target": "beef", "co2eq": 33.365, "mass": 6 },
+    { "source": "soup", "target": "veg", "co2eq": 1.9741666667, "mass": 5 },
+    { "source": "stew", "target": "beef", "co2eq": 53.5, "mass": 3 },
+    { "source": "stew", "target": "veg", "co2eq": 5.52, "mass": 9 },
+    { "source": "beef", "target": "total", "co2eq": 156.5202777778, "mass": 16 },
+    { "source": "fish", "target": "total", "co2eq": 13.357, "mass": 6 },
+    { "source": "pork", "target": "total", "co2eq": 10.1048888889, "mass": 4 },
+    { "source": "veg", "target": "total", "co2eq": 17.139, "mass": 29 },
+    { "source": "side", "target": "total", "co2eq": 1.75, "mass": 7.0 }
+  ]
+}
+

@@ -1,0 +1,614 @@
+[
+  {
+    "id": 1,
+    "header": "Fresh vegetables and salads",
+    "type": "Produce",
+    "status": "In Process",
+    "target": "18",
+    "limit": "5",
+    "reviewer": "Mika Virtanen"
+  },
+  {
+    "id": 2,
+    "header": "Bread and baked goods",
+    "type": "Bakery",
+    "status": "Done",
+    "target": "29",
+    "limit": "24",
+    "reviewer": "Mika Virtanen"
+  },
+  {
+    "id": 3,
+    "header": "Prepared hot meals",
+    "type": "Ready-to-eat",
+    "status": "Done",
+    "target": "10",
+    "limit": "13",
+    "reviewer": "Mika Virtanen"
+  },
+  {
+    "id": 4,
+    "header": "Dairy products",
+    "type": "Refrigerated",
+    "status": "Done",
+    "target": "27",
+    "limit": "23",
+    "reviewer": "Sanna Korhonen"
+  },
+  {
+    "id": 5,
+    "header": "Fresh fruits",
+    "type": "Produce",
+    "status": "In Process",
+    "target": "2",
+    "limit": "16",
+    "reviewer": "Sanna Korhonen"
+  },
+  {
+    "id": 6,
+    "header": "Meat and poultry",
+    "type": "Protein",
+    "status": "In Process",
+    "target": "20",
+    "limit": "8",
+    "reviewer": "Sanna Korhonen"
+  },
+  {
+    "id": 7,
+    "header": "Frozen meals",
+    "type": "Frozen",
+    "status": "In Process",
+    "target": "19",
+    "limit": "21",
+    "reviewer": "Sanna Korhonen"
+  },
+  {
+    "id": 8,
+    "header": "Pastries and desserts",
+    "type": "Bakery",
+    "status": "Done",
+    "target": "25",
+    "limit": "26",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 9,
+    "header": "Sandwiches and wraps",
+    "type": "Ready-to-eat",
+    "status": "Done",
+    "target": "7",
+    "limit": "23",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 10,
+    "header": "Canned goods",
+    "type": "Shelf-stable",
+    "status": "Done",
+    "target": "30",
+    "limit": "28",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 11,
+    "header": "Pasta and grains",
+    "type": "Shelf-stable",
+    "status": "Done",
+    "target": "9",
+    "limit": "31",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 12,
+    "header": "Eggs",
+    "type": "Refrigerated",
+    "status": "Done",
+    "target": "12",
+    "limit": "0",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 13,
+    "header": "Fish and seafood",
+    "type": "Protein",
+    "status": "Done",
+    "target": "22",
+    "limit": "33",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 14,
+    "header": "Soups and stews",
+    "type": "Ready-to-eat",
+    "status": "Done",
+    "target": "15",
+    "limit": "34",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 15,
+    "header": "Cheese and yogurt",
+    "type": "Refrigerated",
+    "status": "Done",
+    "target": "3",
+    "limit": "35",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 16,
+    "header": "Coffee and beverages",
+    "type": "Beverages",
+    "status": "In Process",
+    "target": "6",
+    "limit": "36",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 17,
+    "header": "Rice and legumes",
+    "type": "Shelf-stable",
+    "status": "Done",
+    "target": "4",
+    "limit": "37",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 18,
+    "header": "Salad ingredients",
+    "type": "Produce",
+    "status": "Done",
+    "target": "14",
+    "limit": "38",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 19,
+    "header": "Breakfast cereals",
+    "type": "Shelf-stable",
+    "status": "Done",
+    "target": "17",
+    "limit": "39",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 20,
+    "header": "Pizza and flatbreads",
+    "type": "Ready-to-eat",
+    "status": "Done",
+    "target": "11",
+    "limit": "40",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 21,
+    "header": "Frozen vegetables",
+    "type": "Frozen",
+    "status": "In Process",
+    "target": "24",
+    "limit": "18",
+    "reviewer": "Jari Nieminen"
+  },
+  {
+    "id": 22,
+    "header": "Pre-packaged snacks",
+    "type": "Shelf-stable",
+    "status": "Done",
+    "target": "15",
+    "limit": "22",
+    "reviewer": "Leena Mäkinen"
+  },
+  {
+    "id": 23,
+    "header": "Fresh herbs",
+    "type": "Produce",
+    "status": "In Process",
+    "target": "31",
+    "limit": "27",
+    "reviewer": "Antti Laine"
+  },
+  {
+    "id": 24,
+    "header": "Milk and plant-based alternatives",
+    "type": "Beverages",
+    "status": "Done",
+    "target": "8",
+    "limit": "12",
+    "reviewer": "Hanna Järvinen"
+  },
+  {
+    "id": 25,
+    "header": "Deli meats and cold cuts",
+    "type": "Protein",
+    "status": "In Process",
+    "target": "19",
+    "limit": "25",
+    "reviewer": "Pekka Salminen"
+  },
+  {
+    "id": 26,
+    "header": "Root vegetables",
+    "type": "Produce",
+    "status": "Done",
+    "target": "22",
+    "limit": "20",
+    "reviewer": "Riikka Heikkinen"
+  },
+  {
+    "id": 27,
+    "header": "Cookies and crackers",
+    "type": "Bakery",
+    "status": "In Process",
+    "target": "17",
+    "limit": "14",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 28,
+    "header": "Sauces and condiments",
+    "type": "Shelf-stable",
+    "status": "Done",
+    "target": "26",
+    "limit": "30",
+    "reviewer": "Mika Virtanen"
+  },
+  {
+    "id": 29,
+    "header": "Fruit preserves and jams",
+    "type": "Shelf-stable",
+    "status": "In Process",
+    "target": "13",
+    "limit": "16",
+    "reviewer": "Sanna Korhonen"
+  },
+  {
+    "id": 30,
+    "header": "Tofu and meat alternatives",
+    "type": "Protein",
+    "status": "Done",
+    "target": "29",
+    "limit": "32",
+    "reviewer": "Oskari Laaksonen"
+  },
+  {
+    "id": 31,
+    "header": "Frozen berries",
+    "type": "Frozen",
+    "status": "In Process",
+    "target": "21",
+    "limit": "19",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 32,
+    "header": "Cooking oils",
+    "type": "Shelf-stable",
+    "status": "Done",
+    "target": "16",
+    "limit": "23",
+    "reviewer": "Johanna Rantanen"
+  },
+  {
+    "id": 33,
+    "header": "Fresh mushrooms",
+    "type": "Produce",
+    "status": "In Process",
+    "target": "27",
+    "limit": "24",
+    "reviewer": "Ville Koskinen"
+  },
+  {
+    "id": 34,
+    "header": "Nuts and seeds",
+    "type": "Shelf-stable",
+    "status": "Done",
+    "target": "18",
+    "limit": "21",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 35,
+    "header": "Juices and smoothies",
+    "type": "Beverages",
+    "status": "In Process",
+    "target": "23",
+    "limit": "26",
+    "reviewer": "Maija Toivonen"
+  },
+  {
+    "id": 36,
+    "header": "Ice cream and frozen desserts",
+    "type": "Frozen",
+    "status": "Done",
+    "target": "14",
+    "limit": "17",
+    "reviewer": "Sanna Korhonen"
+  },
+  {
+    "id": 37,
+    "header": "Dinner rolls and buns",
+    "type": "Bakery",
+    "status": "In Process",
+    "target": "25",
+    "limit": "28",
+    "reviewer": "Mika Virtanen"
+  },
+  {
+    "id": 38,
+    "header": "Baby food and formula",
+    "type": "Shelf-stable",
+    "status": "Done",
+    "target": "20",
+    "limit": "15",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 39,
+    "header": "Spices and seasonings",
+    "type": "Shelf-stable",
+    "status": "In Process",
+    "target": "12",
+    "limit": "19",
+    "reviewer": "Tuuli Lahtinen"
+  },
+  {
+    "id": 40,
+    "header": "Citrus fruits",
+    "type": "Produce",
+    "status": "Done",
+    "target": "28",
+    "limit": "31",
+    "reviewer": "Eero Virtanen"
+  },
+  {
+    "id": 41,
+    "header": "Butter and margarine",
+    "type": "Refrigerated",
+    "status": "In Process",
+    "target": "19",
+    "limit": "22",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 42,
+    "header": "Sushi and Asian dishes",
+    "type": "Ready-to-eat",
+    "status": "Done",
+    "target": "30",
+    "limit": "33",
+    "reviewer": "Aino Virtanen"
+  },
+  {
+    "id": 43,
+    "header": "Leafy greens",
+    "type": "Produce",
+    "status": "In Process",
+    "target": "11",
+    "limit": "14",
+    "reviewer": "Mika Virtanen"
+  },
+  {
+    "id": 44,
+    "header": "Honey and syrups",
+    "type": "Shelf-stable",
+    "status": "Done",
+    "target": "24",
+    "limit": "27",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 45,
+    "header": "Sausages and processed meats",
+    "type": "Protein",
+    "status": "In Process",
+    "target": "17",
+    "limit": "20",
+    "reviewer": "Kaisa Nieminen"
+  },
+  {
+    "id": 46,
+    "header": "Tomatoes and peppers",
+    "type": "Produce",
+    "status": "Done",
+    "target": "22",
+    "limit": "25",
+    "reviewer": "Sanna Korhonen"
+  },
+  {
+    "id": 47,
+    "header": "Flour and baking supplies",
+    "type": "Shelf-stable",
+    "status": "In Process",
+    "target": "15",
+    "limit": "18",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 48,
+    "header": "Energy drinks and sodas",
+    "type": "Beverages",
+    "status": "Done",
+    "target": "26",
+    "limit": "29",
+    "reviewer": "Mikko Saarinen"
+  },
+  {
+    "id": 49,
+    "header": "Cucumber and zucchini",
+    "type": "Produce",
+    "status": "In Process",
+    "target": "13",
+    "limit": "16",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 50,
+    "header": "Smoked and cured fish",
+    "type": "Protein",
+    "status": "Done",
+    "target": "28",
+    "limit": "31",
+    "reviewer": "Mika Virtanen"
+  },
+  {
+    "id": 51,
+    "header": "Potatoes and sweet potatoes",
+    "type": "Produce",
+    "status": "In Process",
+    "target": "21",
+    "limit": "24",
+    "reviewer": "Sanna Korhonen"
+  },
+  {
+    "id": 52,
+    "header": "Chocolate and candy",
+    "type": "Shelf-stable",
+    "status": "Done",
+    "target": "16",
+    "limit": "19",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 53,
+    "header": "Onions and garlic",
+    "type": "Produce",
+    "status": "In Process",
+    "target": "29",
+    "limit": "32",
+    "reviewer": "Laura Korhonen"
+  },
+  {
+    "id": 54,
+    "header": "Fresh salmon and trout",
+    "type": "Protein",
+    "status": "Done",
+    "target": "14",
+    "limit": "17",
+    "reviewer": "Mika Virtanen"
+  },
+  {
+    "id": 55,
+    "header": "Tea and herbal infusions",
+    "type": "Beverages",
+    "status": "In Process",
+    "target": "27",
+    "limit": "30",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 56,
+    "header": "Bagels and croissants",
+    "type": "Bakery",
+    "status": "Done",
+    "target": "20",
+    "limit": "23",
+    "reviewer": "Sanna Korhonen"
+  },
+  {
+    "id": 57,
+    "header": "Bell peppers and chili peppers",
+    "type": "Produce",
+    "status": "In Process",
+    "target": "15",
+    "limit": "18",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 58,
+    "header": "Hummus and dips",
+    "type": "Refrigerated",
+    "status": "Done",
+    "target": "30",
+    "limit": "33",
+    "reviewer": "Mika Virtanen"
+  },
+  {
+    "id": 59,
+    "header": "Apples and pears",
+    "type": "Produce",
+    "status": "In Process",
+    "target": "23",
+    "limit": "26",
+    "reviewer": "Sanna Korhonen"
+  },
+  {
+    "id": 60,
+    "header": "Pickled vegetables",
+    "type": "Shelf-stable",
+    "status": "Done",
+    "target": "18",
+    "limit": "21",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 61,
+    "header": "Tortillas and flatbreads",
+    "type": "Bakery",
+    "status": "In Process",
+    "target": "25",
+    "limit": "28",
+    "reviewer": "Timo Virtanen"
+  },
+  {
+    "id": 62,
+    "header": "Dried fruits",
+    "type": "Shelf-stable",
+    "status": "Done",
+    "target": "12",
+    "limit": "15",
+    "reviewer": "Mika Virtanen"
+  },
+  {
+    "id": 63,
+    "header": "Olives and antipasti",
+    "type": "Shelf-stable",
+    "status": "In Process",
+    "target": "27",
+    "limit": "30",
+    "reviewer": "Sanna Korhonen"
+  },
+  {
+    "id": 64,
+    "header": "Chicken breast and thighs",
+    "type": "Protein",
+    "status": "Done",
+    "target": "22",
+    "limit": "25",
+    "reviewer": "Assign reviewer"
+  },
+  {
+    "id": 65,
+    "header": "Fresh berries",
+    "type": "Produce",
+    "status": "In Process",
+    "target": "19",
+    "limit": "22",
+    "reviewer": "Emmi Virtanen"
+  },
+  {
+    "id": 66,
+    "header": "Cream and sour cream",
+    "type": "Refrigerated",
+    "status": "Done",
+    "target": "24",
+    "limit": "27",
+    "reviewer": "Mika Virtanen"
+  },
+  {
+    "id": 67,
+    "header": "Carrots and beets",
+    "type": "Produce",
+    "status": "In Process",
+    "target": "21",
+    "limit": "24",
+    "reviewer": "Sanna Korhonen"
+  },
+  {
+    "id": 68,
+    "header": "Frozen pizza",
+    "type": "Frozen",
+    "status": "Done",
+    "target": "26",
+    "limit": "29",
+    "reviewer": "Assign reviewer"
+  }
+]
