@@ -3,14 +3,32 @@
 import { Plus, Settings, FileText, Download, Users, BarChart3 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { LogDonationDialog } from "./log-donation-dialog"
 
 export function QuickActions() {
+  const handleDonationLogged = (donation: {
+    donor: string
+    receiver: string
+    amount: string
+    foodType?: string
+    notes?: string
+  }) => {
+    // In a real app, this would send to an API
+    console.log("Donation logged:", donation)
+    // You could also show a toast notification here
+  }
+
   return (
     <div className="flex items-center space-x-2">
-      <Button className="cursor-pointer">
-        <Plus className="h-4 w-4 mr-2" />
-        Log Donation
-      </Button>
+      <LogDonationDialog
+        trigger={
+          <Button className="cursor-pointer">
+            <Plus className="h-4 w-4 mr-2" />
+            Log Donation
+          </Button>
+        }
+        onDonationLogged={handleDonationLogged}
+      />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" className="cursor-pointer">
