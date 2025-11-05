@@ -1,0 +1,385 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [24.8278, 60.1849]
+    },
+    "properties": {
+      "id": "student-001",
+      "name": "Alvari",
+      "type": "student restaurant",
+      "cuisine": "Cafeteria",
+      "address": "Otakaari 1 D, Espoo",
+      "phone": "+358 9 470 01",
+      "website": "https://www.compass-group.fi/ravintolat-ja-ruokalistat/foodco/kaupungit/espoo/alvari/",
+      "donations": 1247,
+      "meals": 3118,
+      "lastDonation": "2025-10-15",
+      "status": "active"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [24.8205, 60.1875]
+    },
+    "properties": {
+      "id": "student-002",
+      "name": "TUAS",
+      "type": "student restaurant",
+      "cuisine": "Cafeteria",
+      "address": "Maarintie 8, Espoo",
+      "phone": "+358 9 470 01",
+      "website": "https://www.compass-group.fi/ravintolat-ja-ruokalistat/foodco/kaupungit/espoo/tuas-aalto-yliopisto/",
+      "donations": 892,
+      "meals": 2230,
+      "lastDonation": "2025-10-14",
+      "status": "active"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [24.8295, 60.1845]
+    },
+    "properties": {
+      "id": "student-003",
+      "name": "Dipoli Reima",
+      "type": "student restaurant",
+      "cuisine": "Cafeteria",
+      "address": "Otakaari 24, Espoo",
+      "phone": "+358 9 470 01",
+      "website": "https://www.compass-group.fi/en/ravintolat-ja-ruokalistat/food--co/kaupungit/espoo/dipoli-ravintolat/",
+      "donations": 1456,
+      "meals": 3640,
+      "lastDonation": "2025-10-13",
+      "status": "active"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [24.8276, 60.1838]
+    },
+    "properties": {
+      "id": "student-004",
+      "name": "A Bloc",
+      "type": "student restaurant",
+      "cuisine": "Cafeteria",
+      "address": "Otaniementie 12, Espoo",
+      "phone": "+358 50 373 2358",
+      "website": "https://www.compass-group.fi/en/ravintolat-ja-ruokalistat/food--co/kaupungit/espoo/a-bloc/",
+      "donations": 456,
+      "meals": 1140,
+      "lastDonation": "2025-10-16",
+      "status": "active"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [24.8330, 60.1860]
+    },
+    "properties": {
+      "id": "student-005",
+      "name": "Täffä",
+      "type": "student restaurant",
+      "cuisine": "Cafeteria",
+      "address": "Otakaari 22, Espoo",
+      "phone": "+358 9 470 24488",
+      "website": "http://teknologforeningen.fi/",
+      "donations": 678,
+      "meals": 1695,
+      "lastDonation": "2025-10-15",
+      "status": "active"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [24.8205, 60.1815]
+    },
+    "properties": {
+      "id": "student-006",
+      "name": "Arvo",
+      "type": "student restaurant",
+      "cuisine": "Cafeteria",
+      "address": "Ekonominaukio 1, Espoo",
+      "phone": "+358 46 923 1295",
+      "website": "https://www.sodexo.fi/arvo",
+      "donations": 534,
+      "meals": 1335,
+      "lastDonation": "2025-10-14",
+      "status": "active"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [24.8260, 60.1855]
+    },
+    "properties": {
+      "id": "student-007",
+      "name": "Kvarkki",
+      "type": "student restaurant",
+      "cuisine": "Cafeteria",
+      "address": "Otakaari 3, Espoo",
+      "phone": "+358 50 347 9152",
+      "website": "http://www.sodexo.fi/kvarkki",
+      "donations": 1123,
+      "meals": 2808,
+      "lastDonation": "2025-10-16",
+      "status": "active"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [24.9494, 60.1692]
+    },
+    "properties": {
+      "id": "student-008",
+      "name": "Sodexo Helsinki University Main Building",
+      "type": "student restaurant",
+      "cuisine": "Cafeteria",
+      "address": "Fabianinkatu 33, Helsinki",
+      "phone": "+358 46 922 8855",
+      "website": "https://www.sodexo.fi/en/restaurants/helsinki-university-main-building",
+      "donations": 987,
+      "meals": 2468,
+      "lastDonation": "2025-10-15",
+      "status": "active"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [24.9373, 60.1680]
+    },
+    "properties": {
+      "id": "student-009",
+      "name": "UniCafe Ylioppilasaukio",
+      "type": "student restaurant",
+      "cuisine": "Cafeteria",
+      "address": "Mannerheimintie 3B, Helsinki",
+      "phone": "+358 50 411 6520",
+      "website": "https://unicafe.fi/en/",
+      "donations": 723,
+      "meals": 1808,
+      "lastDonation": "2025-10-16",
+      "status": "active"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [24.9480, 60.1710]
+    },
+    "properties": {
+      "id": "student-010",
+      "name": "UniCafe Metsätalo",
+      "type": "student restaurant",
+      "cuisine": "Cafeteria",
+      "address": "Fabianinkatu 39, Helsinki",
+    "phone": "+358 9 191 21603",
+    "website": "https://unicafe.fi/en/",
+    "donations": 812,
+    "meals": 2030,
+    "lastDonation": "2025-10-14",
+    "status": "active"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [24.9375, 60.1685]
+    },
+    "properties": {
+      "id": "student-011",
+      "name": "UniCafe Kaivopiha",
+      "type": "student restaurant",
+      "cuisine": "Cafeteria",
+      "address": "Mannerheimintie 3, Helsinki",
+      "phone": "+358 50 411 6520",
+      "website": "https://unicafe.fi/en/",
+      "donations": 645,
+      "meals": 1613,
+      "lastDonation": "2025-10-15",
+      "status": "active"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [24.9510, 60.1725]
+    },
+    "properties": {
+      "id": "student-012",
+      "name": "UniCafe Olivia",
+      "type": "student restaurant",
+      "cuisine": "Cafeteria",
+      "address": "Siltavuorenpenger 20R, Helsinki",
+      "phone": "+358 50 411 6520",
+      "website": "https://unicafe.fi/en/",
+      "donations": 934,
+      "meals": 2335,
+      "lastDonation": "2025-10-16",
+      "status": "active"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [24.9330, 60.1690]
+    },
+    "properties": {
+      "id": "staff-001",
+      "name": "Staff restaurant Sähkötalo",
+      "type": "staff restaurant",
+      "cuisine": "Cafeteria",
+      "address": "Kampinkuja 2, Helsinki",
+      "phone": "+358 9 310 1691",
+      "website": "https://palvelukeskus.hel.fi/en/",
+      "donations": 1089,
+      "meals": 2723,
+      "lastDonation": "2025-10-14",
+      "status": "active"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [25.0000, 60.2290]
+    },
+    "properties": {
+      "id": "staff-002",
+      "name": "Staff restaurant Viikinmäki",
+      "type": "staff restaurant",
+      "cuisine": "Cafeteria",
+      "address": "Hernepellontie 26, Helsinki",
+      "phone": "+358 9 310 1691",
+      "website": "https://palvelukeskus.hel.fi/en/",
+      "donations": 378,
+      "meals": 945,
+      "lastDonation": "2025-10-15",
+      "status": "active"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [24.9450, 60.1690]
+    },
+    "properties": {
+      "id": "staff-003",
+      "name": "Roasberg",
+      "type": "staff restaurant",
+      "cuisine": "Cafe",
+      "address": "Mikonkatu 13, Helsinki",
+      "phone": "+358 9 612 2222",
+      "website": "https://roasberg.fi/",
+      "donations": 1245,
+      "meals": 3113,
+      "lastDonation": "2025-10-16",
+      "status": "active"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [24.9320, 60.1695]
+    },
+    "properties": {
+      "id": "staff-004",
+      "name": "Espresso House Kamppi",
+      "type": "staff restaurant",
+      "cuisine": "Cafe",
+      "address": "Urho Kekkosen katu 1, Helsinki",
+      "phone": "+358 10 321 2220",
+      "website": "https://espressohouse.com/",
+      "donations": 756,
+      "meals": 1890,
+      "lastDonation": "2025-10-14",
+      "status": "active"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [24.9379, 60.1737]
+    },
+    "properties": {
+      "id": "staff-005",
+      "name": "Oodi Library Café",
+      "type": "staff restaurant",
+      "cuisine": "Cafe",
+      "address": "Töölönlahdenkatu 4, Helsinki",
+      "phone": "+358 9 310 85000",
+      "website": "https://www.oodihelsinki.fi/",
+      "donations": 645,
+      "meals": 1613,
+      "lastDonation": "2025-10-15",
+      "status": "active"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [24.9340, 60.1630]
+    },
+    "properties": {
+      "id": "school-001",
+      "name": "Ressu Comprehensive School Cafeteria",
+      "type": "school restaurant",
+      "cuisine": "School Cafeteria",
+      "address": "Kalevankatu 8-10, Helsinki",
+      "phone": "+358 9 310 82101",
+      "website": "https://www.hel.fi/ressunperuskoulu",
+      "donations": 534,
+      "meals": 1335,
+      "lastDonation": "2025-10-14",
+      "status": "active"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [25.1210, 60.1970]
+    },
+    "properties": {
+      "id": "school-002",
+      "name": "Kallahti Comprehensive School Cafeteria",
+      "type": "school restaurant",
+      "cuisine": "School Cafeteria",
+      "address": "Pohjavedenkatu 5, Helsinki",
+      "phone": "+358 9 310 82416",
+      "website": "https://www.hel.fi/kallahdenperuskoulu",
+      "donations": 1123,
+      "meals": 2808,
+      "lastDonation": "2025-10-16",
+      "status": "active"
+    }
+  }
+]
+}
