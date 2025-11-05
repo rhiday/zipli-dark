@@ -13,7 +13,7 @@ export default function ClimateImpactPage() {
       <div className="mt-6 bg-card rounded-lg border p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold">Food flow (Sankey)</h2>
-          <Tabs value={metric} onValueChange={(v) => setMetric(v as any)}>
+          <Tabs value={metric} onValueChange={(v) => setMetric(v as "co2eq" | "mass")}>
             <TabsList>
               <TabsTrigger value="co2eq">CO₂e</TabsTrigger>
               <TabsTrigger value="mass">Mass</TabsTrigger>

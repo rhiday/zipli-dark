@@ -1,6 +1,6 @@
 "use client"
 
-import { Plus, Settings, FileText, Download, Users, BarChart3 } from "lucide-react"
+import { Plus, Settings, Download, Users, BarChart3 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { LogDonationDialog } from "./log-donation-dialog"

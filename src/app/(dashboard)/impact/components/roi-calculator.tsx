@@ -53,7 +53,7 @@ export function ROICalculator() {
           }
         }
         setIntensityKgPerKg(prev => ({ ...prev, ...(map as Record<ProteinKey, number>) }))
-      } catch (e) {
+      } catch {
         // keep defaults if fetch fails
       }
     }

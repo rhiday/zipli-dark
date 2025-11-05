@@ -7,7 +7,7 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-import { Users, MapPin, TrendingUp, Target, ArrowUpIcon, UserIcon, Utensils, Heart } from "lucide-react"
+import { MapPin, TrendingUp, Target, ArrowUpIcon, Utensils, Heart } from "lucide-react"
 
 const receiverImpactData = [
   { month: "Jan", new: 12, active: 23, completed: 8 },

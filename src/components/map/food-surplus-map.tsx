@@ -4,12 +4,24 @@ import React, { useState, useCallback, useEffect } from 'react'
 import Map, { Marker, Popup } from 'react-map-gl'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { MapPin, Package, Users, Clock, X } from 'lucide-react'
+import { Package, Users, Clock, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { DonationGauge } from '@/components/ui/donation-gauge'
 
+interface LocationData {
+  geometry: { coordinates: [number, number] };
+  properties: {
+    id: string;
+    name: string;
+    type: string;
+    donations?: number;
+    meals?: number;
+    lastDonation?: string;
+  };
+}
+
 interface LocationPopupProps {
-  location: any
+  location: LocationData
   onClose: () => void
 }
 
@@ -73,8 +85,10 @@ function LocationPopup({ location, onClose }: LocationPopupProps) {
 }
 
 export function FoodSurplusMap() {
-  const [selectedLocation, setSelectedLocation] = useState<any>(null)
-  const [restaurantData, setRestaurantData] = useState<any>(null)
+  const [selectedLocation, setSelectedLocation] = useState<LocationData | null>(null)
+  const [restaurantData, setRestaurantData] = useState<{
+    features: LocationData[];
+  } | null>(null)
   const [loading, setLoading] = useState(true)
   const [viewState, setViewState] = useState({
     longitude: 24.945831,
@@ -99,7 +113,7 @@ export function FoodSurplusMap() {
     loadRestaurants()
   }, [])
 
-  const handleMarkerClick = useCallback((e: any, location: any) => {
+  const handleMarkerClick = useCallback((e: { originalEvent: { stopPropagation: () => void } }, location: LocationData) => {
     e.originalEvent.stopPropagation()
     setSelectedLocation(location)
   }, [])
@@ -129,7 +143,7 @@ export function FoodSurplusMap() {
         style={{ width: '100%', height: '100%' }}
         mapStyle="mapbox://styles/mapbox/dark-v11"
       >
-        {restaurantData?.features.map((location: any) => (
+        {restaurantData?.features.map((location: LocationData) => (
           <Marker
             key={location.properties.id}
             longitude={location.geometry.coordinates[0]}

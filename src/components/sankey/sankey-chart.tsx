@@ -73,70 +73,76 @@ export default function SankeyChart({ metric = 'mass' }: SankeyChartProps) {
         svg.attr("width", width).attr("height", height);
 
         const sankeyGenerator = sankey<SankeyNode, SankeyLink>()
-            // @ts-ignore d3 types are permissive here
-            .nodeId((d: any) => d.id)
+            // @ts-expect-error d3 types are permissive here
+            .nodeId((d: SankeyNode) => d.id as string)
             .nodeWidth(15)
             .nodePadding(10)
             .extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]]);
 
-        // @ts-ignore — d3 types here are permissive
+        // @ts-expect-error — d3 types here are permissive
         const { nodes, links } = sankeyGenerator(data);
 
         const color = d3.scaleOrdinal([
             "#22c55e", "#86efac", "#166534", "#0f3a1b", "#f59e0b", "#ef4444", "#22c55e",
         ]);
 
-        const link = svg.append("g")
+        svg.append("g")
             .selectAll("path")
-            .data(links as any)
+            .data(links)
             .enter()
             .append("path")
-            .attr("d", (d: any) => sankeyLinkHorizontal()(d))
+            .attr("d", (d: SankeyLink) => sankeyLinkHorizontal()(d))
             .attr("fill", "none")
-            .attr("stroke", (d: any) => color((d.source as any).id))
-            .attr("stroke-width", (d: any) => Math.max(1, (d as any).width))
+            .attr("stroke", (d: SankeyLink) => color((d.source as SankeyNode).id as string))
+            .attr("stroke-width", (d: SankeyLink) => Math.max(1, (d as SankeyLink & { width?: number }).width ?? 1))
             .attr("opacity", 0.6);
 
         svg.append("g")
             .selectAll("rect")
-            .data(nodes as any)
+            .data(nodes)
             .enter()
             .append("rect")
-            .attr("x", (d: any) => d.x0)
-            .attr("y", (d: any) => d.y0)
-            .attr("height", (d: any) => d.y1 - d.y0)
-            .attr("width", (d: any) => d.x1 - d.x0)
-            .attr("fill", (d: any) => color(d.id as any))
+            .attr("x", (d: SankeyNode) => (d as SankeyNode & { x0?: number }).x0 ?? 0)
+            .attr("y", (d: SankeyNode) => (d as SankeyNode & { y0?: number }).y0 ?? 0)
+            .attr("height", (d: SankeyNode) => {
+                const dTyped = d as SankeyNode & { y0?: number; y1?: number };
+                return (dTyped.y1 ?? 0) - (dTyped.y0 ?? 0);
+            })
+            .attr("width", (d: SankeyNode) => {
+                const dTyped = d as SankeyNode & { x0?: number; x1?: number };
+                return (dTyped.x1 ?? 0) - (dTyped.x0 ?? 0);
+            })
+            .attr("fill", (d: SankeyNode) => color(d.id as string))
             .attr("opacity", 0.8);
 
         const textColor = getComputedStyle(document.documentElement).getPropertyValue('--foreground').trim() || '#0f172a';
         svg.append("g")
             .selectAll("text")
-            .data(nodes as any)
+            .data(nodes)
             .enter()
             .append("text")
-            .attr("x", (d: any) => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
-            .attr("y", (d: any) => (d.y0 + d.y1) / 2)
-            .attr("text-anchor", (d: any) => d.x0 < width / 2 ? "start" : "end")
+            .attr("x", (d: SankeyNode) => {
+                const dTyped = d as SankeyNode & { x0?: number; x1?: number };
+                const x0 = dTyped.x0 ?? 0;
+                return x0 < width / 2 ? (dTyped.x1 ?? 0) + 6 : x0 - 6;
+            })
+            .attr("y", (d: SankeyNode) => {
+                const dTyped = d as SankeyNode & { y0?: number; y1?: number };
+                return ((dTyped.y0 ?? 0) + (dTyped.y1 ?? 0)) / 2;
+            })
+            .attr("text-anchor", (d: SankeyNode) => {
+                const dTyped = d as SankeyNode & { x0?: number };
+                return (dTyped.x0 ?? 0) < width / 2 ? "start" : "end";
+            })
             .attr("dy", "0.35em")
             .attr("font-size", "11px")
             .attr("fill", `oklch(${textColor})`)
             .attr("font-weight", "500")
-            .text((d: any) => {
+            .text((d: SankeyNode) => {
                 const unit = metric === 'mass' ? ' kg' : ' kg CO₂e';
                 return `${d.name} (${(d.value as number)?.toFixed(1)}${unit})`;
             });
-    }, [data]);
-
-    const getCategoryDisplayName = (category: string): string => {
-        const categoryMap: Record<string, string> = {
-            main_protein: "Pääruoka",
-            energy_supplement: "Energiatuki",
-            soup: "Keitto",
-            salad_ingredients: "Salaatti",
-        };
-        return categoryMap[category] || category;
-    };
+    }, [data, metric]);
 
     if (loading) {
         return (

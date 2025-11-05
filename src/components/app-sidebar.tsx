@@ -3,21 +3,10 @@
 import * as React from "react"
 import {
   LayoutPanelLeft,
-  LayoutDashboard,
   BarChart3,
-  Mail,
-  CheckSquare,
   MessageCircle,
   ListChecks,
   Megaphone,
-  Calendar,
-  Shield,
-  AlertTriangle,
-  Settings,
-  HelpCircle,
-  CreditCard,
-  LayoutTemplate,
-  Users,
 } from "lucide-react"
 import Link from "next/link"
 import { Logo } from "@/components/logo"

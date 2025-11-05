@@ -32,7 +32,6 @@ function getPotentialColor(score: number): string {
 
 export function DonationGauge({ donations, meals, size = 'md', showLabel = true }: DonationGaugeProps) {
   const potential = calculatePotential(donations, meals)
-  const label = getPotentialLabel(potential)
   const color = getPotentialColor(potential)
 
   const chartData = [

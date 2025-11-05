@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
 import {
   closestCenter,
   DndContext,
@@ -949,9 +950,11 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
         {/* Food Item Image */}
         <div className="px-4 pb-4">
           <div className="relative aspect-video w-full overflow-hidden rounded-lg border bg-muted">
-            <img 
+            <Image 
               src={`https://placehold.co/800x450/e5e7eb/6b7280?text=${encodeURIComponent(item.header)}`}
               alt={item.header}
+              width={800}
+              height={450}
               className="object-cover w-full h-full"
             />
           </div>
