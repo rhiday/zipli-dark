@@ -16,13 +16,6 @@ function calculatePotential(donations: number, meals: number): number {
   return score
 }
 
-function getPotentialLabel(score: number): string {
-  if (score >= 75) return 'Excellent'
-  if (score >= 50) return 'Good'
-  if (score >= 25) return 'Medium'
-  return 'Low'
-}
-
 function getPotentialColor(score: number): string {
   if (score >= 75) return 'hsl(142, 76%, 36%)' // green
   if (score >= 50) return 'hsl(45, 93%, 47%)' // yellow
