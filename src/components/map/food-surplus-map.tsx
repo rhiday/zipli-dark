@@ -4,7 +4,7 @@ import React, { useState, useCallback, useEffect } from 'react'
 import Map, { Marker, Popup } from 'react-map-gl'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Package, Users, Clock, X } from 'lucide-react'
+import { Package, Users, Clock, X, UtensilsCrossed, Coffee, School, Building2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { DonationGauge } from '@/components/ui/donation-gauge'
 
@@ -14,6 +14,7 @@ interface LocationData {
     id: string;
     name: string;
     type: string;
+    cuisine?: string;
     donations?: number;
     meals?: number;
     lastDonation?: string;
@@ -23,6 +24,63 @@ interface LocationData {
 interface LocationPopupProps {
   location: LocationData
   onClose: () => void
+}
+
+// Helper function to get icon and color based on type/cuisine
+function getLocationStyle(type: string, cuisine?: string) {
+  if (type === 'receiver') {
+    return {
+      icon: Users,
+      bgColor: 'bg-orange-500',
+      label: 'Receiver'
+    }
+  }
+  
+  if (type === 'student restaurant') {
+    return {
+      icon: UtensilsCrossed,
+      bgColor: 'bg-blue-600',
+      label: 'Student Restaurant'
+    }
+  }
+  
+  if (type === 'staff restaurant') {
+    if (cuisine === 'Cafe') {
+      return {
+        icon: Coffee,
+        bgColor: 'bg-amber-600',
+        label: 'Staff Café'
+      }
+    }
+    return {
+      icon: Building2,
+      bgColor: 'bg-purple-600',
+      label: 'Staff Restaurant'
+    }
+  }
+  
+  if (type === 'school restaurant' || cuisine === 'School Cafeteria') {
+    return {
+      icon: School,
+      bgColor: 'bg-green-600',
+      label: 'School Cafeteria'
+    }
+  }
+  
+  if (cuisine === 'Cafe') {
+    return {
+      icon: Coffee,
+      bgColor: 'bg-amber-600',
+      label: 'Café'
+    }
+  }
+  
+  // Default for cafeterias
+  return {
+    icon: UtensilsCrossed,
+    bgColor: 'bg-blue-600',
+    label: 'Cafeteria'
+  }
 }
 
 function LocationPopup({ location, onClose }: LocationPopupProps) {
@@ -81,6 +139,38 @@ function LocationPopup({ location, onClose }: LocationPopupProps) {
         </CardContent>
       </Card>
     </Popup>
+  )
+}
+
+// Legend component
+function MapLegend() {
+  const legendItems = [
+    { icon: UtensilsCrossed, color: 'bg-blue-600', label: 'Student Restaurant' },
+    { icon: Building2, color: 'bg-purple-600', label: 'Staff Restaurant' },
+    { icon: School, color: 'bg-green-600', label: 'School Cafeteria' },
+    { icon: Coffee, color: 'bg-amber-600', label: 'Café' },
+    { icon: Users, color: 'bg-orange-500', label: 'Receiver' },
+  ]
+
+  return (
+    <Card className="absolute bottom-4 left-4 z-10 shadow-lg">
+      <CardContent className="p-3">
+        <p className="text-xs font-semibold mb-2 text-muted-foreground">Location Types</p>
+        <div className="space-y-1.5">
+          {legendItems.map((item, index) => {
+            const Icon = item.icon
+            return (
+              <div key={index} className="flex items-center gap-2">
+                <div className={`w-6 h-6 ${item.color} rounded-full flex items-center justify-center flex-shrink-0`}>
+                  <Icon className="h-3.5 w-3.5 text-white" />
+                </div>
+                <span className="text-xs">{item.label}</span>
+              </div>
+            )
+          })}
+        </div>
+      </CardContent>
+    </Card>
   )
 }
 
@@ -172,23 +262,24 @@ export function FoodSurplusMap() {
         style={{ width: '100%', height: '100%' }}
         mapStyle="mapbox://styles/mapbox/dark-v11"
       >
-        {restaurantData?.features.map((location: LocationData) => (
-          <Marker
-            key={location.properties.id}
-            longitude={location.geometry.coordinates[0]}
-            latitude={location.geometry.coordinates[1]}
-            onClick={(e) => handleMarkerClick(e, location)}
-            style={{ cursor: 'pointer' }}
-          >
-            <div className={`w-10 h-10 ${location.properties.type === 'receiver' ? 'bg-orange-500' : 'bg-blue-600'} rounded-full border-2 border-white shadow-lg flex items-center justify-center`}>
-              {location.properties.type === 'receiver' ? (
-                <Users className="h-5 w-5 text-white" />
-              ) : (
-                <Package className="h-5 w-5 text-white" />
-              )}
-            </div>
-          </Marker>
-        ))}
+        {restaurantData?.features.map((location: LocationData) => {
+          const style = getLocationStyle(location.properties.type, location.properties.cuisine)
+          const Icon = style.icon
+          
+          return (
+            <Marker
+              key={location.properties.id}
+              longitude={location.geometry.coordinates[0]}
+              latitude={location.geometry.coordinates[1]}
+              onClick={(e) => handleMarkerClick(e, location)}
+              style={{ cursor: 'pointer' }}
+            >
+              <div className={`w-10 h-10 ${style.bgColor} rounded-full border-2 border-white shadow-lg flex items-center justify-center hover:scale-110 transition-transform`}>
+                <Icon className="h-5 w-5 text-white" />
+              </div>
+            </Marker>
+          )
+        })}
 
         {selectedLocation && (
           <LocationPopup
@@ -196,6 +287,8 @@ export function FoodSurplusMap() {
             onClose={handleClosePopup}
           />
         )}
+        
+        <MapLegend />
         </Map>
       )}
     </div>
