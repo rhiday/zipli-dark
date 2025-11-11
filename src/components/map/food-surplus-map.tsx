@@ -90,6 +90,7 @@ export function FoodSurplusMap() {
     features: LocationData[];
   } | null>(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [viewState, setViewState] = useState({
     longitude: 24.945831,
     latitude: 60.192059,
@@ -101,11 +102,19 @@ export function FoodSurplusMap() {
     async function loadRestaurants() {
       try {
         setLoading(true)
+        setError(null)
         const response = await fetch('/data/helsinki-restaurants.json')
+        if (!response.ok) {
+          throw new Error(`Failed to load data: ${response.status}`)
+        }
         const data = await response.json()
+        if (!data.features || !Array.isArray(data.features)) {
+          throw new Error('Invalid data format')
+        }
         setRestaurantData(data)
       } catch (error) {
         console.error('Failed to load restaurant data:', error)
+        setError(error instanceof Error ? error.message : 'Failed to load map data')
       } finally {
         setLoading(false)
       }
@@ -123,6 +132,7 @@ export function FoodSurplusMap() {
   }, [])
 
   const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || 'pk.your-mapbox-token-here'
+  const hasValidToken = MAPBOX_TOKEN && MAPBOX_TOKEN !== 'pk.your-mapbox-token-here'
 
   return (
     <div className="w-full h-[500px] rounded-lg border overflow-hidden relative">
@@ -135,7 +145,26 @@ export function FoodSurplusMap() {
         </div>
       )}
 
-      <Map
+      {error && (
+        <div className="absolute inset-0 bg-background/80 backdrop-blur-sm z-10 flex items-center justify-center">
+          <div className="text-center p-4">
+            <p className="text-sm text-destructive mb-2">Error: {error}</p>
+            <p className="text-xs text-muted-foreground">Check browser console for details</p>
+          </div>
+        </div>
+      )}
+
+      {!hasValidToken && (
+        <div className="absolute inset-0 bg-background/80 backdrop-blur-sm z-10 flex items-center justify-center">
+          <div className="text-center p-4">
+            <p className="text-sm text-muted-foreground mb-2">Mapbox token not configured</p>
+            <p className="text-xs text-muted-foreground">Set NEXT_PUBLIC_MAPBOX_TOKEN in your environment variables</p>
+          </div>
+        </div>
+      )}
+
+      {hasValidToken && !error && (
+        <Map
         {...viewState}
         onMove={evt => setViewState(evt.viewState)}
         onClick={() => setSelectedLocation(null)}
@@ -167,7 +196,8 @@ export function FoodSurplusMap() {
             onClose={handleClosePopup}
           />
         )}
-      </Map>
+        </Map>
+      )}
     </div>
   )
 }
