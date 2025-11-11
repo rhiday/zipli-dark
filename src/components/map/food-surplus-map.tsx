@@ -103,7 +103,7 @@ export function FoodSurplusMap() {
       try {
         setLoading(true)
         setError(null)
-        const response = await fetch('/data/helsinki-restaurants.json')
+        const response = await fetch('/data/helsinkiresturants_aada.json')
         if (!response.ok) {
           throw new Error(`Failed to load data: ${response.status}`)
         }

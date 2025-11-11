@@ -62,17 +62,17 @@ export default function Dashboard2() {
             <FoodSurplusMap />
           </div>
 
+          {/* Recent Donations - Full Width */}
+          <RecentTransactions />
+
           {/* Third Row - Charts in 6-6 columns */}
           <div className="grid gap-6 grid-cols-1 @5xl:grid-cols-2">
             <SalesChart />
             <RevenueBreakdown />
           </div>
 
-          {/* Fourth Row - Two Column Layout */}
-          <div className="grid gap-6 grid-cols-1 @5xl:grid-cols-2">
-            <RecentTransactions />
-            <TopProducts />
-          </div>
+          {/* Fourth Row - Top Products */}
+          <TopProducts />
 
           {/* Fifth Row - Sankey removed (moved to Climate impact page) */}
         </div>

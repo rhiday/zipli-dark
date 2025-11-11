@@ -193,12 +193,12 @@
       "type": "student restaurant",
       "cuisine": "Cafeteria",
       "address": "Fabianinkatu 39, Helsinki",
-    "phone": "+358 9 191 21603",
-    "website": "https://unicafe.fi/en/",
-    "donations": 812,
-    "meals": 2030,
-    "lastDonation": "2025-10-14",
-    "status": "active"
+      "phone": "+358 9 191 21603",
+      "website": "https://unicafe.fi/en/",
+      "donations": 812,
+      "meals": 2030,
+      "lastDonation": "2025-10-14",
+      "status": "active"
     }
   },
   {
