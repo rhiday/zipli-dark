@@ -4,9 +4,21 @@ import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import { sankey, SankeyNode, SankeyLink, sankeyLinkHorizontal } from "d3-sankey";
 
+interface SankeyNodeData {
+    id: string;
+    name: string;
+    value?: number;
+}
+
+interface SankeyLinkData {
+    source: string;
+    target: string;
+    value: number;
+}
+
 interface SankeyData {
-    nodes: Array<{ id: string; name: string; value?: number }>;
-    links: Array<{ source: string; target: string; value: number }>;
+    nodes: Array<SankeyNodeData>;
+    links: Array<SankeyLinkData>;
 }
 
 type FlowMetric = 'mass' | 'co2eq';
@@ -72,14 +84,12 @@ export default function SankeyChart({ metric = 'mass' }: SankeyChartProps) {
 
         svg.attr("width", width).attr("height", height);
 
-        const sankeyGenerator = sankey<SankeyNode, SankeyLink>()
-            // @ts-expect-error d3 types are permissive here
-            .nodeId((d: SankeyNode) => d.id as string)
+        const sankeyGenerator = sankey<SankeyNode<SankeyNodeData, SankeyLinkData>, SankeyLink<SankeyNodeData, SankeyLinkData>>()
+            .nodeId((d: SankeyNode<SankeyNodeData, SankeyLinkData>) => d.id as string)
             .nodeWidth(15)
             .nodePadding(10)
             .extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]]);
 
-        // @ts-expect-error — d3 types here are permissive
         const { nodes, links } = sankeyGenerator(data);
 
         const color = d3.scaleOrdinal([
@@ -91,10 +101,10 @@ export default function SankeyChart({ metric = 'mass' }: SankeyChartProps) {
             .data(links)
             .enter()
             .append("path")
-            .attr("d", (d: SankeyLink) => sankeyLinkHorizontal()(d))
+            .attr("d", (d: SankeyLink<SankeyNodeData, SankeyLinkData>) => sankeyLinkHorizontal()(d))
             .attr("fill", "none")
-            .attr("stroke", (d: SankeyLink) => color((d.source as SankeyNode).id as string))
-            .attr("stroke-width", (d: SankeyLink) => Math.max(1, (d as SankeyLink & { width?: number }).width ?? 1))
+            .attr("stroke", (d: SankeyLink<SankeyNodeData, SankeyLinkData>) => color((d.source as SankeyNode<SankeyNodeData, SankeyLinkData>).id as string))
+            .attr("stroke-width", (d: SankeyLink<SankeyNodeData, SankeyLinkData>) => Math.max(1, (d as SankeyLink<SankeyNodeData, SankeyLinkData> & { width?: number }).width ?? 1))
             .attr("opacity", 0.6);
 
         svg.append("g")
@@ -102,17 +112,17 @@ export default function SankeyChart({ metric = 'mass' }: SankeyChartProps) {
             .data(nodes)
             .enter()
             .append("rect")
-            .attr("x", (d: SankeyNode) => (d as SankeyNode & { x0?: number }).x0 ?? 0)
-            .attr("y", (d: SankeyNode) => (d as SankeyNode & { y0?: number }).y0 ?? 0)
-            .attr("height", (d: SankeyNode) => {
-                const dTyped = d as SankeyNode & { y0?: number; y1?: number };
+            .attr("x", (d: SankeyNode<SankeyNodeData, SankeyLinkData>) => (d as SankeyNode<SankeyNodeData, SankeyLinkData> & { x0?: number }).x0 ?? 0)
+            .attr("y", (d: SankeyNode<SankeyNodeData, SankeyLinkData>) => (d as SankeyNode<SankeyNodeData, SankeyLinkData> & { y0?: number }).y0 ?? 0)
+            .attr("height", (d: SankeyNode<SankeyNodeData, SankeyLinkData>) => {
+                const dTyped = d as SankeyNode<SankeyNodeData, SankeyLinkData> & { y0?: number; y1?: number };
                 return (dTyped.y1 ?? 0) - (dTyped.y0 ?? 0);
             })
-            .attr("width", (d: SankeyNode) => {
-                const dTyped = d as SankeyNode & { x0?: number; x1?: number };
+            .attr("width", (d: SankeyNode<SankeyNodeData, SankeyLinkData>) => {
+                const dTyped = d as SankeyNode<SankeyNodeData, SankeyLinkData> & { x0?: number; x1?: number };
                 return (dTyped.x1 ?? 0) - (dTyped.x0 ?? 0);
             })
-            .attr("fill", (d: SankeyNode) => color(d.id as string))
+            .attr("fill", (d: SankeyNode<SankeyNodeData, SankeyLinkData>) => color(d.id as string))
             .attr("opacity", 0.8);
 
         const textColor = getComputedStyle(document.documentElement).getPropertyValue('--foreground').trim() || '#0f172a';
@@ -121,24 +131,24 @@ export default function SankeyChart({ metric = 'mass' }: SankeyChartProps) {
             .data(nodes)
             .enter()
             .append("text")
-            .attr("x", (d: SankeyNode) => {
-                const dTyped = d as SankeyNode & { x0?: number; x1?: number };
+            .attr("x", (d: SankeyNode<SankeyNodeData, SankeyLinkData>) => {
+                const dTyped = d as SankeyNode<SankeyNodeData, SankeyLinkData> & { x0?: number; x1?: number };
                 const x0 = dTyped.x0 ?? 0;
                 return x0 < width / 2 ? (dTyped.x1 ?? 0) + 6 : x0 - 6;
             })
-            .attr("y", (d: SankeyNode) => {
-                const dTyped = d as SankeyNode & { y0?: number; y1?: number };
+            .attr("y", (d: SankeyNode<SankeyNodeData, SankeyLinkData>) => {
+                const dTyped = d as SankeyNode<SankeyNodeData, SankeyLinkData> & { y0?: number; y1?: number };
                 return ((dTyped.y0 ?? 0) + (dTyped.y1 ?? 0)) / 2;
             })
-            .attr("text-anchor", (d: SankeyNode) => {
-                const dTyped = d as SankeyNode & { x0?: number };
+            .attr("text-anchor", (d: SankeyNode<SankeyNodeData, SankeyLinkData>) => {
+                const dTyped = d as SankeyNode<SankeyNodeData, SankeyLinkData> & { x0?: number };
                 return (dTyped.x0 ?? 0) < width / 2 ? "start" : "end";
             })
             .attr("dy", "0.35em")
             .attr("font-size", "11px")
             .attr("fill", `oklch(${textColor})`)
             .attr("font-weight", "500")
-            .text((d: SankeyNode) => {
+            .text((d: SankeyNode<SankeyNodeData, SankeyLinkData>) => {
                 const unit = metric === 'mass' ? ' kg' : ' kg CO₂e';
                 return `${d.name} (${(d.value as number)?.toFixed(1)}${unit})`;
             });
