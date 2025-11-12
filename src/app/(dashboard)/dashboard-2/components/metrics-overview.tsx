@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { 
   TrendingUp, 
   TrendingDown, 
@@ -25,81 +26,123 @@ interface MetricsData {
   description: string
 }
 
-const getMetricsData = (timeRange: TimeRange): MetricsData => {
-  const data: Record<TimeRange, MetricsData> = {
-    "12months": {
-      foodDonated: "937,788 kg",
-      activeDonors: "89",
-      mealsSaved: "1,875,576",
-      co2Reduced: "2,340 kg",
-      foodDonatedChange: "+18%",
-      activeDonorsChange: "+12%",
-      mealsSavedChange: "+22%",
-      co2ReducedChange: "+15%",
-      description: "Last 12 months"
-    },
-    "6months": {
-      foodDonated: "468,894 kg",
-      activeDonors: "76",
-      mealsSaved: "937,788",
-      co2Reduced: "1,170 kg",
-      foodDonatedChange: "+15%",
-      activeDonorsChange: "+10%",
-      mealsSavedChange: "+18%",
-      co2ReducedChange: "+12%",
-      description: "Last 6 months"
-    },
-    "30days": {
-      foodDonated: "78,149 kg",
-      activeDonors: "67",
-      mealsSaved: "156,298",
-      co2Reduced: "195 kg",
-      foodDonatedChange: "+12%",
-      activeDonorsChange: "+8%",
-      mealsSavedChange: "+14%",
-      co2ReducedChange: "+10%",
-      description: "Last 30 days"
-    },
-    "7days": {
-      foodDonated: "18,228 kg",
-      activeDonors: "54",
-      mealsSaved: "36,456",
-      co2Reduced: "46 kg",
-      foodDonatedChange: "+8%",
-      activeDonorsChange: "+5%",
-      mealsSavedChange: "+10%",
-      co2ReducedChange: "+7%",
-      description: "Last 7 days"
-    },
-    "since-beginning": {
-      foodDonated: "2,813,364 kg",
-      activeDonors: "89",
-      mealsSaved: "5,626,728",
-      co2Reduced: "7,020 kg",
-      foodDonatedChange: "+25%",
-      activeDonorsChange: "+18%",
-      mealsSavedChange: "+28%",
-      co2ReducedChange: "+22%",
-      description: "All time"
-    }
-  }
-  
-  return data[timeRange]
-}
-
 interface MetricsOverviewProps {
   timeRange: TimeRange
 }
 
 export function MetricsOverview({ timeRange }: MetricsOverviewProps) {
-  const metricsData = getMetricsData(timeRange)
+  const [metrics, setMetrics] = useState<MetricsData | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const loadMetrics = async () => {
+      try {
+        const response = await fetch('/data/dashboard-data.json')
+        const data = await response.json()
+        
+        // Calculate metrics based on time range
+        const baseMetrics = data.metrics
+        let metricsData: MetricsData
+        
+        switch (timeRange) {
+          case "12months":
+            metricsData = {
+              foodDonated: `${baseMetrics.totalDonationsKg.toLocaleString()} kg`,
+              activeDonors: baseMetrics.activeDonors.toString(),
+              mealsSaved: baseMetrics.mealsSaved.toLocaleString(),
+              co2Reduced: `${baseMetrics.co2Reduced.toLocaleString()} kg`,
+              foodDonatedChange: "+18%",
+              activeDonorsChange: "+12%",
+              mealsSavedChange: "+22%",
+              co2ReducedChange: "+18%",
+              description: "Last 12 months"
+            }
+            break
+          case "6months":
+            metricsData = {
+              foodDonated: `${Math.floor(baseMetrics.totalDonationsKg * 0.6).toLocaleString()} kg`,
+              activeDonors: Math.floor(baseMetrics.activeDonors * 0.85).toString(),
+              mealsSaved: Math.floor(baseMetrics.mealsSaved * 0.6).toLocaleString(),
+              co2Reduced: `${Math.floor(baseMetrics.co2Reduced * 0.6).toLocaleString()} kg`,
+              foodDonatedChange: "+15%",
+              activeDonorsChange: "+10%",
+              mealsSavedChange: "+18%",
+              co2ReducedChange: "+15%",
+              description: "Last 6 months"
+            }
+            break
+          case "30days":
+            metricsData = {
+              foodDonated: `${Math.floor(baseMetrics.totalDonationsKg * 0.08).toLocaleString()} kg`,
+              activeDonors: Math.floor(baseMetrics.activeDonors * 0.7).toString(),
+              mealsSaved: Math.floor(baseMetrics.mealsSaved * 0.08).toLocaleString(),
+              co2Reduced: `${Math.floor(baseMetrics.co2Reduced * 0.08).toLocaleString()} kg`,
+              foodDonatedChange: "+12%",
+              activeDonorsChange: "+8%",
+              mealsSavedChange: "+14%",
+              co2ReducedChange: "+12%",
+              description: "Last 30 days"
+            }
+            break
+          case "7days":
+            metricsData = {
+              foodDonated: `${Math.floor(baseMetrics.totalDonationsKg * 0.02).toLocaleString()} kg`,
+              activeDonors: Math.floor(baseMetrics.activeDonors * 0.5).toString(),
+              mealsSaved: Math.floor(baseMetrics.mealsSaved * 0.02).toLocaleString(),
+              co2Reduced: `${Math.floor(baseMetrics.co2Reduced * 0.02).toLocaleString()} kg`,
+              foodDonatedChange: "+8%",
+              activeDonorsChange: "+5%",
+              mealsSavedChange: "+10%",
+              co2ReducedChange: "+8%",
+              description: "Last 7 days"
+            }
+            break
+          case "since-beginning":
+            metricsData = {
+              foodDonated: `${Math.floor(baseMetrics.totalDonationsKg * 2.5).toLocaleString()} kg`,
+              activeDonors: baseMetrics.activeDonors.toString(),
+              mealsSaved: Math.floor(baseMetrics.mealsSaved * 2.5).toLocaleString(),
+              co2Reduced: `${Math.floor(baseMetrics.co2Reduced * 2.5).toLocaleString()} kg`,
+              foodDonatedChange: "+25%",
+              activeDonorsChange: "+18%",
+              mealsSavedChange: "+28%",
+              co2ReducedChange: "+25%",
+              description: "All time"
+            }
+            break
+        }
+        
+        setMetrics(metricsData)
+      } catch (error) {
+        console.error('Failed to load metrics:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadMetrics()
+  }, [timeRange])
+
+  if (loading || !metrics) {
+    return (
+      <div className="grid gap-4 sm:grid-cols-2 @5xl:grid-cols-4">
+        {[1, 2, 3, 4].map((i) => (
+          <Card key={i} className="cursor-pointer">
+            <CardHeader>
+              <CardDescription>Loading...</CardDescription>
+            </CardHeader>
+          </Card>
+        ))}
+      </div>
+    )
+  }
   
-  const metrics = [
+  const metricsCards = [
     {
       title: "Food Donated",
-      value: metricsData.foodDonated,
-      description: metricsData.description,
-      change: metricsData.foodDonatedChange,
+      value: metrics.foodDonated,
+      description: metrics.description,
+      change: metrics.foodDonatedChange,
       trend: "up" as const,
       icon: Package,
       footer: "Strong donation growth",
@@ -107,38 +150,39 @@ export function MetricsOverview({ timeRange }: MetricsOverviewProps) {
     },
     {
       title: "Active Donors",
-      value: metricsData.activeDonors,
-      description: "Restaurants & stores",
-      change: metricsData.activeDonorsChange, 
+      value: metrics.activeDonors,
+      description: "Restaurants & cafes",
+      change: metrics.activeDonorsChange, 
       trend: "up" as const,
       icon: Users,
-      footer: "New partners this month",
-      subfooter: "S-Market, Fazer, Stockmann"
+      footer: "Growing network",
+      subfooter: "Student & staff restaurants"
     },
     {
       title: "Meals Saved",
-      value: metricsData.mealsSaved,
+      value: metrics.mealsSaved,
       description: "Equivalent meals",
-      change: metricsData.mealsSavedChange,
+      change: metrics.mealsSavedChange,
       trend: "up" as const, 
       icon: Utensils,
       footer: "More people fed",
-      subfooter: "1 meal ≈ 0.5 kg food"
+      subfooter: "1 meal ≈ 0.4 kg food"
     },
     {
       title: "CO₂ Reduced",
-      value: metricsData.co2Reduced,
+      value: metrics.co2Reduced,
       description: "Carbon footprint saved",
-      change: metricsData.co2ReducedChange,
+      change: metrics.co2ReducedChange,
       trend: "up" as const,
       icon: Leaf,
-      footer: "Carbon footprint of donations",
-      subfooter: "Diverted from landfills to people"
+      footer: "Environmental impact",
+      subfooter: "Diverted from landfills"
     },
   ]
+
   return (
     <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs grid gap-4 sm:grid-cols-2 @5xl:grid-cols-4">
-      {metrics.map((metric) => {
+      {metricsCards.map((metric) => {
         const TrendIcon = metric.trend === "up" ? TrendingUp : TrendingDown
         
         return (

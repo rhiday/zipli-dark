@@ -1,0 +1,149 @@
+# Zipli Project Context
+
+## Project Overview
+Food surplus management platform for Helsinki. Connects restaurants/cafes with food banks and receivers to reduce food waste and help communities.
+
+## Tech Stack
+- **Frontend:** Next.js 15 + React 19 + TypeScript
+- **Backend:** Supabase (TO BE INTEGRATED)
+- **Styling:** Tailwind CSS v4 + shadcn/ui components
+- **Maps:** Mapbox GL for location visualization
+- **Charts:** Recharts + D3 (Sankey diagrams)
+- **Package Manager:** pnpm
+
+## Database Schema (Supabase - Planning Phase)
+Tables to be created:
+- `donations` - food donation records (amount, type, status, timestamps)
+- `donors` - restaurants, cafes, supermarkets (profile, location, active status)
+- `receivers` - food banks, shelters, schools (profile, location, capacity)
+- `users` - admin/donor/receiver accounts (auth, roles, permissions)
+- `locations` - GPS coordinates for map markers
+- `transactions` - pickup/delivery tracking
+- `metrics` - aggregated impact data (CO2, meals, etc.)
+
+## Development Guidelines - TOP PRIORITY
+
+### When User Requests Features:
+1. **ALWAYS ask clarifying questions** - user is frontend-focused, may not consider backend implications
+2. **Explain database/backend concepts** - user has limited backend knowledge, teach as you go
+3. **Warn about breaking changes** - always preserve existing functionality unless explicitly told to remove
+4. **Provide complete implementation** - show SQL + TypeScript + component integration
+5. **Think full-stack** - consider auth, validation, error handling, loading states
+
+### Working with the User (Frontend Developer):
+- User may use vague terminology like "make it work" or "add this feature"
+- ASK FOR SPECIFICS: What should happen on error? Who can access this? What data is needed?
+- GUIDE the user: Suggest best practices they might not know
+- TEACH concepts: Explain why certain backend patterns matter
+- BE PATIENT: User is learning backend concepts as we build
+
+### Code Standards:
+- Use `"use client"` for interactive components
+- Keep static data imports until backend is ready (gradual migration)
+- All API calls in `/src/lib/supabase/` or custom hooks
+- Forms use `react-hook-form` + `zod` validation
+- Loading states, error states, empty states ALWAYS required
+- TypeScript strict mode - avoid `any` types
+- Proper type imports from Supabase
+
+### File Structure:
+```
+/src
+  /app
+    /(dashboard)/[feature]/
+      - page.tsx (route)
+      - components/ (feature-specific)
+      - data.ts (types/constants)
+  /components
+    /ui/ (shadcn components)
+    /[feature]/ (shared components)
+  /lib
+    - supabase.ts (client setup)
+    - utils.ts (helpers)
+  /hooks
+    - use-[feature].ts (custom hooks)
+  /types
+    - [feature].ts (TypeScript types)
+```
+
+### Supabase Patterns to Use:
+```typescript
+// Always use proper error handling
+const { data, error } = await supabase.from('table').select()
+if (error) throw error
+
+// Use React Query for caching (when installed)
+// Real-time subscriptions for live updates
+// Row Level Security (RLS) for permissions
+```
+
+### What NOT to Do:
+- ❌ Don't remove features without explicit confirmation
+- ❌ Don't suggest full rewrites (iterate incrementally)
+- ❌ Don't use complex backend patterns (keep it simple)
+- ❌ Don't assume user knows SQL/databases/auth flows
+- ❌ Don't create unnecessary abstractions
+- ❌ Don't skip error handling or loading states
+- ❌ Don't hardcode API keys (use env variables)
+
+### Current State (Before Backend Integration):
+- ✅ All data is static JSON files in `/public/data/` and component `/data/` folders
+- ✅ Auth pages exist but not wired up (sign-in, sign-up, forgot-password)
+- ✅ Map shows hardcoded Helsinki restaurant data from JSON
+- ✅ Dashboard metrics are hardcoded with time range filters
+- ✅ Theme customizer fully functional
+- ✅ Sidebar navigation configured
+- ⏳ Ready for Supabase integration
+- ⏳ No authentication/authorization yet
+- ⏳ No real CRUD operations yet
+
+## User Preferences (from their rules)
+- NO high-level suggestions - provide ACTUAL CODE
+- Be casual and terse
+- Anticipate needs - suggest solutions they didn't think about
+- Treat as expert in frontend, but guide on backend
+- Give answers immediately, explain after
+- Value good arguments over convention
+- No moral lectures
+- Only discuss safety when crucial
+- Add 🎃 emoji before responses
+
+## Active Development Phase
+
+### Phase 1: Foundation (CURRENT)
+- [ ] Set up Supabase project
+- [ ] Design and create database schema
+- [ ] Set up authentication
+- [ ] Create Supabase client utilities
+
+### Phase 2: Core Features
+- [ ] Donor management (CRUD)
+- [ ] Receiver management (CRUD)
+- [ ] Donation tracking system
+- [ ] Real-time map updates
+- [ ] User roles and permissions
+
+### Phase 3: Advanced Features
+- [ ] Analytics and metrics calculation
+- [ ] Messaging system
+- [ ] Calendar/scheduling
+- [ ] Notifications
+- [ ] Real-time updates
+
+## Important Notes
+- User modified `src/components/app-sidebar.tsx` (check git status)
+- Helsinki restaurants data in `/public/data/helsinkiresturants_aada.json`
+- Mapbox setup documented in `MAPBOX_SETUP.md`
+- Main dashboard is `/dashboard-2` route
+
+## Quick Commands
+```bash
+pnpm dev              # Start dev server
+pnpm build           # Production build
+pnpm lint            # Run linter
+```
+
+---
+
+**Remember:** User is learning backend concepts while building. Be their senior full-stack partner. Ask questions, explain reasoning, guide decisions, and prevent mistakes before they happen.
+

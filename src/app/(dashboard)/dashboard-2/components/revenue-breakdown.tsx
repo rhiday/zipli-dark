@@ -8,13 +8,6 @@ import { ChartContainer, ChartStyle, ChartTooltip, ChartTooltipContent } from "@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
 
-const donationSourcesData = [
-  { category: "restaurants", value: 45, amount: 5600, fill: "var(--color-restaurants)" },
-  { category: "supermarkets", value: 30, amount: 3730, fill: "var(--color-supermarkets)" },
-  { category: "bakeries", value: 15, amount: 1865, fill: "var(--color-bakeries)" },
-  { category: "hotels", value: 10, amount: 1245, fill: "var(--color-hotels)" },
-]
-
 const chartConfig = {
   donations: {
     label: "Donations",
@@ -24,32 +17,74 @@ const chartConfig = {
   },
   restaurants: {
     label: "Restaurants",
-    color: "var(--chart-1)",
+    color: "#026209", // Zipli Earth (dark green)
   },
-  supermarkets: {
-    label: "Supermarkets", 
-    color: "var(--chart-2)",
+  "student-restaurants": {
+    label: "Student Restaurants", 
+    color: "#5A0057", // Zipli Plum (purple)
   },
-  bakeries: {
-    label: "Bakeries",
-    color: "var(--chart-3)",
+  cafes: {
+    label: "Cafes",
+    color: "#18E170", // Zipli Lime (bright green - smallest slice)
   },
-  hotels: {
-    label: "Hotels",
-    color: "var(--chart-4)",
+  "staff-restaurants": {
+    label: "Staff Restaurants",
+    color: "#FFA5BD", // Zipli Rose (pink)
   },
 }
 
 export function RevenueBreakdown() {
   const id = "donation-sources"
-  const [activeCategory, setActiveCategory] = React.useState("restaurants")
+  const [donationSourcesData, setDonationSourcesData] = React.useState<any[]>([])
+  const [loading, setLoading] = React.useState(true)
+  const [activeCategory, setActiveCategory] = React.useState("")
+
+  React.useEffect(() => {
+    const loadData = async () => {
+      try {
+        const response = await fetch('/data/dashboard-data.json')
+        const data = await response.json()
+        
+        // Transform category data into chart format
+        const categoryData = data.donationsByCategory
+        const chartData = Object.entries(categoryData).map(([key, value]: [string, any]) => ({
+          category: key.toLowerCase().replace(/ /g, '-'),
+          value: value.percentage,
+          amount: value.kg,
+          fill: `var(--color-${key.toLowerCase().replace(/ /g, '-')})`
+        }))
+        
+        setDonationSourcesData(chartData)
+        if (chartData.length > 0) {
+          setActiveCategory(chartData[0].category)
+        }
+      } catch (error) {
+        console.error('Failed to load donation sources:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadData()
+  }, [])
 
   const activeIndex = React.useMemo(
     () => donationSourcesData.findIndex((item) => item.category === activeCategory),
-    [activeCategory]
+    [activeCategory, donationSourcesData]
   )
   
-  const categories = React.useMemo(() => donationSourcesData.map((item) => item.category), [])
+  const categories = React.useMemo(() => donationSourcesData.map((item) => item.category), [donationSourcesData])
+
+  if (loading || donationSourcesData.length === 0) {
+    return (
+      <Card data-chart={id} className="flex flex-col cursor-pointer">
+        <CardHeader>
+          <CardTitle>Donation Sources</CardTitle>
+          <CardDescription>Loading...</CardDescription>
+        </CardHeader>
+      </Card>
+    )
+  }
 
   return (
     <Card data-chart={id} className="flex flex-col cursor-pointer">

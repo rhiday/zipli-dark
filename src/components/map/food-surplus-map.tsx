@@ -184,32 +184,68 @@ export function FoodSurplusMap() {
   const [viewState, setViewState] = useState({
     longitude: 24.945831,
     latitude: 60.192059,
-    zoom: 12
+    zoom: 13.5 // Closer zoom to see Helsinki downtown markers
   })
 
-  // Load restaurant data from JSON file
+  // Load donor and receiver data from merged data file
   useEffect(() => {
-    async function loadRestaurants() {
+    async function loadLocations() {
       try {
         setLoading(true)
         setError(null)
-        const response = await fetch('/data/helsinkiresturants_aada.json')
+        const response = await fetch('/data/dashboard-data.json')
         if (!response.ok) {
           throw new Error(`Failed to load data: ${response.status}`)
         }
         const data = await response.json()
-        if (!data.features || !Array.isArray(data.features)) {
-          throw new Error('Invalid data format')
-        }
-        setRestaurantData(data)
+        
+        // Transform donors and receivers into GeoJSON format
+        const donorFeatures = (data.donors || []).map((donor: any) => ({
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: donor.coordinates
+          },
+          properties: {
+            id: donor.id,
+            name: donor.name,
+            type: donor.type,
+            cuisine: donor.category,
+            donations: donor.totalDonations,
+            meals: donor.totalMeals,
+            lastDonation: donor.lastDonation,
+            markerType: 'donor'
+          }
+        }))
+
+        const receiverFeatures = (data.receivers || []).map((receiver: any) => ({
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: receiver.coordinates
+          },
+          properties: {
+            id: receiver.id,
+            name: receiver.name,
+            type: receiver.type,
+            cuisine: receiver.organization,
+            capacity: receiver.capacity,
+            markerType: 'receiver'
+          }
+        }))
+
+        setRestaurantData({
+          type: 'FeatureCollection',
+          features: [...donorFeatures, ...receiverFeatures]
+        })
       } catch (error) {
-        console.error('Failed to load restaurant data:', error)
+        console.error('Failed to load location data:', error)
         setError(error instanceof Error ? error.message : 'Failed to load map data')
       } finally {
         setLoading(false)
       }
     }
-    loadRestaurants()
+    loadLocations()
   }, [])
 
   const handleMarkerClick = useCallback((e: { originalEvent: { stopPropagation: () => void } }, location: LocationData) => {
@@ -230,7 +266,7 @@ export function FoodSurplusMap() {
         <div className="absolute inset-0 bg-background/80 backdrop-blur-sm z-10 flex items-center justify-center">
           <div className="text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-2"></div>
-            <p className="text-sm text-muted-foreground">Loading restaurants...</p>
+            <p className="text-sm text-muted-foreground">Loading donors and receivers...</p>
           </div>
         </div>
       )}
