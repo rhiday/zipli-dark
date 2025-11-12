@@ -9,7 +9,6 @@ import {
   Megaphone,
 } from "lucide-react"
 import Link from "next/link"
-import { Logo } from "@/components/logo"
 
 import { NavMain } from "@/components/nav-main"
 import { NavUser } from "@/components/nav-user"
@@ -65,11 +64,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link href="/dashboard-2">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                  <Logo size={24} className="text-current" />
-                </div>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-bold">Zipli</span>
+                <div className="flex aspect-square size-12 items-center justify-center">
+                  <img 
+                    src="/zipli-white.svg" 
+                    alt="Zipli" 
+                    className="w-10 h-10 object-contain"
+                  />
                 </div>
               </Link>
             </SidebarMenuButton>

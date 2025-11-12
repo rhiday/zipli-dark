@@ -1,14 +1,15 @@
 "use client"
 
 import React, { useState, useCallback, useEffect } from 'react'
-import Map, { Marker, Popup } from 'react-map-gl'
+import Map, { Marker, Popup, Source, Layer } from 'react-map-gl'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Package, Users, Clock, X, UtensilsCrossed, Coffee, School, Building2 } from 'lucide-react'
+import { Package, Users, Clock, X, UtensilsCrossed, Coffee, School, Building2, Flame } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { DonationGauge } from '@/components/ui/donation-gauge'
 
 interface LocationData {
+  type?: string;
   geometry: { coordinates: [number, number] };
   properties: {
     id: string;
@@ -17,7 +18,11 @@ interface LocationData {
     cuisine?: string;
     donations?: number;
     meals?: number;
+    receivedDonations?: number;
+    mealsDistributed?: number;
     lastDonation?: string;
+    lastReceived?: string;
+    markerType?: string;
   };
 }
 
@@ -26,20 +31,26 @@ interface LocationPopupProps {
   onClose: () => void
 }
 
+// Helper function to check if a type is a receiver
+function isReceiverType(type: string): boolean {
+  return ['receiver', 'food receiver', 'community_center', 'shelter', 'food_bank'].includes(type)
+}
+
 // Helper function to get icon and color based on type/cuisine
 function getLocationStyle(type: string, cuisine?: string) {
-  if (type === 'receiver') {
+  if (isReceiverType(type)) {
     return {
       icon: Users,
-      bgColor: 'bg-orange-500',
+      bgColor: '#5A0057',  // Dark purple for receivers
       label: 'Receiver'
     }
   }
   
+  // All donors use dark green, but different icons
   if (type === 'student restaurant') {
     return {
       icon: UtensilsCrossed,
-      bgColor: 'bg-blue-600',
+      bgColor: '#024209',  // Dark green
       label: 'Student Restaurant'
     }
   }
@@ -48,13 +59,13 @@ function getLocationStyle(type: string, cuisine?: string) {
     if (cuisine === 'Cafe') {
       return {
         icon: Coffee,
-        bgColor: 'bg-amber-600',
+        bgColor: '#024209',  // Dark green
         label: 'Staff Café'
       }
     }
     return {
       icon: Building2,
-      bgColor: 'bg-purple-600',
+      bgColor: '#024209',  // Dark green
       label: 'Staff Restaurant'
     }
   }
@@ -62,7 +73,7 @@ function getLocationStyle(type: string, cuisine?: string) {
   if (type === 'school restaurant' || cuisine === 'School Cafeteria') {
     return {
       icon: School,
-      bgColor: 'bg-green-600',
+      bgColor: '#024209',  // Dark green
       label: 'School Cafeteria'
     }
   }
@@ -70,7 +81,7 @@ function getLocationStyle(type: string, cuisine?: string) {
   if (cuisine === 'Cafe') {
     return {
       icon: Coffee,
-      bgColor: 'bg-amber-600',
+      bgColor: '#024209',  // Dark green
       label: 'Café'
     }
   }
@@ -78,7 +89,7 @@ function getLocationStyle(type: string, cuisine?: string) {
   // Default for cafeterias
   return {
     icon: UtensilsCrossed,
-    bgColor: 'bg-blue-600',
+    bgColor: '#024209',  // Dark green
     label: 'Cafeteria'
   }
 }
@@ -107,13 +118,13 @@ function LocationPopup({ location, onClose }: LocationPopupProps) {
         <CardHeader className="pb-2 pr-10">
           <div className="flex items-center justify-between gap-2">
             <CardTitle className="text-base">{properties.name}</CardTitle>
-            <Badge variant={properties.type === 'receiver' ? 'secondary' : 'default'} className="text-xs">
-              {properties.type}
+            <Badge variant={isReceiverType(properties.type) ? 'secondary' : 'default'} className="text-xs">
+              {isReceiverType(properties.type) ? 'receiver' : properties.type}
             </Badge>
           </div>
         </CardHeader>
         <CardContent className="pt-0 pb-4">
-          {properties.type !== 'receiver' ? (
+          {!isReceiverType(properties.type) ? (
             <div className="grid grid-cols-[auto_1fr] gap-4 items-center">
               <div className="flex items-center justify-center">
                 <DonationGauge donations={properties.donations ?? 0} meals={properties.meals ?? 0} size="sm" showLabel={false} />
@@ -131,9 +142,21 @@ function LocationPopup({ location, onClose }: LocationPopupProps) {
               </div>
             </div>
           ) : (
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Clock className="h-4 w-4" />
-              <span>Last activity: {properties.lastDonation}</span>
+            <div className="grid grid-cols-[auto_1fr] gap-4 items-center">
+              <div className="flex items-center justify-center">
+                <DonationGauge donations={properties.receivedDonations ?? 0} meals={properties.mealsDistributed ?? 0} size="sm" showLabel={false} />
+              </div>
+
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <Package className="h-4 w-4 text-orange-600 flex-shrink-0" />
+                  <span className="text-sm font-medium">{properties.receivedDonations} received</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Users className="h-4 w-4 text-green-600 flex-shrink-0" />
+                  <span className="text-sm font-medium">{properties.mealsDistributed} meals distributed</span>
+                </div>
+              </div>
             </div>
           )}
         </CardContent>
@@ -143,13 +166,10 @@ function LocationPopup({ location, onClose }: LocationPopupProps) {
 }
 
 // Legend component
-function MapLegend() {
+function MapLegend({ showHeatmap, onToggleHeatmap }: { showHeatmap: boolean, onToggleHeatmap: () => void }) {
   const legendItems = [
-    { icon: UtensilsCrossed, color: 'bg-blue-600', label: 'Student Restaurant' },
-    { icon: Building2, color: 'bg-purple-600', label: 'Staff Restaurant' },
-    { icon: School, color: 'bg-green-600', label: 'School Cafeteria' },
-    { icon: Coffee, color: 'bg-amber-600', label: 'Café' },
-    { icon: Users, color: 'bg-orange-500', label: 'Receiver' },
+    { icon: UtensilsCrossed, color: '#024209', label: 'Donors' },
+    { icon: Users, color: '#5A0057', label: 'Receivers' },
   ]
 
   return (
@@ -161,13 +181,29 @@ function MapLegend() {
             const Icon = item.icon
             return (
               <div key={index} className="flex items-center gap-2">
-                <div className={`w-6 h-6 ${item.color} rounded-full flex items-center justify-center flex-shrink-0`}>
+                <div 
+                  className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: item.color }}
+                >
                   <Icon className="h-3.5 w-3.5 text-white" />
                 </div>
                 <span className="text-xs">{item.label}</span>
               </div>
             )
           })}
+        </div>
+        
+        {/* Heatmap toggle button */}
+        <div className="mt-3 pt-3 border-t border-border">
+          <Button
+            variant={showHeatmap ? "default" : "outline"}
+            size="sm"
+            onClick={onToggleHeatmap}
+            className="w-full text-xs h-8"
+          >
+            <Flame className="h-3.5 w-3.5 mr-1.5" />
+            {showHeatmap ? 'Hide' : 'Show'} Donation Areas
+          </Button>
         </div>
       </CardContent>
     </Card>
@@ -177,14 +213,16 @@ function MapLegend() {
 export function FoodSurplusMap() {
   const [selectedLocation, setSelectedLocation] = useState<LocationData | null>(null)
   const [restaurantData, setRestaurantData] = useState<{
+    type?: string;
     features: LocationData[];
   } | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [showHeatmap, setShowHeatmap] = useState(false)
   const [viewState, setViewState] = useState({
     longitude: 24.945831,
-    latitude: 60.192059,
-    zoom: 13.5 // Closer zoom to see Helsinki downtown markers
+    latitude: 60.185,
+    zoom: 13 // Initial view (will auto-adjust when data loads)
   })
 
   // Load donor and receiver data from merged data file
@@ -230,14 +268,56 @@ export function FoodSurplusMap() {
             type: receiver.type,
             cuisine: receiver.organization,
             capacity: receiver.capacity,
+            receivedDonations: receiver.receivedDonations,
+            mealsDistributed: receiver.mealsDistributed,
+            lastReceived: receiver.lastReceived,
             markerType: 'receiver'
           }
         }))
 
+        const allFeatures = [...donorFeatures, ...receiverFeatures]
+        
         setRestaurantData({
           type: 'FeatureCollection',
-          features: [...donorFeatures, ...receiverFeatures]
+          features: allFeatures
         })
+
+        // Auto-detect map view based on data points
+        if (allFeatures.length > 0) {
+          const allCoords = allFeatures.map(f => f.geometry.coordinates)
+          
+          const lngs = allCoords.map(c => c[0])
+          const lats = allCoords.map(c => c[1])
+          
+          const bounds = {
+            minLng: Math.min(...lngs),
+            maxLng: Math.max(...lngs),
+            minLat: Math.min(...lats),
+            maxLat: Math.max(...lats),
+          }
+          
+          // Calculate center
+          const centerLng = (bounds.minLng + bounds.maxLng) / 2
+          const centerLat = (bounds.minLat + bounds.maxLat) / 2
+          
+          // Calculate appropriate zoom level based on bounds
+          const lngDiff = bounds.maxLng - bounds.minLng
+          const latDiff = bounds.maxLat - bounds.minLat
+          const maxDiff = Math.max(lngDiff, latDiff)
+          
+          // Adjust zoom based on spread of points
+          let zoom = 11
+          if (maxDiff < 0.05) zoom = 13
+          else if (maxDiff < 0.1) zoom = 12
+          else if (maxDiff < 0.2) zoom = 11
+          else zoom = 10
+          
+          setViewState({
+            longitude: centerLng,
+            latitude: centerLat,
+            zoom
+          })
+        }
       } catch (error) {
         console.error('Failed to load location data:', error)
         setError(error instanceof Error ? error.message : 'Failed to load map data')
@@ -256,6 +336,133 @@ export function FoodSurplusMap() {
   const handleClosePopup = useCallback(() => {
     setSelectedLocation(null)
   }, [])
+
+  const toggleHeatmap = useCallback(() => {
+    setShowHeatmap(prev => !prev)
+  }, [])
+
+  // Prepare heatmap data (only donors with donation amounts)
+  const heatmapData = {
+    type: 'FeatureCollection' as const,
+    features: (restaurantData?.features || [])
+      .filter(f => f.properties.markerType === 'donor' && f.properties.donations)
+      .map(f => ({
+        type: 'Feature' as const,
+        geometry: f.geometry,
+        properties: {
+          donations: f.properties.donations || 0
+        }
+      }))
+  }
+
+  // Heatmap layer style
+  const heatmapLayer: any = {
+    id: 'donation-heatmap',
+    type: 'heatmap',
+    paint: {
+      // Weight by donation amount - adjusted for actual data range
+      'heatmap-weight': [
+        'interpolate',
+        ['linear'],
+        ['get', 'donations'],
+        0, 0,
+        100, 0.3,
+        500, 0.6,
+        1000, 1
+      ],
+      // Higher intensity for visibility
+      'heatmap-intensity': [
+        'interpolate',
+        ['linear'],
+        ['zoom'],
+        10, 1.5,
+        15, 2
+      ],
+      // More visible color gradient - brighter greens
+      'heatmap-color': [
+        'interpolate',
+        ['linear'],
+        ['heatmap-density'],
+        0, 'rgba(0, 0, 0, 0)',
+        0.1, 'rgba(24, 225, 112, 0.4)', // Zipli Lime - visible
+        0.3, 'rgba(24, 225, 112, 0.6)', // Zipli Lime - bright
+        0.5, 'rgba(2, 200, 50, 0.7)',   // Bright green - medium
+        0.7, 'rgba(2, 150, 30, 0.8)',   // Green - strong
+        1, 'rgba(2, 98, 9, 0.9)'        // Zipli Earth - very strong
+      ],
+      // Larger radius for better coverage
+      'heatmap-radius': [
+        'interpolate',
+        ['linear'],
+        ['zoom'],
+        10, 30,
+        12, 50,
+        15, 70
+      ],
+      // Higher opacity
+      'heatmap-opacity': 0.85
+    }
+  }
+
+  // Circle layer for area-based donation visualization
+  const circleLayer: any = {
+    id: 'donation-circles',
+    type: 'circle',
+    paint: {
+      // Radius based on donation amount - grows with zoom
+      'circle-radius': [
+        'interpolate',
+        ['linear'],
+        ['zoom'],
+        10, [
+          'interpolate',
+          ['linear'],
+          ['get', 'donations'],
+          0, 15,
+          500, 30,
+          1000, 50,
+          1500, 70
+        ],
+        15, [
+          'interpolate',
+          ['linear'],
+          ['get', 'donations'],
+          0, 30,
+          500, 60,
+          1000, 100,
+          1500, 140
+        ]
+      ],
+      // Color gradient: red (low) → amber → yellow → green (high)
+      'circle-color': [
+        'interpolate',
+        ['linear'],
+        ['get', 'donations'],
+        0, '#ef4444',      // Red - very low
+        400, '#f97316',    // Orange - low
+        700, '#f59e0b',    // Amber - medium-low
+        900, '#eab308',    // Yellow - medium
+        1100, '#84cc16',   // Lime - medium-high
+        1300, '#22c55e',   // Green - high
+        1500, '#16a34a'    // Dark green - very high
+      ],
+      // Low opacity for nice overlaps
+      'circle-opacity': 0.25,
+      // Blur for smooth glow effect
+      'circle-blur': 0.9,
+      // Stroke for definition
+      'circle-stroke-width': 1,
+      'circle-stroke-color': [
+        'interpolate',
+        ['linear'],
+        ['get', 'donations'],
+        0, '#dc2626',
+        700, '#f59e0b',
+        1300, '#22c55e'
+      ],
+      'circle-stroke-opacity': 0.4
+    }
+  }
 
   const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || 'pk.your-mapbox-token-here'
   const hasValidToken = MAPBOX_TOKEN && MAPBOX_TOKEN !== 'pk.your-mapbox-token-here'
@@ -298,6 +505,13 @@ export function FoodSurplusMap() {
         style={{ width: '100%', height: '100%' }}
         mapStyle="mapbox://styles/mapbox/dark-v11"
       >
+        {/* Circle layer - rendered when heatmap toggled on */}
+        {showHeatmap && (
+          <Source type="geojson" data={heatmapData}>
+            <Layer {...circleLayer} />
+          </Source>
+        )}
+
         {restaurantData?.features.map((location: LocationData) => {
           const style = getLocationStyle(location.properties.type, location.properties.cuisine)
           const Icon = style.icon
@@ -310,7 +524,10 @@ export function FoodSurplusMap() {
               onClick={(e) => handleMarkerClick(e, location)}
               style={{ cursor: 'pointer' }}
             >
-              <div className={`w-10 h-10 ${style.bgColor} rounded-full border-2 border-white shadow-lg flex items-center justify-center hover:scale-110 transition-transform`}>
+              <div 
+                className="w-10 h-10 rounded-full border-2 border-white shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
+                style={{ backgroundColor: style.bgColor }}
+              >
                 <Icon className="h-5 w-5 text-white" />
               </div>
             </Marker>
@@ -324,7 +541,7 @@ export function FoodSurplusMap() {
           />
         )}
         
-        <MapLegend />
+        <MapLegend showHeatmap={showHeatmap} onToggleHeatmap={toggleHeatmap} />
         </Map>
       )}
     </div>

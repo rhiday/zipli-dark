@@ -83,21 +83,19 @@ export function RecentTransactions() {
           View All
         </Button>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-3">
         {donations.map((donation) => (
           <div key={donation.id} >
             <div className="flex p-3 rounded-lg border gap-2">
-              <Avatar className="h-8 w-8">
+              <Avatar className="h-8 w-8 shrink-0">
                 <AvatarFallback>{donation.donorName.split(" ").map(n => n[0]).join("")}</AvatarFallback>
               </Avatar>
-              <div className="flex flex-1 items-center flex-wrap justify-between gap-1">
-                <div className="flex items-center space-x-3">
-                  <div className="min-w-0 flex-1">
-                    <p className="text-sm font-medium truncate">{donation.donorName}</p>
-                    <p className="text-xs text-muted-foreground truncate">{donation.donorType} → {donation.receiverName}</p>
-                  </div>
+              <div className="flex flex-1 items-center justify-between gap-3 min-w-0">
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-medium truncate">{donation.donorName}</p>
+                  <p className="text-xs text-muted-foreground truncate">{donation.donorType} → {donation.receiverName}</p>
                 </div>
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center gap-3 shrink-0">
                   <Badge
                     variant={
                       donation.status === "completed" ? "default" :
@@ -108,8 +106,8 @@ export function RecentTransactions() {
                     {donation.status}
                   </Badge>
                   <div className="text-right">
-                    <p className="text-sm font-medium">{donation.quantity} {donation.unit}</p>
-                    <p className="text-xs text-muted-foreground">{getTimeAgo(donation.createdAt)}</p>
+                    <p className="text-sm font-medium whitespace-nowrap">{donation.quantity} {donation.unit}</p>
+                    <p className="text-xs text-muted-foreground whitespace-nowrap">{getTimeAgo(donation.createdAt)}</p>
                   </div>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>

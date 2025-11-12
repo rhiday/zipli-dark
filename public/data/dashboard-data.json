@@ -162,6 +162,9 @@
       "phone": "0449738640",
       "capacity": 40,
       "requestsCount": 12,
+      "receivedDonations": 892,
+      "mealsDistributed": 2230,
+      "lastReceived": "2025-10-16",
       "status": "active"
     },
     {
@@ -174,6 +177,9 @@
       "phone": "+358 40 234 5678",
       "capacity": 50,
       "requestsCount": 6,
+      "receivedDonations": 1123,
+      "mealsDistributed": 2808,
+      "lastReceived": "2025-10-16",
       "status": "active"
     },
     {
@@ -186,6 +192,9 @@
       "phone": "+358 40 678 9012",
       "capacity": 30,
       "requestsCount": 6,
+      "receivedDonations": 645,
+      "mealsDistributed": 1613,
+      "lastReceived": "2025-10-15",
       "status": "active"
     },
     {
@@ -198,6 +207,9 @@
       "phone": "1234567",
       "capacity": 80,
       "requestsCount": 4,
+      "receivedDonations": 1456,
+      "mealsDistributed": 3640,
+      "lastReceived": "2025-10-14",
       "status": "active"
     },
     {
@@ -210,6 +222,9 @@
       "phone": "+358 9 680 3200",
       "capacity": 60,
       "requestsCount": 3,
+      "receivedDonations": 534,
+      "mealsDistributed": 1335,
+      "lastReceived": "2025-10-13",
       "status": "active"
     }
   ],
@@ -283,6 +298,34 @@
       "createdAt": "2025-10-13T09:15:00Z",
       "claimedAt": "2025-10-13T10:00:00Z",
       "pickedUpAt": "2025-10-13T11:20:00Z"
+    },
+    {
+      "id": "don-006",
+      "donorId": "student-010",
+      "donorName": "UniCafe Metsätalo",
+      "donorType": "Student Restaurant",
+      "receiverId": "5e3f0408-f0de-48df-9c48-13ee5752cb5e",
+      "receiverName": "Kohtaamispaikka Tsänssi",
+      "quantity": 52,
+      "unit": "kg",
+      "status": "completed",
+      "createdAt": "2025-10-12T16:30:00Z",
+      "claimedAt": "2025-10-12T17:15:00Z",
+      "pickedUpAt": "2025-10-12T18:00:00Z"
+    },
+    {
+      "id": "don-007",
+      "donorId": "staff-001",
+      "donorName": "Staff restaurant Sähkötalo",
+      "donorType": "Staff Restaurant",
+      "receiverId": "821821cf-1813-444b-be90-a6b7f258e900",
+      "receiverName": "Red Cross Helsinki",
+      "quantity": 34,
+      "unit": "kg",
+      "status": "completed",
+      "createdAt": "2025-10-11T13:45:00Z",
+      "claimedAt": "2025-10-11T14:30:00Z",
+      "pickedUpAt": "2025-10-11T15:45:00Z"
     }
   ],
   "monthlyTrends": [

@@ -4,9 +4,9 @@ import { useState } from "react"
 import { MetricsOverview } from "./components/metrics-overview"
 import { SalesChart } from "./components/sales-chart"
 import { RecentTransactions } from "./components/recent-transactions"
-import { TopProducts } from "./components/top-products"
 import { QuickActions } from "./components/quick-actions"
 import { RevenueBreakdown } from "./components/revenue-breakdown"
+import { AchievementsBadge } from "./components/achievements-badge"
 import { FoodSurplusMap } from "@/components/map/food-surplus-map"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
@@ -53,19 +53,18 @@ export default function Dashboard2() {
             </Select>
           </div>
 
-          {/* Top Row - Key Metrics */}
-
-          <MetricsOverview timeRange={timeRange} />
-
-          {/* Second Row - Map View */}
+          {/* Top Row - Map View */}
           <div>
             <FoodSurplusMap />
           </div>
 
-          {/* Recent Donations & Top Donors - Two Column Layout */}
+          {/* Second Row - Recent Donations & Key Metrics */}
           <div className="grid gap-6 grid-cols-1 @5xl:grid-cols-2">
             <RecentTransactions />
-            <TopProducts />
+            <div className="space-y-3">
+              <AchievementsBadge />
+              <MetricsOverview timeRange={timeRange} />
+            </div>
           </div>
 
           {/* Third Row - Charts in 6-6 columns */}

@@ -380,6 +380,95 @@
       "lastDonation": "2025-10-16",
       "status": "active"
     }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [24.9514, 60.1836]
+    },
+    "properties": {
+      "id": "receiver-001",
+      "name": "Kohtaamispaikka Tsänssi",
+      "type": "food receiver",
+      "cuisine": "Community Center",
+      "address": "Hämeentie 13A, 00530 Helsinki",
+      "phone": "0449738640",
+      "website": "",
+      "organization": "Etappi ry",
+      "contact": "Jyrki Brandt",
+      "receivedDonations": 892,
+      "mealsDistributed": 2230,
+      "lastReceived": "2025-10-16",
+      "status": "active",
+      "driverInstructions": "Kulku Hämeentien puolelta; voit pysähtyä pienten rappujen eteen. Sitten ulko-ovesta sisään ja Tsänssi ensimmäinen ovi oikealla, sisäovessa ovikello."
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [24.9395, 60.1642]
+    },
+    "properties": {
+      "id": "receiver-002",
+      "name": "Red Cross Central",
+      "type": "food receiver",
+      "cuisine": "Charity",
+      "address": "Tehtaankatu 1a, 00140 Helsinki",
+      "phone": "1234567",
+      "website": "",
+      "organization": "Red Cross",
+      "contact": "Marko Rantala",
+      "receivedDonations": 1456,
+      "mealsDistributed": 3640,
+      "lastReceived": "2025-10-15",
+      "status": "active"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [24.9430, 60.1715]
+    },
+    "properties": {
+      "id": "receiver-003",
+      "name": "Red Cross Helsinki",
+      "type": "food receiver",
+      "cuisine": "Charity",
+      "address": "Kaisaniemenkatu 10, Helsinki",
+      "phone": "+358 40 234 5678",
+      "website": "",
+      "organization": "Red Cross Helsinki",
+      "contact": "Maria Receiver",
+      "receivedDonations": 1123,
+      "mealsDistributed": 2808,
+      "lastReceived": "2025-10-14",
+      "status": "active"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [24.9410, 60.1675]
+    },
+    "properties": {
+      "id": "receiver-004",
+      "name": "Andreas Congregation",
+      "type": "food receiver",
+      "cuisine": "Church",
+      "address": "Vuorikatu 5, Helsinki",
+      "phone": "+358 40 678 9012",
+      "website": "",
+      "organization": "Andreas Congregation",
+      "contact": "Andreas Church",
+      "receivedDonations": 645,
+      "mealsDistributed": 1613,
+      "lastReceived": "2025-10-16",
+      "status": "active"
+    }
   }
 ]
 }
