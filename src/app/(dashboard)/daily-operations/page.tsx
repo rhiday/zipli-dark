@@ -37,7 +37,7 @@ export default function DailyOperationsPage() {
         const data = await response.json()
         
         // Get recent donations
-        const recentDonations = (data.recentDonations || []).map((d: any) => ({
+        const recentDonations = (data.recentDonations || []).map((d: Donation) => ({
           id: d.id,
           quantity: d.quantity,
           unit: d.unit,
@@ -50,7 +50,7 @@ export default function DailyOperationsPage() {
         setReceivers(data.receivers || [])
         
         // Calculate metrics
-        const totalKg = recentDonations.reduce((sum: number, d: any) => sum + d.quantity, 0)
+        const totalKg = recentDonations.reduce((sum: number, d: Donation) => sum + d.quantity, 0)
         setMetrics({
           totalMeals: Math.floor(totalKg * 2.5), // 1 kg ≈ 2.5 meals
           orgsHelped: data.receivers?.length || 0

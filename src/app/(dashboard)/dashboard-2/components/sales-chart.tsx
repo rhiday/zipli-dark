@@ -36,7 +36,6 @@ const chartConfig = {
 export function SalesChart() {
   const [timeRange, setTimeRange] = useState("12m")
   const [donationsData, setDonationsData] = useState(donationsDataStatic)
-  const [loading, setLoading] = useState(true)
 
   // Load data from API
   useEffect(() => {
@@ -49,8 +48,6 @@ export function SalesChart() {
         }
       } catch (error) {
         console.error('Failed to load chart data:', error)
-      } finally {
-        setLoading(false)
       }
     }
     loadData()

@@ -33,9 +33,21 @@ const chartConfig = {
   },
 }
 
+interface ChartDataItem {
+  category: string
+  value: number
+  amount: number
+  fill: string
+}
+
+interface CategoryValue {
+  percentage: number
+  kg: number
+}
+
 export function RevenueBreakdown() {
   const id = "donation-sources"
-  const [donationSourcesData, setDonationSourcesData] = React.useState<any[]>([])
+  const [donationSourcesData, setDonationSourcesData] = React.useState<ChartDataItem[]>([])
   const [loading, setLoading] = React.useState(true)
   const [activeCategory, setActiveCategory] = React.useState("")
 
@@ -46,8 +58,8 @@ export function RevenueBreakdown() {
         const data = await response.json()
         
         // Transform category data into chart format
-        const categoryData = data.donationsByCategory
-        const chartData = Object.entries(categoryData).map(([key, value]: [string, any]) => ({
+        const categoryData = data.donationsByCategory as Record<string, CategoryValue>
+        const chartData = Object.entries(categoryData).map(([key, value]) => ({
           category: key.toLowerCase().replace(/ /g, '-'),
           value: value.percentage,
           amount: value.kg,

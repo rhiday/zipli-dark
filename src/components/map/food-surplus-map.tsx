@@ -4,9 +4,32 @@ import React, { useState, useCallback, useEffect } from 'react'
 import Map, { Marker, Popup, Source, Layer } from 'react-map-gl'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Package, Users, Clock, X, UtensilsCrossed, Coffee, School, Building2, Flame } from 'lucide-react'
+import { Package, Users, X, UtensilsCrossed, Coffee, School, Building2, Flame } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { DonationGauge } from '@/components/ui/donation-gauge'
+
+interface DonorData {
+  id: string;
+  name: string;
+  type: string;
+  category: string;
+  coordinates: [number, number];
+  totalDonations: number;
+  totalMeals: number;
+  lastDonation: string;
+}
+
+interface ReceiverData {
+  id: string;
+  name: string;
+  type: string;
+  organization: string;
+  coordinates: [number, number];
+  capacity: number;
+  receivedDonations: number;
+  mealsDistributed: number;
+  lastReceived: string;
+}
 
 interface LocationData {
   type?: string;
@@ -238,7 +261,7 @@ export function FoodSurplusMap() {
         const data = await response.json()
         
         // Transform donors and receivers into GeoJSON format
-        const donorFeatures = (data.donors || []).map((donor: any) => ({
+        const donorFeatures = (data.donors || []).map((donor: DonorData) => ({
           type: 'Feature',
           geometry: {
             type: 'Point',
@@ -256,7 +279,7 @@ export function FoodSurplusMap() {
           }
         }))
 
-        const receiverFeatures = (data.receivers || []).map((receiver: any) => ({
+        const receiverFeatures = (data.receivers || []).map((receiver: ReceiverData) => ({
           type: 'Feature',
           geometry: {
             type: 'Point',
@@ -355,59 +378,10 @@ export function FoodSurplusMap() {
       }))
   }
 
-  // Heatmap layer style
-  const heatmapLayer: any = {
-    id: 'donation-heatmap',
-    type: 'heatmap',
-    paint: {
-      // Weight by donation amount - adjusted for actual data range
-      'heatmap-weight': [
-        'interpolate',
-        ['linear'],
-        ['get', 'donations'],
-        0, 0,
-        100, 0.3,
-        500, 0.6,
-        1000, 1
-      ],
-      // Higher intensity for visibility
-      'heatmap-intensity': [
-        'interpolate',
-        ['linear'],
-        ['zoom'],
-        10, 1.5,
-        15, 2
-      ],
-      // More visible color gradient - brighter greens
-      'heatmap-color': [
-        'interpolate',
-        ['linear'],
-        ['heatmap-density'],
-        0, 'rgba(0, 0, 0, 0)',
-        0.1, 'rgba(24, 225, 112, 0.4)', // Zipli Lime - visible
-        0.3, 'rgba(24, 225, 112, 0.6)', // Zipli Lime - bright
-        0.5, 'rgba(2, 200, 50, 0.7)',   // Bright green - medium
-        0.7, 'rgba(2, 150, 30, 0.8)',   // Green - strong
-        1, 'rgba(2, 98, 9, 0.9)'        // Zipli Earth - very strong
-      ],
-      // Larger radius for better coverage
-      'heatmap-radius': [
-        'interpolate',
-        ['linear'],
-        ['zoom'],
-        10, 30,
-        12, 50,
-        15, 70
-      ],
-      // Higher opacity
-      'heatmap-opacity': 0.85
-    }
-  }
-
   // Circle layer for area-based donation visualization
-  const circleLayer: any = {
+  const circleLayer = {
     id: 'donation-circles',
-    type: 'circle',
+    type: 'circle' as const,
     paint: {
       // Radius based on donation amount - grows with zoom
       'circle-radius': [
@@ -508,7 +482,7 @@ export function FoodSurplusMap() {
         {/* Circle layer - rendered when heatmap toggled on */}
         {showHeatmap && (
           <Source type="geojson" data={heatmapData}>
-            <Layer {...circleLayer} />
+            <Layer {...(circleLayer as unknown as React.ComponentProps<typeof Layer>)} />
           </Source>
         )}
 

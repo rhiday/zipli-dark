@@ -9,6 +9,7 @@ import {
   Megaphone,
 } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 import { NavMain } from "@/components/nav-main"
 import { NavUser } from "@/components/nav-user"
@@ -65,10 +66,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuButton size="lg" asChild>
               <Link href="/dashboard-2">
                 <div className="flex aspect-square size-12 items-center justify-center">
-                  <img 
+                  <Image 
                     src="/zipli-white.svg" 
                     alt="Zipli" 
-                    className="w-10 h-10 object-contain"
+                    width={40}
+                    height={40}
+                    className="object-contain"
                   />
                 </div>
               </Link>

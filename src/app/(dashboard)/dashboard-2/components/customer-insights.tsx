@@ -21,15 +21,15 @@ const receiverImpactData = [
 const chartConfig = {
   new: {
     label: "New Receivers",
-    color: "var(--chart-1)",
+    color: "#18E170", // Zipli lime green
   },
   active: {
     label: "Active",
-    color: "var(--chart-2)",
+    color: "#024209", // Dark green
   },
   completed: {
     label: "Completed",
-    color: "var(--chart-3)",
+    color: "#5A0057", // Dark purple
   },
 }
 
