@@ -109,6 +109,7 @@ export function CustomerInsights() {
                           tickLine={false}
                           axisLine={false}
                           className="text-xs"
+                          tickFormatter={(value: number) => `€${value.toLocaleString()}`}
                         />
                         <ChartTooltip content={<ChartTooltipContent />} />
                         

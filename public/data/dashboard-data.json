@@ -326,6 +326,48 @@
       "createdAt": "2025-10-11T13:45:00Z",
       "claimedAt": "2025-10-11T14:30:00Z",
       "pickedUpAt": "2025-10-11T15:45:00Z"
+    },
+    {
+      "id": "don-008",
+      "donorId": "student-008",
+      "donorName": "Sodexo Helsinki University Main Building",
+      "donorType": "Student Restaurant",
+      "receiverId": "5e3f0408-f0de-48df-9c48-13ee5752cb5e",
+      "receiverName": "Kohtaamispaikka Tsänssi",
+      "quantity": 67,
+      "unit": "kg",
+      "status": "completed",
+      "createdAt": "2025-10-10T10:15:00Z",
+      "claimedAt": "2025-10-10T11:00:00Z",
+      "pickedUpAt": "2025-10-10T12:10:00Z"
+    },
+    {
+      "id": "don-009",
+      "donorId": "student-012",
+      "donorName": "UniCafe Olivia",
+      "donorType": "Student Restaurant",
+      "receiverId": "receiver-pelastusarmeija",
+      "receiverName": "Pelastusarmeija",
+      "quantity": 41,
+      "unit": "kg",
+      "status": "completed",
+      "createdAt": "2025-10-09T15:40:00Z",
+      "claimedAt": "2025-10-09T16:15:00Z",
+      "pickedUpAt": "2025-10-09T17:05:00Z"
+    },
+    {
+      "id": "don-010",
+      "donorId": "student-002",
+      "donorName": "TUAS",
+      "donorType": "Student Restaurant",
+      "receiverId": "76865fff-480d-4762-a305-51410dbc0557",
+      "receiverName": "Helsinki Food Bank",
+      "quantity": 92,
+      "unit": "kg",
+      "status": "completed",
+      "createdAt": "2025-10-08T09:05:00Z",
+      "claimedAt": "2025-10-08T09:45:00Z",
+      "pickedUpAt": "2025-10-08T11:00:00Z"
     }
   ],
   "monthlyTrends": [

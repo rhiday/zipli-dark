@@ -5,8 +5,9 @@ import { Eye, MoreHorizontal } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import Image from "next/image"
 
 interface Donation {
   id: string
@@ -19,20 +20,77 @@ interface Donation {
   createdAt: string
 }
 
-function getTimeAgo(dateString: string): string {
-  const date = new Date(dateString)
-  const now = new Date()
-  const diffMs = now.getTime() - date.getTime()
-  const diffHours = Math.floor(diffMs / (1000 * 60 * 60))
-  const diffDays = Math.floor(diffHours / 24)
+const availableLogos = [
+  '/logos/test/images.jpeg',
+  '/logos/test/images (1).jpeg',
+  '/logos/test/download.jpeg',
+  '/logos/test/red_cross.webp',
+  '/logos/test/sodexo.jpg',
+  '/logos/unicafe.png',
+  '/logos/roasberg.png',
+  '/logos/compass.png'
+]
+
+function getCompanyLogo(donorName: string, receiverName: string, index: number): { src: string, isPerson: boolean } {
+  const donorLower = donorName.toLowerCase()
+  const receiverLower = receiverName.toLowerCase()
   
-  if (diffHours < 24) {
-    return `${diffHours} hours ago`
-  } else if (diffDays === 1) {
-    return "1 day ago"
-  } else {
-    return `${diffDays} days ago`
+  // Match specific donor companies with photos
+  if (donorLower.includes('sodexo')) {
+    return { src: '/logos/test/sodexo.jpg', isPerson: true }
   }
+  if (donorLower.includes('roasberg')) {
+    return { src: '/logos/test/images.jpeg', isPerson: true }
+  }
+  if (donorLower.includes('compass') || donorLower.includes('sähkötalo')) {
+    return { src: '/logos/test/download.jpeg', isPerson: true }
+  }
+  
+  // Assign photos to UniCafe restaurants
+  if (donorLower.includes('dipoli')) {
+    return { src: '/logos/test/images (1).jpeg', isPerson: true }
+  }
+  if (donorLower.includes('alvari')) {
+    return { src: '/logos/unicafe.png', isPerson: false }
+  }
+  if (donorLower.includes('kvarkki')) {
+    return { src: '/logos/test/sodexo.jpg', isPerson: true }
+  }
+  if (donorLower.includes('metsätalo')) {
+    return { src: '/logos/test/images.jpeg', isPerson: true }
+  }
+  if (donorLower.includes('unicafe') || donorLower.includes('olivia')) {
+    return { src: '/logos/unicafe.png', isPerson: false }
+  }
+  
+  // Match specific receiver organizations
+  if (receiverLower.includes('red cross')) {
+    return { src: '/logos/test/red_cross.webp', isPerson: true }
+  }
+  
+  // If no match, rotate through available logos - always use photos
+  const logo = availableLogos[index % availableLogos.length]
+  const isPerson = logo.includes('/test/')
+  return { src: logo, isPerson }
+}
+
+// Simulate recent donation times for demo purposes
+const recentTimes = [
+  "40 seconds ago",
+  "2 minutes ago",
+  "5 minutes ago",
+  "12 minutes ago",
+  "18 minutes ago",
+  "25 minutes ago",
+  "35 minutes ago",
+  "48 minutes ago",
+  "1 hour ago",
+  "2 hours ago"
+]
+
+function getTimeAgo(dateString: string, index: number): string {
+  // Use simulated recent times for demo
+  return recentTimes[index % recentTimes.length]
 }
 
 export function RecentTransactions() {
@@ -84,12 +142,22 @@ export function RecentTransactions() {
         </Button>
       </CardHeader>
       <CardContent className="space-y-3">
-        {donations.map((donation) => (
+        {donations.map((donation, index) => (
           <div key={donation.id} >
             <div className="flex p-3 rounded-lg border gap-2">
-              <Avatar className="h-8 w-8 shrink-0">
-                <AvatarFallback>{donation.donorName.split(" ").map(n => n[0]).join("")}</AvatarFallback>
-              </Avatar>
+              {(() => {
+                const logo = getCompanyLogo(donation.donorName, donation.receiverName, index)
+                return (
+                  <Avatar className={`h-8 w-8 shrink-0 ${logo.isPerson ? '' : 'bg-white'}`}>
+                    <AvatarImage 
+                      src={logo.src} 
+                      alt={donation.donorName}
+                      className={logo.isPerson ? "object-cover" : "object-contain p-1"}
+                    />
+                    <AvatarFallback>{donation.donorName.split(" ").map(n => n[0]).join("")}</AvatarFallback>
+                  </Avatar>
+                )
+              })()}
               <div className="flex flex-1 items-center justify-between gap-3 min-w-0">
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-medium truncate">{donation.donorName}</p>
@@ -98,7 +166,7 @@ export function RecentTransactions() {
                 <div className="flex items-center gap-3 shrink-0">
                   <div className="text-right">
                     <p className="text-sm font-medium whitespace-nowrap">{donation.quantity} {donation.unit}</p>
-                    <p className="text-xs text-muted-foreground whitespace-nowrap">{getTimeAgo(donation.createdAt)}</p>
+                    <p className="text-xs text-muted-foreground whitespace-nowrap">{getTimeAgo(donation.createdAt, index)}</p>
                   </div>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>

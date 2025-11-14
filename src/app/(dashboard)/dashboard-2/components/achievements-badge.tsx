@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Award, Trophy, Utensils, Leaf, Target } from "lucide-react"
+import { Award, Trophy, Utensils, Leaf, Target, Shield } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface Achievement {
@@ -92,17 +92,20 @@ export function AchievementsBadge() {
                 )}
               >
                 {/* Badge Icon */}
-                <div 
-                  className={cn(
-                    "mx-auto w-14 h-14 rounded-full flex items-center justify-center mb-2 transition-all shadow-lg",
-                    !achievement.unlocked && "bg-muted border border-border shadow-none"
-                  )}
-                  style={{ 
-                    backgroundColor: achievement.unlocked ? achievement.color : undefined
-                  }}
-                >
+                <div className="mx-auto w-14 h-14 flex items-center justify-center mb-2 relative">
+                  <Shield 
+                    className={cn(
+                      "absolute inset-0 w-full h-full transition-all",
+                      achievement.unlocked && "drop-shadow-lg"
+                    )}
+                    style={{ 
+                      color: achievement.unlocked ? achievement.color : undefined,
+                      fill: achievement.unlocked ? achievement.color : '#71717a',
+                      stroke: achievement.unlocked ? achievement.color : '#71717a'
+                    }}
+                  />
                   <Icon className={cn(
-                    "h-7 w-7",
+                    "h-6 w-6 relative z-10",
                     achievement.unlocked ? "text-white" : "text-muted-foreground"
                   )} />
                 </div>

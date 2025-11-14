@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ChartContainer, ChartStyle, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
+import { Calendar } from "lucide-react"
 
 const chartConfig = {
   donations: {
@@ -45,11 +46,14 @@ interface CategoryValue {
   kg: number
 }
 
+type TimeRange = "12months" | "6months" | "30days" | "7days" | "since-beginning"
+
 export function RevenueBreakdown() {
   const id = "donation-sources"
   const [donationSourcesData, setDonationSourcesData] = React.useState<ChartDataItem[]>([])
   const [loading, setLoading] = React.useState(true)
   const [activeCategory, setActiveCategory] = React.useState("")
+  const [timeRange, setTimeRange] = React.useState<TimeRange>("30days")
 
   React.useEffect(() => {
     const loadData = async () => {
@@ -57,12 +61,33 @@ export function RevenueBreakdown() {
         const response = await fetch('/data/dashboard-data.json')
         const data = await response.json()
         
-        // Transform category data into chart format
+        // Transform category data into chart format with time range multipliers
         const categoryData = data.donationsByCategory as Record<string, CategoryValue>
+        
+        // Apply time range multiplier
+        let multiplier = 1
+        switch (timeRange) {
+          case "12months":
+            multiplier = 5
+            break
+          case "6months":
+            multiplier = 3
+            break
+          case "30days":
+            multiplier = 1
+            break
+          case "7days":
+            multiplier = 0.25
+            break
+          case "since-beginning":
+            multiplier = 12
+            break
+        }
+        
         const chartData = Object.entries(categoryData).map(([key, value]) => ({
           category: key.toLowerCase().replace(/ /g, '-'),
           value: value.percentage,
-          amount: value.kg,
+          amount: Math.floor(value.kg * multiplier),
           fill: `var(--color-${key.toLowerCase().replace(/ /g, '-')})`
         }))
         
@@ -78,7 +103,7 @@ export function RevenueBreakdown() {
     }
 
     loadData()
-  }, [])
+  }, [timeRange])
 
   const activeIndex = React.useMemo(
     () => donationSourcesData.findIndex((item) => item.category === activeCategory),
@@ -107,41 +132,24 @@ export function RevenueBreakdown() {
           <CardDescription>Food donations by source type (kg)</CardDescription>
         </div>
         <div className="flex items-center space-x-2">
-          <Select value={activeCategory} onValueChange={setActiveCategory}>
-            <SelectTrigger
-              className="w-[175px] rounded-lg cursor-pointer"
-              aria-label="Select a category"
-            >
-              <SelectValue placeholder="Select category" />
-            </SelectTrigger>
-            <SelectContent align="end" className="rounded-lg">
-              {categories.map((key) => {
-                const config = chartConfig[key as keyof typeof chartConfig]
-
-                if (!config) {
-                  return null
-                }
-
-                return (
-                  <SelectItem
-                    key={key}
-                    value={key}
-                    className="rounded-md [&_span]:flex cursor-pointer"
-                  >
-                    <div className="flex items-center gap-2">
-                      <span
-                        className="flex h-3 w-3 shrink-0 "
-                        style={{
-                          backgroundColor: `var(--color-${key})`,
-                        }}
-                      />
-                      {config?.label}
-                    </div>
-                  </SelectItem>
-                )
-              })}
-            </SelectContent>
-          </Select>
+          <div className="flex items-center gap-2">
+            <Calendar className="h-4 w-4 text-muted-foreground" />
+            <Select value={timeRange} onValueChange={(v) => setTimeRange(v as TimeRange)}>
+              <SelectTrigger
+                className="w-[140px] rounded-lg cursor-pointer"
+                aria-label="Select time range"
+              >
+                <SelectValue placeholder="Select range" />
+              </SelectTrigger>
+              <SelectContent align="end" className="rounded-lg">
+                <SelectItem value="7days" className="cursor-pointer">7 days</SelectItem>
+                <SelectItem value="30days" className="cursor-pointer">30 days</SelectItem>
+                <SelectItem value="6months" className="cursor-pointer">6 months</SelectItem>
+                <SelectItem value="12months" className="cursor-pointer">12 months</SelectItem>
+                <SelectItem value="since-beginning" className="cursor-pointer">Since beginning</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
           <Button variant="outline" className="cursor-pointer">
             Export
           </Button>

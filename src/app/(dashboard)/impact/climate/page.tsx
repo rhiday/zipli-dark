@@ -8,7 +8,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export default function ClimateImpactPage() {
   const [metric, setMetric] = useState<"co2eq" | "mass">("co2eq")
-  const [chartType, setChartType] = useState<"sankey" | "pie">("sankey")
+  const [chartType, setChartType] = useState<"sankey" | "pie">("pie")
   
   return (
     <div className="px-6">
