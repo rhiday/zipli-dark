@@ -9,7 +9,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Button } from "@/components/ui/button"
 import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
-import { MapPin, TrendingUp, Target, ArrowUpIcon, Utensils, Heart } from "lucide-react"
+import { MapPin, TrendingUp, Target, ArrowUpIcon, Heart } from "lucide-react"
 
 // Based on: 1.2M kg/year, €0.71/kg operating cost, €3.6M economic value, 1.6x ROI
 const receiverImpactData = [

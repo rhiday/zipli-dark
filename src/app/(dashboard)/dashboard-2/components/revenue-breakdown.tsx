@@ -109,8 +109,6 @@ export function RevenueBreakdown() {
     () => donationSourcesData.findIndex((item) => item.category === activeCategory),
     [activeCategory, donationSourcesData]
   )
-  
-  const categories = React.useMemo(() => donationSourcesData.map((item) => item.category), [donationSourcesData])
 
   if (loading || donationSourcesData.length === 0) {
     return (

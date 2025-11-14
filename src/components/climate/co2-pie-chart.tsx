@@ -31,6 +31,16 @@ const chartConfig = {
   },
 }
 
+interface FoodNode {
+  id: string
+  co2eq?: number
+  mass?: number
+}
+
+interface FoodFlowData {
+  nodes: FoodNode[]
+}
+
 interface ChartDataItem {
   protein: string
   co2eq: number
@@ -54,13 +64,13 @@ export function CO2PieChart({ metric = 'co2eq' }: CO2PieChartProps) {
     const loadData = async () => {
       try {
         const response = await fetch('/data/food-flow.json')
-        const data = await response.json()
+        const data: FoodFlowData = await response.json()
         
         // Filter nodes for protein types only
         const proteinTypes = ['beef', 'fish', 'pork', 'veg']
-        const proteins = data.nodes.filter((node: any) => proteinTypes.includes(node.id))
+        const proteins = data.nodes.filter((node) => proteinTypes.includes(node.id))
         
-        const transformed = proteins.map((protein: any) => ({
+        const transformed = proteins.map((protein) => ({
           protein: protein.id,
           co2eq: protein.co2eq || 0,
           mass: protein.mass || 0,
