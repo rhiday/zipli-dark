@@ -7,10 +7,14 @@ import {
   Package, 
   Users, 
   Utensils, 
-  Leaf 
+  Leaf,
+  Activity,
+  Calendar,
 } from "lucide-react"
-import { Card, CardAction, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Label } from "@/components/ui/label"
 
 type TimeRange = "12months" | "6months" | "30days" | "7days" | "since-beginning"
 
@@ -26,11 +30,8 @@ interface MetricsData {
   description: string
 }
 
-interface MetricsOverviewProps {
-  timeRange: TimeRange
-}
-
-export function MetricsOverview({ timeRange }: MetricsOverviewProps) {
+export function MetricsOverview() {
+  const [timeRange, setTimeRange] = useState<TimeRange>("12months")
   const [metrics, setMetrics] = useState<MetricsData | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -47,10 +48,10 @@ export function MetricsOverview({ timeRange }: MetricsOverviewProps) {
         switch (timeRange) {
           case "12months":
             metricsData = {
-              foodDonated: `${baseMetrics.totalDonationsKg.toLocaleString()} kg`,
-              activeDonors: baseMetrics.activeDonors.toString(),
-              mealsSaved: baseMetrics.mealsSaved.toLocaleString(),
-              co2Reduced: `${baseMetrics.co2Reduced.toLocaleString()} kg`,
+              foodDonated: `${(baseMetrics.totalDonationsKg * 5).toLocaleString()} kg`,
+              activeDonors: (baseMetrics.activeDonors * 5).toString(),
+              mealsSaved: (baseMetrics.mealsSaved * 5).toLocaleString(),
+              co2Reduced: `${(baseMetrics.co2Reduced * 5).toLocaleString()} tonnes CO2e`,
               foodDonatedChange: "+18%",
               activeDonorsChange: "+12%",
               mealsSavedChange: "+22%",
@@ -60,10 +61,10 @@ export function MetricsOverview({ timeRange }: MetricsOverviewProps) {
             break
           case "6months":
             metricsData = {
-              foodDonated: `${Math.floor(baseMetrics.totalDonationsKg * 0.6).toLocaleString()} kg`,
-              activeDonors: Math.floor(baseMetrics.activeDonors * 0.85).toString(),
-              mealsSaved: Math.floor(baseMetrics.mealsSaved * 0.6).toLocaleString(),
-              co2Reduced: `${Math.floor(baseMetrics.co2Reduced * 0.6).toLocaleString()} kg`,
+              foodDonated: `${Math.floor(baseMetrics.totalDonationsKg * 0.6 * 5).toLocaleString()} kg`,
+              activeDonors: Math.floor(baseMetrics.activeDonors * 0.85 * 5).toString(),
+              mealsSaved: Math.floor(baseMetrics.mealsSaved * 0.6 * 5).toLocaleString(),
+              co2Reduced: `${Math.floor(baseMetrics.co2Reduced * 0.6 * 5).toLocaleString()} tonnes CO2e`,
               foodDonatedChange: "+15%",
               activeDonorsChange: "+10%",
               mealsSavedChange: "+18%",
@@ -73,10 +74,10 @@ export function MetricsOverview({ timeRange }: MetricsOverviewProps) {
             break
           case "30days":
             metricsData = {
-              foodDonated: `${Math.floor(baseMetrics.totalDonationsKg * 0.08).toLocaleString()} kg`,
-              activeDonors: Math.floor(baseMetrics.activeDonors * 0.7).toString(),
-              mealsSaved: Math.floor(baseMetrics.mealsSaved * 0.08).toLocaleString(),
-              co2Reduced: `${Math.floor(baseMetrics.co2Reduced * 0.08).toLocaleString()} kg`,
+              foodDonated: `${Math.floor(baseMetrics.totalDonationsKg * 0.08 * 5).toLocaleString()} kg`,
+              activeDonors: Math.floor(baseMetrics.activeDonors * 0.7 * 5).toString(),
+              mealsSaved: Math.floor(baseMetrics.mealsSaved * 0.08 * 5).toLocaleString(),
+              co2Reduced: `${Math.floor(baseMetrics.co2Reduced * 0.08 * 5).toLocaleString()} tonnes CO2e`,
               foodDonatedChange: "+12%",
               activeDonorsChange: "+8%",
               mealsSavedChange: "+14%",
@@ -86,10 +87,10 @@ export function MetricsOverview({ timeRange }: MetricsOverviewProps) {
             break
           case "7days":
             metricsData = {
-              foodDonated: `${Math.floor(baseMetrics.totalDonationsKg * 0.02).toLocaleString()} kg`,
-              activeDonors: Math.floor(baseMetrics.activeDonors * 0.5).toString(),
-              mealsSaved: Math.floor(baseMetrics.mealsSaved * 0.02).toLocaleString(),
-              co2Reduced: `${Math.floor(baseMetrics.co2Reduced * 0.02).toLocaleString()} kg`,
+              foodDonated: `${Math.floor(baseMetrics.totalDonationsKg * 0.02 * 5).toLocaleString()} kg`,
+              activeDonors: Math.floor(baseMetrics.activeDonors * 0.5 * 5).toString(),
+              mealsSaved: Math.floor(baseMetrics.mealsSaved * 0.02 * 5).toLocaleString(),
+              co2Reduced: `${Math.floor(baseMetrics.co2Reduced * 0.02 * 5).toLocaleString()} tonnes CO2e`,
               foodDonatedChange: "+8%",
               activeDonorsChange: "+5%",
               mealsSavedChange: "+10%",
@@ -99,10 +100,10 @@ export function MetricsOverview({ timeRange }: MetricsOverviewProps) {
             break
           case "since-beginning":
             metricsData = {
-              foodDonated: `${Math.floor(baseMetrics.totalDonationsKg * 2.5).toLocaleString()} kg`,
-              activeDonors: baseMetrics.activeDonors.toString(),
-              mealsSaved: Math.floor(baseMetrics.mealsSaved * 2.5).toLocaleString(),
-              co2Reduced: `${Math.floor(baseMetrics.co2Reduced * 2.5).toLocaleString()} kg`,
+              foodDonated: `${Math.floor(baseMetrics.totalDonationsKg * 2.5 * 5).toLocaleString()} kg`,
+              activeDonors: (baseMetrics.activeDonors * 5).toString(),
+              mealsSaved: Math.floor(baseMetrics.mealsSaved * 2.5 * 5).toLocaleString(),
+              co2Reduced: `${Math.floor(baseMetrics.co2Reduced * 2.5 * 5).toLocaleString()} tonnes CO2e`,
               foodDonatedChange: "+25%",
               activeDonorsChange: "+18%",
               mealsSavedChange: "+28%",
@@ -169,7 +170,7 @@ export function MetricsOverview({ timeRange }: MetricsOverviewProps) {
       subfooter: "1 meal ≈ 0.4 kg food"
     },
     {
-      title: "CO₂ Reduced",
+      title: "Emissions Avoided",
       value: metrics.co2Reduced,
       description: "Carbon footprint saved",
       change: metrics.co2ReducedChange,
@@ -181,35 +182,68 @@ export function MetricsOverview({ timeRange }: MetricsOverviewProps) {
   ]
 
   return (
-    <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs grid gap-3 grid-cols-2">
-      {metricsCards.map((metric) => {
-        const TrendIcon = metric.trend === "up" ? TrendingUp : TrendingDown
-        
-        return (
-          <Card key={metric.title} className=" cursor-pointer">
-            <CardHeader>
-              <CardDescription>{metric.title}</CardDescription>
-              <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-                {metric.value}
-              </CardTitle>
-              <CardAction>
-                <Badge variant="outline">
-                  <TrendIcon className="h-4 w-4" />
-                  {metric.change}
-                </Badge>
-              </CardAction>
-            </CardHeader>
-            <CardFooter className="flex-col items-start gap-1.5 text-sm">
-              <div className="line-clamp-1 flex gap-2 font-medium">
-                {metric.footer} <TrendIcon className="size-4" />
-              </div>
-              <div className="text-muted-foreground">
-                {metric.subfooter}
-              </div>
-            </CardFooter>
-          </Card>
-        )
-      })}
-    </div>
+    <Card className="from-primary/5 to-card bg-gradient-to-t shadow-xs">
+      <CardHeader className="flex flex-col gap-2 pb-3 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <CardTitle className="text-lg font-semibold flex items-center gap-2">
+            <Activity className="h-5 w-5 text-primary" />
+            Key Metrics
+          </CardTitle>
+          <CardDescription className="mt-1.5">
+            Real-time platform performance
+          </CardDescription>
+        </div>
+        <div className="flex items-center gap-3">
+          <Label htmlFor="metrics-time-range" className="flex items-center gap-2 text-xs sm:text-sm font-medium">
+            <Calendar className="h-4 w-4" />
+            Time Range:
+          </Label>
+          <Select value={timeRange} onValueChange={(v) => setTimeRange(v as TimeRange)}>
+            <SelectTrigger id="metrics-time-range" className="w-[140px] sm:w-[180px]">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent align="end">
+              <SelectItem value="12months">12 months</SelectItem>
+              <SelectItem value="6months">6 months</SelectItem>
+              <SelectItem value="30days">30 days</SelectItem>
+              <SelectItem value="7days">7 days</SelectItem>
+              <SelectItem value="since-beginning">Since beginning</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      </CardHeader>
+      <CardContent>
+        <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs grid gap-3 grid-cols-2">
+          {metricsCards.map((metric) => {
+            const TrendIcon = metric.trend === "up" ? TrendingUp : TrendingDown
+            
+            return (
+              <Card key={metric.title} className="cursor-pointer">
+                <CardHeader className="pb-2">
+                  <CardDescription>{metric.title}</CardDescription>
+                  <CardTitle className="text-2xl font-semibold tabular-nums">
+                    {metric.value}
+                  </CardTitle>
+                  <CardAction>
+                    <Badge variant="outline">
+                      <TrendIcon className="h-4 w-4" />
+                      {metric.change}
+                    </Badge>
+                  </CardAction>
+                </CardHeader>
+                <CardFooter className="flex-col items-start gap-1 text-sm pt-2">
+                  <div className="line-clamp-1 flex gap-2 font-medium">
+                    {metric.footer} <TrendIcon className="size-4" />
+                  </div>
+                  <div className="text-muted-foreground text-xs">
+                    {metric.subfooter}
+                  </div>
+                </CardFooter>
+              </Card>
+            )
+          })}
+        </div>
+      </CardContent>
+    </Card>
   )
 }
