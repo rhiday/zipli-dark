@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Calendar, Filter, TrendingUp } from "lucide-react"
 
@@ -179,6 +179,7 @@ export default function DailyOperationsPage() {
                   >
                     <div className="flex items-center gap-3">
                       <Avatar className="h-10 w-10">
+                        <AvatarImage src="/avatar.png" alt={receiver.name} />
                         <AvatarFallback>
                           {receiver.name.split(' ').map(n => n[0]).join('')}
                         </AvatarFallback>
