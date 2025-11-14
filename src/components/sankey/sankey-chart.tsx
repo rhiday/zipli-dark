@@ -92,9 +92,20 @@ export default function SankeyChart({ metric = 'mass' }: SankeyChartProps) {
 
         const { nodes, links } = sankeyGenerator(data);
 
-        const color = d3.scaleOrdinal([
-            "#22c55e", "#86efac", "#166534", "#0f3a1b", "#f59e0b", "#ef4444", "#22c55e",
-        ]);
+        // Brand colors matching Donation Sources
+        const colorMap: Record<string, string> = {
+            "total": "#666666", // gray for total
+            "beef": "#026209", // Zipli Earth (dark green)
+            "fish": "#18E170", // Zipli Lime (bright green)
+            "pork": "#FFA5BD", // Zipli Rose (pink)
+            "veg": "#5A0057", // Zipli Plum (purple)
+            "side": "#86efac", // light green
+            "casserole": "#f59e0b", // orange
+            "sauce": "#ef4444", // red
+            "soup": "#3b82f6", // blue
+            "stew": "#8b5cf6", // purple
+        };
+        const color = (id: string) => colorMap[id] || "#22c55e";
 
         svg.append("g")
             .selectAll("path")

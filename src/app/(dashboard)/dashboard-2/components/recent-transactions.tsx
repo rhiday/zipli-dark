@@ -96,15 +96,6 @@ export function RecentTransactions() {
                   <p className="text-xs text-muted-foreground truncate">{donation.donorType} → {donation.receiverName}</p>
                 </div>
                 <div className="flex items-center gap-3 shrink-0">
-                  <Badge
-                    variant={
-                      donation.status === "completed" ? "default" :
-                      donation.status === "pending" ? "secondary" : "destructive"
-                    }
-                    className="cursor-pointer"
-                  >
-                    {donation.status}
-                  </Badge>
                   <div className="text-right">
                     <p className="text-sm font-medium whitespace-nowrap">{donation.quantity} {donation.unit}</p>
                     <p className="text-xs text-muted-foreground whitespace-nowrap">{getTimeAgo(donation.createdAt)}</p>

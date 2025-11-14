@@ -148,12 +148,6 @@ export default function DailyOperationsPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <Badge 
-                      variant={donation.status === 'completed' ? 'default' : 'secondary'}
-                      className="mb-1"
-                    >
-                      {donation.status}
-                    </Badge>
                     <p className="text-xs text-muted-foreground">
                       {new Date(donation.createdAt).toLocaleDateString('en-US', { 
                         month: 'short', 

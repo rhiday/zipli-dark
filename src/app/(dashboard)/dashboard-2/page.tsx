@@ -11,6 +11,7 @@ import { FoodSurplusMap } from "@/components/map/food-surplus-map"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
 import { Calendar } from "lucide-react"
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 
 type TimeRange = "12months" | "6months" | "30days" | "7days" | "since-beginning"
 
@@ -22,11 +23,12 @@ export default function Dashboard2() {
         {/* Enhanced Header */}
 
         <div className="flex md:flex-row flex-col md:items-center justify-between gap-4 md:gap-6">
-          <div className="flex flex-col gap-2">
-            <h1 className="text-2xl font-bold tracking-tight">Food Surplus Dashboard</h1>
-            <p className="text-muted-foreground">
-              Monitor food donations, receivers, and impact in Helsinki
-            </p>
+          <div className="flex items-center gap-4">
+            <Avatar className="h-12 w-12">
+              <AvatarImage src="/avatar.png" alt="Olivia" />
+              <AvatarFallback>OL</AvatarFallback>
+            </Avatar>
+            <h1 className="text-2xl font-bold tracking-tight">Welcome back, Olivia</h1>
           </div>
           <QuickActions />
         </div>

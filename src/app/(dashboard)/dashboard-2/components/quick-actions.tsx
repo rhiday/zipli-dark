@@ -33,7 +33,7 @@ export function QuickActions() {
         <DropdownMenuTrigger asChild>
           <Button variant="outline" className="cursor-pointer">
             <Settings className="h-4 w-4 mr-2" />
-            Actions
+            Edit Target
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
