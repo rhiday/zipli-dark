@@ -25,12 +25,12 @@ interface Receiver {
   image?: string
 }
 
-// Local receiver logos in public/logos/test
-// Update this list to match real files in /public/logos/test
-const RECEIVER_LOGOS = [
-  "/logos/test/logo-1.png",
-  "/logos/test/logo-2.png",
-  "/logos/test/logo-3.png",
+// Receiver images from public/avatars
+const RECEIVER_IMAGES = [
+  "/avatars/receiver 1.webp",
+  "/avatars/receiver 2.jpg",
+  "/avatars/receiver 3.webp",
+  "/avatars/receiver 4.webp",
 ]
 
 export default function DailyOperationsPage() {
@@ -169,26 +169,13 @@ export default function DailyOperationsPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {receivers.map((receiver) => {
-                  // Show a custom image for Red Cross, otherwise pick a random logo
-                  const getImageForReceiver = (receiver: Receiver) => {
+                {receivers.map((receiver, index) => {
+                  // Static assignment of receiver images
+                  const getImageForReceiver = (receiver: Receiver, index: number) => {
                     if (receiver.image) return receiver.image
-
-                    // Special case: Red Cross
-                    if (receiver.name.toLowerCase().includes("red cross")) {
-                      // Save the image you showed as public/logos/test/red-cross.jpg
-                      // so it is available at this path:
-                      return "/logos/test/red-cross.jpg"
-                    }
-
-                    // Default: random logo from public/logos/test
-                    if (RECEIVER_LOGOS.length > 0) {
-                      const index = Math.floor(Math.random() * RECEIVER_LOGOS.length)
-                      return RECEIVER_LOGOS[index]
-                    }
-
-                    // Fallback to initials-only avatar if no local logos are configured
-                    return ""
+                    
+                    // Assign images statically based on index
+                    return RECEIVER_IMAGES[index % RECEIVER_IMAGES.length]
                   }
 
                   return (
@@ -198,9 +185,9 @@ export default function DailyOperationsPage() {
                     >
                       <div className="flex items-center gap-3">
                         <Avatar className="h-10 w-10">
-                          <AvatarImage src={getImageForReceiver(receiver)} alt={receiver.name} />
+                          <AvatarImage src={getImageForReceiver(receiver, index)} alt={receiver.name} className="object-cover" />
                           <AvatarFallback>
-                            {receiver.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                            <img src="/avatar.png" alt="default" className="object-cover" />
                           </AvatarFallback>
                         </Avatar>
                         <div>

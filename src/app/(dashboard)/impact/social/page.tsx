@@ -59,27 +59,17 @@ export default function SocialImpactPage() {
         
         // Available receiver images
         const receiverImages = [
-          '/logos/test/receiver 1.webp',
-          '/logos/test/receiver 2.jpg',
-          '/logos/test/receiver 3.webp',
-          '/logos/test/receiver 4.webp'
+          '/avatars/receiver 1.webp',
+          '/avatars/receiver 2.jpg',
+          '/avatars/receiver 3.webp',
+          '/avatars/receiver 4.webp'
         ]
         
-        // Assign random avatar images to receivers
-        const receiversWithAvatars = (data.receivers || []).map((r: Receiver) => {
-          // Use Red Cross images for Red Cross organization
-          if (r.organization === 'Red Cross Finland') {
-            // Randomly pick between receiver 1 or 4 (both are webp, can be Red Cross themed)
-            const redCrossImages = [receiverImages[0], receiverImages[3]]
-            return {
-              ...r,
-              avatarImage: redCrossImages[Math.floor(Math.random() * redCrossImages.length)]
-            }
-          }
-          // Randomly assign any receiver image to other organizations
+        // Assign receiver images statically based on index
+        const receiversWithAvatars = (data.receivers || []).map((r: Receiver, index: number) => {
           return {
             ...r,
-            avatarImage: receiverImages[Math.floor(Math.random() * receiverImages.length)]
+            avatarImage: receiverImages[index % receiverImages.length]
           }
         })
         
@@ -185,9 +175,9 @@ export default function SocialImpactPage() {
                 >
                   <div className="flex items-center gap-3">
                     <Avatar className="h-10 w-10">
-                      <AvatarImage src={receiver.avatarImage || '/avatar.png'} alt={receiver.name} />
+                      <AvatarImage src={receiver.avatarImage || '/avatar.png'} alt={receiver.name} className="object-cover" />
                       <AvatarFallback>
-                        {receiver.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                        <img src="/avatar.png" alt="default" className="object-cover" />
                       </AvatarFallback>
                     </Avatar>
                     <div>

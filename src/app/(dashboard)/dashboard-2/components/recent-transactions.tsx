@@ -18,44 +18,49 @@ interface Donation {
 }
 
 const availableLogos = [
-  '/logos/test/donor 1.jpeg',
-  '/logos/test/donor 2.jpeg',
-  '/logos/test/donor 3.jpeg',
-  '/logos/test/sodexo.jpg',
-  '/logos/test/sodexo_2.webp',
+  '/avatars/donor 1.jpeg',
+  '/avatars/donor 2.jpeg',
+  '/avatars/donor 3.jpeg',
+  '/avatars/sodexo.jpg',
+  '/avatars/sodexo_2.webp',
 ]
 
 function getCompanyLogo(donorName: string, receiverName: string): { src: string, isPerson: boolean } {
+  // Simple static assignment of images to different donors
   const donorLower = donorName.toLowerCase()
   
-  // Match specific donor companies with logos
-  if (donorLower.includes('sodexo')) {
-    return { src: '/logos/test/sodexo.jpg', isPerson: true }
+  if (donorLower.includes('sodexo') && donorLower.includes('vilppulantie')) {
+    return { src: '/avatars/donor 2.jpeg', isPerson: true }
+  }
+  if (donorLower.includes('dipoli')) {
+    return { src: '/avatars/donor 1.jpeg', isPerson: true }
   }
   if (donorLower.includes('roasberg')) {
-    return { src: '/logos/test/donor 1.jpeg', isPerson: true }
-  }
-  if (donorLower.includes('sähkötalo')) {
-    return { src: '/logos/test/donor 3.jpeg', isPerson: true }
+    return { src: '/avatars/donor 3.jpeg', isPerson: true }
   }
   if (donorLower.includes('alvari')) {
-    return { src: '/logos/test/donor 2.jpeg', isPerson: true }
+    return { src: '/avatars/sodexo.jpg', isPerson: true }
   }
   if (donorLower.includes('kvarkki')) {
-    return { src: '/logos/test/donor 3.jpeg', isPerson: true }
+    return { src: '/avatars/sodexo_2.webp', isPerson: true }
+  }
+  if (donorLower.includes('sähkötalo')) {
+    return { src: '/avatars/donor 1.jpeg', isPerson: true }
+  }
+  if (donorLower.includes('sodexo') && donorLower.includes('helsinki')) {
+    return { src: '/avatars/donor 3.jpeg', isPerson: true }
+  }
+  if (donorLower.includes('olivia')) {
+    return { src: '/avatars/donor 2.jpeg', isPerson: true }
   }
   if (donorLower.includes('metsätalo')) {
-    return { src: '/logos/test/donor 1.jpeg', isPerson: true }
-  }
-  if (donorLower.includes('unicafe') || donorLower.includes('olivia')) {
-    return { src: '/logos/test/donor 2.jpeg', isPerson: true }
+    return { src: '/avatars/sodexo.jpg', isPerson: true }
   }
   if (donorLower.includes('tuas')) {
-    return { src: '/logos/test/sodexo_2.webp', isPerson: true }
+    return { src: '/avatars/sodexo_2.webp', isPerson: true }
   }
   
-  // If no specific match, assign images based on a hash of the donor name for consistency
-  // This ensures the same donor always gets the same image
+  // Default fallback
   const hash = donorName.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
   const logo = availableLogos[hash % availableLogos.length]
   return { src: logo, isPerson: true }
@@ -139,9 +144,11 @@ export function RecentTransactions() {
                     <AvatarImage 
                       src={logo.src} 
                       alt={donation.donorName}
-                      className={logo.isPerson ? "object-cover" : "object-contain p-1"}
+                      className="object-cover"
                     />
-                    <AvatarFallback>{donation.donorName.split(" ").map(n => n[0]).join("")}</AvatarFallback>
+                    <AvatarFallback>
+                      <img src="/avatar.png" alt="default" className="object-cover" />
+                    </AvatarFallback>
                   </Avatar>
                 )
               })()}
