@@ -121,22 +121,20 @@ export function ROICalculator() {
           <Button onClick={onCalculate} disabled={!canCalculate} className="min-w-40 text-base">Calculate</Button>
         </div>
 
-        {result && (
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            <div className="rounded-lg border p-4">
-              <div className="text-sm text-muted-foreground">CO₂e</div>
-              <div className="text-xl font-semibold">{result.co2eKg.toFixed(2)} kg</div>
-            </div>
-            <div className="rounded-lg border p-4">
-              <div className="text-sm text-muted-foreground">Trees absorbing/month (rough)</div>
-              <div className="text-xl font-semibold">{result.treesMonth.toFixed(1)}</div>
-            </div>
-            <div className="rounded-lg border p-4">
-              <div className="text-sm text-muted-foreground">Intensity</div>
-              <div className="text-xl font-semibold">{intensityKgPerKg[protein].toFixed(2)} kg/kg</div>
-            </div>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <div className="rounded-lg border p-4">
+            <div className="text-sm text-muted-foreground">CO₂e</div>
+            <div className="text-xl font-semibold">{result ? `${result.co2eKg.toFixed(2)} kg` : "--"}</div>
           </div>
-        )}
+          <div className="rounded-lg border p-4">
+            <div className="text-sm text-muted-foreground">Trees absorbing/month (rough)</div>
+            <div className="text-xl font-semibold">{result ? result.treesMonth.toFixed(1) : "--"}</div>
+          </div>
+          <div className="rounded-lg border p-4">
+            <div className="text-sm text-muted-foreground">Intensity</div>
+            <div className="text-xl font-semibold">{result ? `${intensityKgPerKg[protein].toFixed(2)} kg/kg` : "--"}</div>
+          </div>
+        </div>
       </CardContent>
     </Card>
   )

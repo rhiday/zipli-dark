@@ -1,5 +1,6 @@
 "use client"
 
+import 'mapbox-gl/dist/mapbox-gl.css'
 import React, { useState, useCallback, useEffect } from 'react'
 import Map, { Marker, Popup, Source, Layer } from 'react-map-gl'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'

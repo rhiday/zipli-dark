@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import 'mapbox-gl/dist/mapbox-gl.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -137,7 +136,7 @@
 }
 
 /* Fix for right-side inset variant support */
-@media (min-width: 768px) {
+@media (min-width: 0px) {
   /* Right sidebar inset variant - margin adjustments */
   [data-side="right"][data-variant="inset"] ~ [data-slot="sidebar-inset"] {
     margin-right: 0 !important;

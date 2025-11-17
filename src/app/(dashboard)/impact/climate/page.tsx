@@ -24,8 +24,8 @@ export default function ClimateImpactPage() {
               </h2>
               <Tabs value={chartType} onValueChange={(v) => setChartType(v as "sankey" | "pie")}>
                 <TabsList>
-                  <TabsTrigger value="sankey">Sankey</TabsTrigger>
                   <TabsTrigger value="pie">Pie chart</TabsTrigger>
+                  <TabsTrigger value="sankey">Sankey</TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>

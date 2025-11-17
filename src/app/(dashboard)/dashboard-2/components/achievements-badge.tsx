@@ -77,7 +77,7 @@ export function AchievementsBadge() {
         </div>
       </CardHeader>
       <CardContent>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-3 grid-cols-4">
           {achievements.map((achievement) => {
             const Icon = achievement.icon
             

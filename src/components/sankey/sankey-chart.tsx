@@ -183,9 +183,6 @@ export default function SankeyChart({ metric = 'mass' }: SankeyChartProps) {
             <div className="overflow-x-auto bg-card rounded-lg p-4 border">
                 <svg ref={svgRef} className="mx-auto block" />
             </div>
-            <div className="mt-4 text-sm text-muted-foreground">
-                <p>Kaavio näyttää ruokahävikin jakautumisen eri kategorioihin ja yksittäisiin tuotteisiin {metricLabel.toLowerCase()}n mukaan.</p>
-            </div>
         </div>
     );
 }
