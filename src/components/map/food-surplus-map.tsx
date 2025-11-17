@@ -5,7 +5,7 @@ import React, { useState, useCallback, useEffect } from 'react'
 import Map, { Marker, Popup, Source, Layer } from 'react-map-gl'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Package, Users, X, UtensilsCrossed, Coffee, School, Building2, Flame } from 'lucide-react'
+import { Package, Users, X, UtensilsCrossed, Coffee, School, Building2, Flame, Sprout, ShoppingCart } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { DonationGauge } from '@/components/ui/donation-gauge'
 
@@ -67,6 +67,24 @@ function getLocationStyle(type: string, cuisine?: string) {
       icon: Users,
       bgColor: '#5A0057',  // Dark purple for receivers
       label: 'Receiver'
+    }
+  }
+  
+  // Producer type
+  if (type === 'producer') {
+    return {
+      icon: Sprout,
+      bgColor: '#024209',  // Same green as other donors
+      label: 'Producer'
+    }
+  }
+  
+  // Supermarket/Hypermarket types
+  if (type === 'supermarket' || type === 'hypermarket') {
+    return {
+      icon: ShoppingCart,
+      bgColor: '#024209',  // Same green as other donors
+      label: type === 'hypermarket' ? 'Hypermarket' : 'Supermarket'
     }
   }
   
@@ -299,7 +317,73 @@ export function FoodSurplusMap() {
           }
         }))
 
-        const allFeatures = [...donorFeatures, ...receiverFeatures]
+        // Load additional location data
+        const extraFeatures: LocationData[] = []
+
+        // Load restaurants
+        try {
+          const restaurantsResponse = await fetch('/data/helsinkiresturants.json')
+          if (restaurantsResponse.ok) {
+            const restaurantsData = await restaurantsResponse.json()
+            if (restaurantsData.features) {
+              // Add prefix to ensure unique IDs
+              const restaurants = (restaurantsData.features as LocationData[]).map(f => ({
+                ...f,
+                properties: {
+                  ...f.properties,
+                  id: `hki-rest-${f.properties.id}`
+                }
+              }))
+              extraFeatures.push(...restaurants)
+            }
+          }
+        } catch (error) {
+          console.error('Failed to load restaurant data:', error)
+        }
+
+        // Load producers
+        try {
+          const producersResponse = await fetch('/data/foodproducers.json')
+          if (producersResponse.ok) {
+            const producersData = await producersResponse.json()
+            if (producersData.features) {
+              // Add prefix to ensure unique IDs
+              const producers = (producersData.features as LocationData[]).map(f => ({
+                ...f,
+                properties: {
+                  ...f.properties,
+                  id: `prod-${f.properties.id}`
+                }
+              }))
+              extraFeatures.push(...producers)
+            }
+          }
+        } catch (error) {
+          console.error('Failed to load producer data:', error)
+        }
+
+        // Load shops
+        try {
+          const shopsResponse = await fetch('/data/shopshelsinki.json')
+          if (shopsResponse.ok) {
+            const shopsData = await shopsResponse.json()
+            if (shopsData.features) {
+              // Add prefix to ensure unique IDs
+              const shops = (shopsData.features as LocationData[]).map(f => ({
+                ...f,
+                properties: {
+                  ...f.properties,
+                  id: `shop-${f.properties.id}`
+                }
+              }))
+              extraFeatures.push(...shops)
+            }
+          }
+        } catch (error) {
+          console.error('Failed to load shop data:', error)
+        }
+
+        const allFeatures: LocationData[] = [...donorFeatures, ...receiverFeatures, ...extraFeatures]
         
         setRestaurantData({
           type: 'FeatureCollection',
@@ -365,11 +449,15 @@ export function FoodSurplusMap() {
     setShowHeatmap(prev => !prev)
   }, [])
 
-  // Prepare heatmap data (only donors with donation amounts)
+  // Prepare heatmap data (all donors - exclude receivers)
   const heatmapData = {
     type: 'FeatureCollection' as const,
     features: (restaurantData?.features || [])
-      .filter(f => f.properties.markerType === 'donor' && f.properties.donations)
+      .filter(f => {
+        const isReceiver = isReceiverType(f.properties.type)
+        const hasDonations = f.properties.donations && f.properties.donations > 0
+        return !isReceiver && hasDonations
+      })
       .map(f => ({
         type: 'Feature' as const,
         geometry: f.geometry,

@@ -1,86 +1,150 @@
-# Implementation Plan: New Social Impact Tab Design ✅ COMPLETED
+# Implementation Plan: Add New Location Data to Map
 
 ## Problem Statement
-Redesign the Social Impact tab to show a cleaner, more focused view with:
-- Two key metrics at the top (Total Meals provided, Organizations helped)
-- Two-column layout with donations table and recipient organizations
-- Filter buttons (Select dates, Filters) on each section
+Colleague pushed three new JSON files with food producer and supermarket data to the main branch (commit `22cf26c`). We need to fetch these files and display them on our existing map as **donor locations** (green markers with appropriate icons for their type).
 
 ## Current State
 
-### File: `src/app/(dashboard)/dashboard-2/components/customer-insights.tsx`
+### Local Map Component
+**File**: `src/components/map/food-surplus-map.tsx`
+- Currently loads only `/data/dashboard-data.json` (donors and receivers)
+- Has `getLocationStyle()` function that assigns icons based on type:
+  - Student/staff/school restaurants: fork/knife, coffee, building icons
+  - All donors use **green color** (#024209)
+  - Receivers use purple (#5A0057)
+- Displays 2 legend items: Donors and Receivers
 
-**Chart Type:** LineChart with 3 toggleable data series
-- Financial Impact Over Time
-- Data: `revenue`, `savings`, `economicValue` (€ amounts)
-- Colors: Zipli lime green (#18E170), dark green (#024209), dark purple (#5A0057)
-- Toggle switches to show/hide each series
+### New Data Files on Remote
+1. **`public/data/foodproducers.json`**
+   - 10 producers: Valio, Fazer, Paulig, Solar Foods, etc.
+   - Properties: id, name, type: "producer", address, phone, website, products[], status
+   - GeoJSON format
 
-**Key Metrics (Right Panel):**
-1. Annual ROI: 1.6x
-2. Operating Cost: €0.71/kg (-43% vs. before Zipli)
-3. Economic Value: €3.6M (1,200,000 kg kept in the system)
+2. **`public/data/helsinkiresturants.json`**
+   - Student/staff restaurants: Alvari, TUAS, Dipoli, etc.
+   - Properties: id, name, type: "student restaurant", cuisine, donations, meals, etc.
+   - GeoJSON format
 
-**Data Arrays:**
-- `receiverImpactData`: 6 months (Jan-Jun) with revenue/savings/economicValue
-- `receiverTypesData`: 3 types (Food Banks: 24, Charities: 36, Community Centers: 8)
-- `helsinkiDistrictsData`: 5 districts with higher meal counts (28,470; 19,230; 14,560; 11,230; 28,910)
+3. **`public/data/shopshelsinki.json`**
+   - 10 supermarkets: Prisma, S-Market, Lidl, K-Supermarket
+   - Properties: id, name, type: "supermarket" or "hypermarket", address, phone, website
+   - GeoJSON format
 
-## Original State (Commit: 3eb96e3)
+## Proposed Changes
 
-**Chart Type:** BarChart with 3 stacked bars
-- Receiver Growth Trends
-- Data: `new`, `active`, `completed` (counts)
-- Colors: CSS variables (--chart-1, --chart-2, --chart-3)
-- No toggle controls
+### Step 1: Fetch the three new JSON files (no code changes)
+```bash
+git checkout origin/main -- public/data/foodproducers.json
+git checkout origin/main -- public/data/helsinkiresturants.json
+git checkout origin/main -- public/data/shopshelsinki.json
+```
 
-**Key Metrics (Right Panel):**
-1. Active Receivers: 34 (+12.5% from last month)
-2. Meals Distributed: 8,200 (+2.1% improvement)
-3. Success Rate: 94.2% (+8.3% growth)
+### Step 2: Add new icon imports
+**File**: `src/components/map/food-surplus-map.tsx` (line 8)
 
-**Data Arrays:**
-- `receiverImpactData`: 6 months with new/active/completed counts (smaller numbers: 12-28 range)
-- `receiverTypesData`: 3 types (Food Banks: 12, Charities: 18, Community Centers: 4)
-- `helsinkiDistrictsData`: 5 districts with lower meal counts (2,847; 1,923; 1,456; 1,123; 2,891)
+Add `Sprout` and `ShoppingCart` icons:
+```typescript
+import { Package, Users, X, UtensilsCrossed, Coffee, School, Building2, Flame, Sprout, ShoppingCart } from 'lucide-react'
+```
 
-## Changes Required
+### Step 3: Update getLocationStyle() to handle new types
+**File**: `src/components/map/food-surplus-map.tsx` (after line 76, before student restaurant check)
 
-### In `src/app/(dashboard)/dashboard-2/components/customer-insights.tsx`:
+Add cases for producer and supermarket types (all use green color):
+```typescript
+// Producer type
+if (type === 'producer') {
+  return {
+    icon: Sprout,
+    bgColor: '#024209',  // Same green as other donors
+    label: 'Producer'
+  }
+}
 
-1. **Imports:**
-   - Remove: `LineChart, Line, ResponsiveContainer` from recharts
-   - Remove: `Switch, Label` from UI components
-   - Add back: `BarChart, Bar` to recharts imports
-   - Add back: `Users, UserIcon, Utensils` to lucide-react imports
+// Supermarket/Hypermarket types
+if (type === 'supermarket' || type === 'hypermarket') {
+  return {
+    icon: ShoppingCart,
+    bgColor: '#024209',  // Same green as other donors
+    label: type === 'hypermarket' ? 'Hypermarket' : 'Supermarket'
+  }
+}
+```
 
-2. **Data Arrays:**
-   - `receiverImpactData`: Change from revenue/savings/economicValue to new/active/completed
-   - `chartConfig`: Change from financial metrics to new/active/completed with CSS variable colors
-   - `receiverTypesData`: Reduce counts (24→12, 36→18, 8→4) and growth percentages
-   - `helsinkiDistrictsData`: Reduce meal counts by factor of 10
+### Step 4: Load the new data files in loadLocations()
+**File**: `src/components/map/food-surplus-map.tsx` (inside loadLocations function, after receiverFeatures)
 
-3. **State:**
-   - Remove: `showRevenue`, `showSavings`, `showEconomicValue` states
+Add before the line `const allFeatures = [...donorFeatures, ...receiverFeatures]`:
+```typescript
+// Load additional location data
+const extraFeatures: LocationData[] = []
 
-4. **Chart Section:**
-   - Replace LineChart with BarChart
-   - Change title from "Financial Impact Over Time" to "Receiver Growth Trends"
-   - Change chart height from 300px to 375px
-   - Remove ResponsiveContainer wrapper
-   - Replace Line components with Bar components
-   - Remove toggle switch controls section
+// Load restaurants
+try {
+  const restaurantsResponse = await fetch('/data/helsinkiresturants.json')
+  if (restaurantsResponse.ok) {
+    const restaurantsData = await restaurantsResponse.json()
+    if (restaurantsData.features) {
+      extraFeatures.push(...(restaurantsData.features as LocationData[]))
+    }
+  }
+} catch (error) {
+  console.error('Failed to load restaurant data:', error)
+}
 
-5. **Key Metrics Cards:**
-   - Card 1: "Annual ROI" → "Active Receivers" (1.6x → 34, with +12.5% from last month)
-   - Card 2: "Operating Cost" → "Meals Distributed" (€0.71/kg → 8,200, with +2.1% improvement)
-   - Card 3: "Economic Value" → "Success Rate" (€3.6M → 94.2%, with +8.3% growth)
-   - Change icons: Keep TrendingUp for card 1, change Target→Utensils for card 2, keep Heart→Target for card 3
+// Load producers
+try {
+  const producersResponse = await fetch('/data/foodproducers.json')
+  if (producersResponse.ok) {
+    const producersData = await producersResponse.json()
+    if (producersData.features) {
+      extraFeatures.push(...(producersData.features as LocationData[]))
+    }
+  }
+} catch (error) {
+  console.error('Failed to load producer data:', error)
+}
 
-## Files to Modify
-- `src/app/(dashboard)/dashboard-2/components/customer-insights.tsx` (complete revert to original state)
+// Load shops
+try {
+  const shopsResponse = await fetch('/data/shopshelsinki.json')
+  if (shopsResponse.ok) {
+    const shopsData = await shopsResponse.json()
+    if (shopsData.features) {
+      extraFeatures.push(...(shopsData.features as LocationData[]))
+    }
+  }
+} catch (error) {
+  console.error('Failed to load shop data:', error)
+}
+```
 
-## Notes
-- The change was introduced in commit `43e2855` ("update")
-- The Types and Districts tabs remain unchanged
-- No other files need modification
+Then update the allFeatures line to include extraFeatures:
+```typescript
+const allFeatures: LocationData[] = [...donorFeatures, ...receiverFeatures, ...extraFeatures]
+```
+
+## Summary of Changes
+1. Fetch 3 new JSON files from remote
+2. Import `Sprout` and `ShoppingCart` icons
+3. Add producer and supermarket cases to `getLocationStyle()` (both use green)
+4. Add 3 fetch calls in `loadLocations()` to load new data files
+5. Include new locations in the map's feature array
+
+## Result
+Map will show:
+- All existing donors and receivers
+- **+ 10 new producers** (green markers with Sprout icon)
+- **+ new student/staff restaurants** (green markers with existing restaurant icons)
+- **+ 10 new supermarkets** (green markers with ShoppingCart icon)
+
+All new locations will be **green** (donor color) with **different icons** to distinguish their type.
+
+## Testing
+- [ ] Navigate to map page
+- [ ] Verify no console errors
+- [ ] Confirm map shows more locations than before
+- [ ] Check that producer markers have Sprout icon (green)
+- [ ] Check that supermarket markers have ShoppingCart icon (green)
+- [ ] Click markers to verify popups work (will show existing popup format)
+- [ ] Verify map auto-adjusts to fit all markers

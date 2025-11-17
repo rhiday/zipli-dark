@@ -1,0 +1,165 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [25.0911, 60.1985] },
+      "properties": {
+        "id": "shop-004",
+        "name": "Prisma Viikki",
+        "type": "hypermarket",
+        "address": "Viikintori 3, 00790 Helsinki, Finland",
+        "phone": "+358 10 76 68700",
+        "website": "https://www.prisma.fi",
+        "donations": 1580,
+        "meals": 3950,
+        "lastDonation": "2025-11-16",
+        "notes": "Large Prisma in northeastern Helsinki."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [25.0908, 60.2515] },
+      "properties": {
+        "id": "shop-005",
+        "name": "S-Market Mannerheimintie",
+        "type": "supermarket",
+        "address": "Mannerheimintie 9, 00100 Helsinki, Finland",
+        "phone": "+358 10 76 61000",
+        "website": "https://www.s-kaupat.fi",
+        "donations": 920,
+        "meals": 2300,
+        "lastDonation": "2025-11-17",
+        "notes": "S-Market in central Helsinki, 24/7 listed in open-alfa data."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [24.9318, 60.1699] },
+      "properties": {
+        "id": "shop-006",
+        "name": "Lidl Kamppi",
+        "type": "supermarket",
+        "address": "Kampinkuja 2, 00100 Helsinki, Finland",
+        "phone": "+358 800 05435",
+        "website": "https://www.lidl.fi",
+        "donations": 785,
+        "meals": 1963,
+        "lastDonation": "2025-11-15",
+        "notes": "Discount supermarket in Kamppi."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [25.0716, 60.2621] },
+      "properties": {
+        "id": "shop-007",
+        "name": "Lidl Alppikylä",
+        "type": "supermarket",
+        "address": "Suurmetsäntie 6, 00770 Helsinki, Finland",
+        "phone": "+358 800 05435",
+        "website": "https://www.lidl.fi",
+        "donations": 650,
+        "meals": 1625,
+        "lastDonation": "2025-11-14",
+        "notes": "Lidl branch in northeast Helsinki."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [25.0754, 60.2618] },
+      "properties": {
+        "id": "shop-008",
+        "name": "K-Supermarket Jakomäki",
+        "type": "supermarket",
+        "address": "Jakomäentie 1, 00770 Helsinki, Finland",
+        "phone": "020 734 8920",
+        "website": "https://www.k-ruoka.fi",
+        "donations": 540,
+        "meals": 1350,
+        "lastDonation": "2025-11-13",
+        "notes": "Kesko's supermarket in the Jakomäki district."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [24.9440, 60.1594] },
+      "properties": {
+        "id": "shop-009",
+        "name": "K-Supermarket Postitalo",
+        "type": "supermarket",
+        "address": "Elielinaukio 2F, 00100 Helsinki, Finland",
+        "phone": "010 956 9000",
+        "website": "https://www.k-ruoka.fi",
+        "donations": 1240,
+        "meals": 3100,
+        "lastDonation": "2025-11-17",
+        "notes": "Supermarket in the Postitalo building downtown."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [24.9487, 60.1989] },
+      "properties": {
+        "id": "shop-010",
+        "name": "Prisma Firdonkatu",
+        "type": "hypermarket",
+        "address": "Firdonkatu 2B, 00520 Helsinki, Finland",
+        "phone": "+358 10 76 57000",
+        "website": "https://www.prisma.fi",
+        "donations": 1820,
+        "meals": 4550,
+        "lastDonation": "2025-11-16",
+        "notes": "One of the big Prisma hypermarkets in Helsinki."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [24.9718, 60.2043] },
+      "properties": {
+        "id": "shop-011",
+        "name": "S-Market Vallila",
+        "type": "supermarket",
+        "address": "Aleksis Kiven katu 11, 00510 Helsinki, Finland",
+        "phone": "+358 10 766 6050",
+        "website": "https://www.s-kaupat.fi",
+        "donations": 710,
+        "meals": 1775,
+        "lastDonation": "2025-11-15",
+        "notes": "S-Market in the Vallila neighborhood."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [24.9650, 60.1980] },
+      "properties": {
+        "id": "shop-012",
+        "name": "K-Citymarket Easton",
+        "type": "hypermarket",
+        "address": "Gotlanninkatu 13 / Kauppakartanonkatu 3, 00930 Helsinki, Finland",
+        "phone": "010 5383600",
+        "website": "https://www.k-ruoka.fi",
+        "donations": 1950,
+        "meals": 4875,
+        "lastDonation": "2025-11-17",
+        "notes": "Large anchor in Easton shopping centre."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [24.9283, 60.1895] },
+      "properties": {
+        "id": "shop-013",
+        "name": "K-Supermarket Lauttasaari",
+        "type": "supermarket",
+        "address": "Lauttasaarentie 5, 00200 Helsinki, Finland",
+        "phone": null,
+        "website": "https://www.k-ruoka.fi",
+        "donations": 680,
+        "meals": 1700,
+        "lastDonation": "2025-11-14",
+        "notes": "Supermarket on the island of Lauttasaari."
+      }
+    }
+  ]
+}

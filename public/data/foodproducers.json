@@ -1,0 +1,209 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.8933, 60.2046]
+      },
+      "properties": {
+        "id": "producer-001",
+        "name": "Valio",
+        "type": "producer",
+        "address": "Meijeritie 6, FI-00370 Helsinki, Finland",
+        "phone": "+358 10 381 121",
+        "website": "https://www.valio.com",
+        "products": ["milk", "cheese", "yogurt", "dairy products"],
+        "donations": 2340,
+        "meals": 5850,
+        "lastDonation": "2025-11-15",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.8786, 60.2566]
+      },
+      "properties": {
+        "id": "producer-002",
+        "name": "Fazer",
+        "type": "producer",
+        "address": "Fazerintie 6, FI-01230 Vantaa, Finland",
+        "phone": "+358 20 555 3000",
+        "website": "https://www.fazergroup.com",
+        "products": ["confectionery", "bakery items", "chocolates", "breads"],
+        "donations": 1890,
+        "meals": 4725,
+        "lastDonation": "2025-11-16",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [25.1532, 60.2039]
+      },
+      "properties": {
+        "id": "producer-003",
+        "name": "Paulig",
+        "type": "producer",
+        "address": "Satamakaari 20, FI-00981 Helsinki, Finland",
+        "phone": "+358 9 319 81",
+        "website": "https://www.pauliggroup.com",
+        "products": ["coffee", "spices", "ready meals"],
+        "donations": 1650,
+        "meals": 4125,
+        "lastDonation": "2025-11-14",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.8578, 60.3008]
+      },
+      "properties": {
+        "id": "producer-004",
+        "name": "Solar Foods",
+        "type": "producer",
+        "address": "Härkälenkki 11, 01730 Vantaa, Finland",
+        "phone": "+358 10 579 3287",
+        "website": "https://solarfoods.com",
+        "products": ["single-cell proteins", "sustainable proteins"],
+        "donations": 580,
+        "meals": 1450,
+        "lastDonation": "2025-11-13",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.8933, 60.2046]
+      },
+      "properties": {
+        "id": "producer-005",
+        "name": "Oddlygood Global",
+        "type": "producer",
+        "address": "Meijeritie 6, FI-00370 Helsinki, Finland",
+        "phone": "N/A",
+        "website": "https://www.oddlygood.com",
+        "products": ["plant-based dairy alternatives"],
+        "donations": 745,
+        "meals": 1863,
+        "lastDonation": "2025-11-15",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.85, 60.277]
+      },
+      "properties": {
+        "id": "producer-006",
+        "name": "HKScan",
+        "type": "producer",
+        "address": "Väinö Tannerin tie 1, FI-01511 Vantaa, Finland",
+        "phone": "+358 10 570100",
+        "website": "https://www.hkfoods.com",
+        "products": ["pork", "beef", "poultry", "processed meats"],
+        "donations": 1980,
+        "meals": 4950,
+        "lastDonation": "2025-11-16",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.91, 60.162]
+      },
+      "properties": {
+        "id": "producer-007",
+        "name": "Anora Industrial",
+        "type": "producer",
+        "address": "Kaapeliaukio 1, 00180 Helsinki, Finland",
+        "phone": "+358 207 013 013",
+        "website": "https://anoraindustrial.com",
+        "products": ["wines", "spirits", "industrial ethanol"],
+        "donations": 420,
+        "meals": 1050,
+        "lastDonation": "2025-11-12",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [25.1021, 60.3816]
+      },
+      "properties": {
+        "id": "producer-008",
+        "name": "ETKO Brewing",
+        "type": "producer",
+        "address": "Kumitehtaankatu 5, 04260 Kerava, Finland",
+        "phone": "+358 50 490 3069",
+        "website": "https://etko.beer",
+        "products": ["beer", "craft beer"],
+        "donations": 320,
+        "meals": 800,
+        "lastDonation": "2025-11-11",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [25.2667, 60.3667]
+      },
+      "properties": {
+        "id": "producer-009",
+        "name": "Arla Foods",
+        "type": "producer",
+        "address": "Kotkatie 34, 01151 Söderkulla, Finland",
+        "phone": "+358 9272 001",
+        "website": "https://www.arla.fi",
+        "products": ["milk", "cheese", "dairy products"],
+        "donations": 2150,
+        "meals": 5375,
+        "lastDonation": "2025-11-17",
+        "status": "active"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.4, 59.9833]
+      },
+      "properties": {
+        "id": "producer-010",
+        "name": "Dansukker (Sucros Oy)",
+        "type": "producer",
+        "address": "Porkkalan sokeripuhdistamo, Porkkala, Finland",
+        "phone": "N/A",
+        "website": "https://www.dansukker.fi",
+        "products": ["sugar", "jam sugar", "household sugar"],
+        "donations": 890,
+        "meals": 2225,
+        "lastDonation": "2025-11-10",
+        "status": "active"
+      }
+    }
+  ]
+}
+
+
+
+

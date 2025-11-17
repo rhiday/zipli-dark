@@ -22,7 +22,16 @@ interface Receiver {
   organization: string
   type: string
   requestsCount: number
+  image?: string
 }
+
+// Local receiver logos in public/logos/test
+// Update this list to match real files in /public/logos/test
+const RECEIVER_LOGOS = [
+  "/logos/test/logo-1.png",
+  "/logos/test/logo-2.png",
+  "/logos/test/logo-3.png",
+]
 
 export default function DailyOperationsPage() {
   const [donations, setDonations] = useState<Donation[]>([])
@@ -136,26 +145,14 @@ export default function DailyOperationsPage() {
                   key={donation.id}
                   className="flex items-center justify-between p-3 rounded-lg border hover:bg-muted/50 transition-colors cursor-pointer"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10">
-                      <span className="text-sm font-medium">{donation.quantity}</span>
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium">{donation.donorName}</p>
-                      <p className="text-xs text-muted-foreground">
-                        {donation.quantity} {donation.unit}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-xs text-muted-foreground">
-                      {new Date(donation.createdAt).toLocaleDateString('en-US', { 
-                        month: 'short', 
-                        day: 'numeric', 
-                        year: 'numeric' 
-                      })}
-                    </p>
-                  </div>
+                  <p className="text-sm font-medium">{donation.quantity} kg</p>
+                  <p className="text-xs text-muted-foreground">
+                    {new Date(donation.createdAt).toLocaleDateString('en-US', { 
+                      month: 'short', 
+                      day: 'numeric', 
+                      year: 'numeric' 
+                    }).replace(',', ', ')}
+                  </p>
                 </div>
               ))}
             </div>
@@ -172,28 +169,51 @@ export default function DailyOperationsPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {receivers.map((receiver) => (
-                  <div 
-                    key={receiver.id}
-                    className="flex items-center justify-between p-3 rounded-lg border hover:bg-muted/50 transition-colors cursor-pointer"
-                  >
-                    <div className="flex items-center gap-3">
-                      <Avatar className="h-10 w-10">
-                        <AvatarImage src="/avatar.png" alt={receiver.name} />
-                        <AvatarFallback>
-                          {receiver.name.split(' ').map(n => n[0]).join('')}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="text-sm font-medium">{receiver.name}</p>
-                        <p className="text-xs text-muted-foreground">{receiver.organization}</p>
+                {receivers.map((receiver) => {
+                  // Show a custom image for Red Cross, otherwise pick a random logo
+                  const getImageForReceiver = (receiver: Receiver) => {
+                    if (receiver.image) return receiver.image
+
+                    // Special case: Red Cross
+                    if (receiver.name.toLowerCase().includes("red cross")) {
+                      // Save the image you showed as public/logos/test/red-cross.jpg
+                      // so it is available at this path:
+                      return "/logos/test/red-cross.jpg"
+                    }
+
+                    // Default: random logo from public/logos/test
+                    if (RECEIVER_LOGOS.length > 0) {
+                      const index = Math.floor(Math.random() * RECEIVER_LOGOS.length)
+                      return RECEIVER_LOGOS[index]
+                    }
+
+                    // Fallback to initials-only avatar if no local logos are configured
+                    return ""
+                  }
+
+                  return (
+                    <div 
+                      key={receiver.id}
+                      className="flex items-center justify-between p-3 rounded-lg border hover:bg-muted/50 transition-colors cursor-pointer"
+                    >
+                      <div className="flex items-center gap-3">
+                        <Avatar className="h-10 w-10">
+                          <AvatarImage src={getImageForReceiver(receiver)} alt={receiver.name} />
+                          <AvatarFallback>
+                            {receiver.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <p className="text-sm font-medium">{receiver.name}</p>
+                          <p className="text-xs text-muted-foreground">{receiver.organization}</p>
+                        </div>
                       </div>
+                      <Badge variant="outline">
+                        {receiver.requestsCount} requests
+                      </Badge>
                     </div>
-                    <Badge variant="outline">
-                      {receiver.requestsCount} requests
-                    </Badge>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </CardContent>
           </Card>

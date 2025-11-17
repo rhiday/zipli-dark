@@ -18,57 +18,48 @@ interface Donation {
 }
 
 const availableLogos = [
-  '/logos/test/images.jpeg',
-  '/logos/test/images (1).jpeg',
-  '/logos/test/download.jpeg',
-  '/logos/test/red_cross.webp',
+  '/logos/test/donor 1.jpeg',
+  '/logos/test/donor 2.jpeg',
+  '/logos/test/donor 3.jpeg',
   '/logos/test/sodexo.jpg',
-  '/logos/unicafe.png',
-  '/logos/roasberg.png',
-  '/logos/compass.png'
+  '/logos/test/sodexo_2.webp',
 ]
 
 function getCompanyLogo(donorName: string, receiverName: string, index: number): { src: string, isPerson: boolean } {
   const donorLower = donorName.toLowerCase()
   const receiverLower = receiverName.toLowerCase()
   
-  // Match specific donor companies with photos
+  // Match specific donor companies with logos
   if (donorLower.includes('sodexo')) {
     return { src: '/logos/test/sodexo.jpg', isPerson: true }
   }
   if (donorLower.includes('roasberg')) {
-    return { src: '/logos/test/images.jpeg', isPerson: true }
+    return { src: '/logos/test/donor 1.jpeg', isPerson: true }
   }
-  if (donorLower.includes('compass') || donorLower.includes('sähkötalo')) {
-    return { src: '/logos/test/download.jpeg', isPerson: true }
-  }
-  
-  // Assign photos to UniCafe restaurants
-  if (donorLower.includes('dipoli')) {
-    return { src: '/logos/test/images (1).jpeg', isPerson: true }
+  if (donorLower.includes('sähkötalo')) {
+    return { src: '/logos/test/donor 3.jpeg', isPerson: true }
   }
   if (donorLower.includes('alvari')) {
-    return { src: '/logos/unicafe.png', isPerson: false }
+    return { src: '/logos/test/donor 2.jpeg', isPerson: true }
   }
   if (donorLower.includes('kvarkki')) {
-    return { src: '/logos/test/sodexo.jpg', isPerson: true }
+    return { src: '/logos/test/donor 3.jpeg', isPerson: true }
   }
   if (donorLower.includes('metsätalo')) {
-    return { src: '/logos/test/images.jpeg', isPerson: true }
+    return { src: '/logos/test/donor 1.jpeg', isPerson: true }
   }
   if (donorLower.includes('unicafe') || donorLower.includes('olivia')) {
-    return { src: '/logos/unicafe.png', isPerson: false }
+    return { src: '/logos/test/donor 2.jpeg', isPerson: true }
+  }
+  if (donorLower.includes('tuas')) {
+    return { src: '/logos/test/sodexo_2.webp', isPerson: true }
   }
   
-  // Match specific receiver organizations
-  if (receiverLower.includes('red cross')) {
-    return { src: '/logos/test/red_cross.webp', isPerson: true }
-  }
-  
-  // If no match, rotate through available logos - always use photos
-  const logo = availableLogos[index % availableLogos.length]
-  const isPerson = logo.includes('/test/')
-  return { src: logo, isPerson }
+  // If no specific match, assign images based on a hash of the donor name for consistency
+  // This ensures the same donor always gets the same image
+  const hash = donorName.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
+  const logo = availableLogos[hash % availableLogos.length]
+  return { src: logo, isPerson: true }
 }
 
 // Simulate recent donation times for demo purposes

@@ -26,11 +26,23 @@ const chartConfig = {
   },
   cafes: {
     label: "Cafes",
-    color: "#18E170", // Zipli Lime (bright green - smallest slice)
+    color: "#18E170", // Zipli Lime (bright green)
   },
   "staff-restaurants": {
     label: "Staff Restaurants",
     color: "#FFA5BD", // Zipli Rose (pink)
+  },
+  producers: {
+    label: "Producers",
+    color: "#84cc16", // Lime green
+  },
+  supermarkets: {
+    label: "Supermarkets",
+    color: "#3b82f6", // Blue
+  },
+  hypermarkets: {
+    label: "Hypermarkets",
+    color: "#8b5cf6", // Purple
   },
 }
 
@@ -61,9 +73,6 @@ export function RevenueBreakdown() {
         const response = await fetch('/data/dashboard-data.json')
         const data = await response.json()
         
-        // Transform category data into chart format with time range multipliers
-        const categoryData = data.donationsByCategory as Record<string, CategoryValue>
-        
         // Apply time range multiplier
         let multiplier = 1
         switch (timeRange) {
@@ -84,12 +93,73 @@ export function RevenueBreakdown() {
             break
         }
         
-        const chartData = Object.entries(categoryData).map(([key, value]) => ({
-          category: key.toLowerCase().replace(/ /g, '-'),
-          value: value.percentage,
-          amount: Math.floor(value.kg * multiplier),
-          fill: `var(--color-${key.toLowerCase().replace(/ /g, '-')})`
-        }))
+        // Calculate donation totals by category from all donors
+        const categoryTotals: Record<string, number> = {}
+        
+        // Process donors from dashboard data
+        if (data.donors) {
+          data.donors.forEach((donor: any) => {
+            const category = donor.category || 'Other'
+            categoryTotals[category] = (categoryTotals[category] || 0) + (donor.totalDonations || 0)
+          })
+        }
+        
+        // Load and process additional data sources
+        const loadAdditionalData = async () => {
+          // Load producers
+          try {
+            const producersResponse = await fetch('/data/foodproducers.json')
+            if (producersResponse.ok) {
+              const producersData = await producersResponse.json()
+              if (producersData.features) {
+                producersData.features.forEach((f: any) => {
+                  if (f.properties?.donations) {
+                    categoryTotals['Producers'] = (categoryTotals['Producers'] || 0) + f.properties.donations
+                  }
+                })
+              }
+            }
+          } catch (error) {
+            console.error('Failed to load producers:', error)
+          }
+          
+          // Load shops (supermarkets and hypermarkets)
+          try {
+            const shopsResponse = await fetch('/data/shopshelsinki.json')
+            if (shopsResponse.ok) {
+              const shopsData = await shopsResponse.json()
+              if (shopsData.features) {
+                shopsData.features.forEach((f: any) => {
+                  if (f.properties?.donations) {
+                    const type = f.properties.type
+                    if (type === 'hypermarket') {
+                      categoryTotals['Hypermarkets'] = (categoryTotals['Hypermarkets'] || 0) + f.properties.donations
+                    } else if (type === 'supermarket') {
+                      categoryTotals['Supermarkets'] = (categoryTotals['Supermarkets'] || 0) + f.properties.donations
+                    }
+                  }
+                })
+              }
+            }
+          } catch (error) {
+            console.error('Failed to load shops:', error)
+          }
+        }
+        
+        await loadAdditionalData()
+        
+        // Calculate total and percentages
+        const total = Object.values(categoryTotals).reduce((sum, val) => sum + val, 0)
+        
+        // Transform into chart format
+        const chartData = Object.entries(categoryTotals)
+          .map(([category, amount]) => ({
+            category: category.toLowerCase().replace(/ /g, '-'),
+            value: Math.round((amount / total) * 100),
+            amount: Math.floor(amount * multiplier),
+            fill: `var(--color-${category.toLowerCase().replace(/ /g, '-')})`
+          }))
+          .sort((a, b) => b.amount - a.amount) // Sort by amount descending
         
         setDonationSourcesData(chartData)
         if (chartData.length > 0) {
@@ -153,104 +223,100 @@ export function RevenueBreakdown() {
           </Button>
         </div>
       </CardHeader>
-      <CardContent className="flex flex-1 justify-center">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
-          <div className="flex justify-center">
-            <ChartContainer
-              id={id}
-              config={chartConfig}
-              className="mx-auto aspect-square w-full max-w-[300px]"
+      <CardContent className="flex flex-1 flex-col items-center">
+        <ChartContainer
+          id={id}
+          config={chartConfig}
+          className="mx-auto aspect-square w-full max-w-[280px]"
+        >
+          <PieChart>
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+            <Pie
+              data={donationSourcesData}
+              dataKey="amount"
+              nameKey="category"
+              innerRadius={60}
+              strokeWidth={5}
+              activeIndex={activeIndex}
+              activeShape={({
+                outerRadius = 0,
+                ...props
+              }: PieSectorDataItem) => (
+                <g>
+                  <Sector {...props} outerRadius={outerRadius + 10} />
+                  <Sector
+                    {...props}
+                    outerRadius={outerRadius + 25}
+                    innerRadius={outerRadius + 12}
+                  />
+                </g>
+              )}
             >
-              <PieChart>
-                <ChartTooltip
-                  cursor={false}
-                  content={<ChartTooltipContent hideLabel />}
-                />
-                <Pie
-                  data={donationSourcesData}
-                  dataKey="amount"
-                  nameKey="category"
-                  innerRadius={60}
-                  strokeWidth={5}
-                  activeIndex={activeIndex}
-                  activeShape={({
-                    outerRadius = 0,
-                    ...props
-                  }: PieSectorDataItem) => (
-                    <g>
-                      <Sector {...props} outerRadius={outerRadius + 10} />
-                      <Sector
-                        {...props}
-                        outerRadius={outerRadius + 25}
-                        innerRadius={outerRadius + 12}
-                      />
-                    </g>
-                  )}
-                >
-                  <Label
-                    content={({ viewBox }) => {
-                      if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                        return (
-                          <text
-                            x={viewBox.cx}
-                            y={viewBox.cy}
-                            textAnchor="middle"
-                            dominantBaseline="middle"
-                          >
-                            <tspan
-                              x={viewBox.cx}
-                              y={viewBox.cy}
-                              className="fill-foreground text-3xl font-bold"
-                            >
-                              {(donationSourcesData[activeIndex].amount / 1000).toFixed(1)}K kg
-                            </tspan>
-                            <tspan
-                              x={viewBox.cx}
-                              y={(viewBox.cy || 0) + 24}
-                              className="fill-muted-foreground"
-                            >
-                              Donated
-                            </tspan>
-                          </text>
-                        )
-                      }
+              <Label
+                content={({ viewBox }) => {
+                  if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                    return (
+                      <text
+                        x={viewBox.cx}
+                        y={viewBox.cy}
+                        textAnchor="middle"
+                        dominantBaseline="middle"
+                      >
+                        <tspan
+                          x={viewBox.cx}
+                          y={viewBox.cy}
+                          className="fill-foreground text-3xl font-bold"
+                        >
+                          {(donationSourcesData[activeIndex].amount / 1000).toFixed(1)}K kg
+                        </tspan>
+                        <tspan
+                          x={viewBox.cx}
+                          y={(viewBox.cy || 0) + 24}
+                          className="fill-muted-foreground"
+                        >
+                          Donated
+                        </tspan>
+                      </text>
+                    )
+                  }
+                }}
+              />
+            </Pie>
+          </PieChart>
+        </ChartContainer>
+        
+        <div className="grid grid-cols-2 gap-1.5 w-full mt-3 max-w-[500px]">
+          {donationSourcesData.map((item, index) => {
+            const config = chartConfig[item.category as keyof typeof chartConfig]
+            const isActive = index === activeIndex
+            
+            return (
+              <div 
+                key={item.category}
+                className={`flex items-center justify-between px-2 py-1 rounded transition-colors cursor-pointer ${
+                  isActive ? 'bg-muted' : 'hover:bg-muted/50'
+                }`}
+                onClick={() => setActiveCategory(item.category)}
+              >
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <span
+                    className="flex h-2 w-2 shrink-0 rounded-full"
+                    style={{
+                      backgroundColor: `var(--color-${item.category})`,
                     }}
                   />
-                </Pie>
-              </PieChart>
-            </ChartContainer>
-          </div>
-          
-          <div className="flex flex-col justify-center space-y-4">
-            {donationSourcesData.map((item, index) => {
-              const config = chartConfig[item.category as keyof typeof chartConfig]
-              const isActive = index === activeIndex
-              
-              return (
-                <div 
-                  key={item.category}
-                  className={`flex items-center justify-between p-3 rounded-lg transition-colors cursor-pointer ${
-                    isActive ? 'bg-muted' : 'hover:bg-muted/50'
-                  }`}
-                  onClick={() => setActiveCategory(item.category)}
-                >
-                  <div className="flex items-center gap-3">
-                    <span
-                      className="flex h-3 w-3 shrink-0 rounded-full"
-                      style={{
-                        backgroundColor: `var(--color-${item.category})`,
-                      }}
-                    />
-                    <span className="font-medium">{config?.label}</span>
-                  </div>
-                  <div className="text-right">
-                    <div className="font-bold">{(item.amount / 1000).toFixed(1)}K kg</div>
-                    <div className="text-sm text-muted-foreground">{item.value}%</div>
-                  </div>
+                  <span className="text-[11px] font-medium truncate">{config?.label}</span>
                 </div>
-              )
-            })}
-          </div>
+                <div className="text-right shrink-0 ml-1.5">
+                  <div className="text-[11px] font-bold">{(item.amount / 1000).toFixed(1)}K kg</div>
+                  <div className="text-[9px] text-muted-foreground">{item.value}%</div>
+                </div>
+              </div>
+            )
+          })}
         </div>
       </CardContent>
     </Card>

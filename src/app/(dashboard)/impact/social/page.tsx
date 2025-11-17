@@ -28,6 +28,7 @@ interface Receiver {
   name: string
   organization: string
   requestsCount: number
+  avatarImage?: string
 }
 
 export default function SocialImpactPage() {
@@ -56,8 +57,34 @@ export default function SocialImpactPage() {
           }))
           .sort((a, b) => b.quantity - a.quantity)
         
+        // Available receiver images
+        const receiverImages = [
+          '/logos/test/receiver 1.webp',
+          '/logos/test/receiver 2.jpg',
+          '/logos/test/receiver 3.webp',
+          '/logos/test/receiver 4.webp'
+        ]
+        
+        // Assign random avatar images to receivers
+        const receiversWithAvatars = (data.receivers || []).map((r: Receiver) => {
+          // Use Red Cross images for Red Cross organization
+          if (r.organization === 'Red Cross Finland') {
+            // Randomly pick between receiver 1 or 4 (both are webp, can be Red Cross themed)
+            const redCrossImages = [receiverImages[0], receiverImages[3]]
+            return {
+              ...r,
+              avatarImage: redCrossImages[Math.floor(Math.random() * redCrossImages.length)]
+            }
+          }
+          // Randomly assign any receiver image to other organizations
+          return {
+            ...r,
+            avatarImage: receiverImages[Math.floor(Math.random() * receiverImages.length)]
+          }
+        })
+        
         setDonations(allDonations)
-        setReceivers(data.receivers || [])
+        setReceivers(receiversWithAvatars)
         
         // Calculate metrics - based on notes: "Total kilos / 2"
         const totalKg = allDonations.reduce((sum: number, d: Donation) => sum + d.quantity, 0)
@@ -158,7 +185,7 @@ export default function SocialImpactPage() {
                 >
                   <div className="flex items-center gap-3">
                     <Avatar className="h-10 w-10">
-                      <AvatarImage src="/avatar.png" alt={receiver.name} />
+                      <AvatarImage src={receiver.avatarImage || '/avatar.png'} alt={receiver.name} />
                       <AvatarFallback>
                         {receiver.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
                       </AvatarFallback>
