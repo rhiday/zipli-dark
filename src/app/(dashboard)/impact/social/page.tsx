@@ -55,7 +55,7 @@ export default function SocialImpactPage() {
             createdAt: d.createdAt,
             donorName: d.donorName
           }))
-          .sort((a, b) => b.quantity - a.quantity)
+          .sort((a: Donation, b: Donation) => b.quantity - a.quantity)
         
         // Available receiver images
         const receiverImages = [
