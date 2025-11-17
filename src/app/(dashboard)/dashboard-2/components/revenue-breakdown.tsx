@@ -53,9 +53,22 @@ interface ChartDataItem {
   fill: string
 }
 
-interface CategoryValue {
-  percentage: number
-  kg: number
+interface DonorSummary {
+  category?: string
+  totalDonations?: number
+}
+
+interface ProducerFeature {
+  properties?: {
+    donations?: number
+  }
+}
+
+interface ShopFeature {
+  properties?: {
+    donations?: number
+    type?: string
+  }
 }
 
 type TimeRange = "12months" | "6months" | "30days" | "7days" | "since-beginning"
@@ -98,7 +111,7 @@ export function RevenueBreakdown() {
         
         // Process donors from dashboard data
         if (data.donors) {
-          data.donors.forEach((donor: any) => {
+          (data.donors as DonorSummary[]).forEach((donor) => {
             const category = donor.category || 'Other'
             categoryTotals[category] = (categoryTotals[category] || 0) + (donor.totalDonations || 0)
           })
@@ -112,7 +125,7 @@ export function RevenueBreakdown() {
             if (producersResponse.ok) {
               const producersData = await producersResponse.json()
               if (producersData.features) {
-                producersData.features.forEach((f: any) => {
+                (producersData.features as ProducerFeature[]).forEach((f) => {
                   if (f.properties?.donations) {
                     categoryTotals['Producers'] = (categoryTotals['Producers'] || 0) + f.properties.donations
                   }
@@ -129,7 +142,7 @@ export function RevenueBreakdown() {
             if (shopsResponse.ok) {
               const shopsData = await shopsResponse.json()
               if (shopsData.features) {
-                shopsData.features.forEach((f: any) => {
+                (shopsData.features as ShopFeature[]).forEach((f) => {
                   if (f.properties?.donations) {
                     const type = f.properties.type
                     if (type === 'hypermarket') {

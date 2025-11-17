@@ -25,9 +25,8 @@ const availableLogos = [
   '/logos/test/sodexo_2.webp',
 ]
 
-function getCompanyLogo(donorName: string, receiverName: string, index: number): { src: string, isPerson: boolean } {
+function getCompanyLogo(donorName: string, receiverName: string): { src: string, isPerson: boolean } {
   const donorLower = donorName.toLowerCase()
-  const receiverLower = receiverName.toLowerCase()
   
   // Match specific donor companies with logos
   if (donorLower.includes('sodexo')) {
@@ -134,7 +133,7 @@ export function RecentTransactions() {
           <div key={donation.id} >
             <div className="flex p-3 rounded-lg border gap-2">
               {(() => {
-                const logo = getCompanyLogo(donation.donorName, donation.receiverName, index)
+                const logo = getCompanyLogo(donation.donorName, donation.receiverName)
                 return (
                   <Avatar className={`h-8 w-8 shrink-0 ${logo.isPerson ? '' : 'bg-white'}`}>
                     <AvatarImage 
