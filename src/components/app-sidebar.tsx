@@ -25,8 +25,8 @@ import {
 
 const data = {
   user: {
-    name: "Zipli",
-    email: "admin@foodlink.fi",
+    name: "Demo User",
+    email: "demo@zipli.test",
     avatar: "",
   },
   navGroups: [
