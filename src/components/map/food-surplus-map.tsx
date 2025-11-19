@@ -567,6 +567,7 @@ export function FoodSurplusMap() {
         mapboxAccessToken={MAPBOX_TOKEN}
         style={{ width: '100%', height: '100%' }}
         mapStyle="mapbox://styles/mapbox/dark-v11"
+        padding={{ left: 200, right: 50, top: 50, bottom: 50 }}
       >
         {/* Circle layer - rendered when heatmap toggled on */}
         {showHeatmap && (
