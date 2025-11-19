@@ -21,7 +21,7 @@ const testimonials: Testimonial[] = [
     quote:
       'Instead of throwing away perfectly good food, we now connect with Helsinki Food Bank instantly. We\'ve donated over 1,700 kg this month alone and it feels amazing to give back.',
     rating: 5,
-    foodImage: '/logos/test/download.jpeg',
+    foodImage: '/avatars/donor 1.jpeg',
   },
   {
     name: 'Sanna Korhonen',
@@ -29,7 +29,7 @@ const testimonials: Testimonial[] = [
     image: 'https://notion-avatars.netlify.app/api/avatar?preset=female-1',
     quote: 'This platform has revolutionized how we handle surplus food. We\'ve reduced waste by 85% and built strong partnerships with local charities. Our customers love that we\'re making a difference.',
     rating: 5,
-    foodImage: '/logos/test/images.jpeg',
+    foodImage: '/logos/compass.png',
   },
   {
     name: 'Jari Nieminen',
@@ -40,13 +40,13 @@ const testimonials: Testimonial[] = [
     rating: 5,
   },
   {
-    name: 'Leena Mäkinen',
+    name: 'Leona Mäkinen',
     role: 'Operations Manager, Fazer Café',
     image: 'https://notion-avatars.netlify.app/api/avatar?preset=female-2',
     quote:
       'Our bakery products used to go to waste every evening. Now we donate to Pelastusarmeija and other organizations. The tracking system shows we\'ve saved over 960 kg this month.',
     rating: 5,
-    foodImage: '/logos/test/images (1).jpeg',
+    foodImage: '/avatars/donor 2.jpeg',
   },
   {
     name: 'Antti Laine',
@@ -62,7 +62,7 @@ const testimonials: Testimonial[] = [
     image: 'https://notion-avatars.netlify.app/api/avatar?preset=female-3',
     quote: 'As a small café owner, I love how easy it is to donate leftover pastries and sandwiches. The platform connects me with local shelters in minutes. Zero waste feels incredible.',
     rating: 5,
-    foodImage: '/logos/test/Unknown-3.webp',
+    foodImage: '/logos/roasberg.png',
   },
   {
     name: 'Pekka Salminen',
@@ -71,7 +71,7 @@ const testimonials: Testimonial[] = [
     quote:
       'From the charity side, this system is a lifesaver. We receive quality food donations daily from trusted partners like S-Market and Hotel Kämp. It helps us serve 200+ people every day.',
     rating: 5,
-    foodImage: '/logos/test/red_cross.webp',
+    foodImage: '/avatars/receiver 1.webp',
   },
   {
     name: 'Riikka Heikkinen',
@@ -79,7 +79,7 @@ const testimonials: Testimonial[] = [
     image: 'https://notion-avatars.netlify.app/api/avatar?preset=female-4',
     quote: 'The impact on our sustainability goals has been remarkable. Detailed analytics help us optimize donations and the recognition system motivates our kitchen teams across all locations.',
     rating: 5,
-    foodImage: '/logos/test/sodexo.jpg',
+    foodImage: '/logos/sodexo.png',
   },
   {
     name: 'Oskari Laaksonen',
@@ -95,7 +95,7 @@ const testimonials: Testimonial[] = [
     image: 'https://notion-avatars.netlify.app/api/avatar?preset=female-5',
     quote: 'Every evening, our unsold bread and pastries find a new home through this system. The pickup coordination is smooth and we\'ve donated to 15 different organizations this month.',
     rating: 5,
-    foodImage: '/logos/test/download.jpeg',
+    foodImage: '/avatars/donor 3.jpeg',
   },
   {
     name: 'Ville Koskinen',
@@ -104,7 +104,7 @@ const testimonials: Testimonial[] = [
     quote:
       'Fast food generates waste, but not anymore. We schedule daily pickups with youth programs and shelters. The app makes it effortless and our team loves being part of the solution.',
     rating: 5,
-    foodImage: '/logos/test/images.jpeg',
+    foodImage: '/logos/unicafe.png',
   },
   {
     name: 'Maija Toivonen',
@@ -112,7 +112,7 @@ const testimonials: Testimonial[] = [
     image: 'https://notion-avatars.netlify.app/api/avatar?preset=female-6',
     quote: 'This platform connects us with dozens of food donors across Helsinki. The real-time updates and reliable logistics mean fresh food reaches those in need within hours, not days.',
     rating: 5,
-    foodImage: '/logos/test/images (1).jpeg',
+    foodImage: '/avatars/receiver 2.jpg',
   },
 ]
 
