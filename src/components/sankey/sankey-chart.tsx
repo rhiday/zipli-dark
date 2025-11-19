@@ -31,6 +31,7 @@ export default function SankeyChart({ metric = 'mass' }: SankeyChartProps) {
     const svgRef = useRef<SVGSVGElement>(null);
     const [data, setData] = useState<SankeyData | null>(null);
     const [loading, setLoading] = useState(true);
+    const zoomRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
 
     useEffect(() => {
         const load = async () => {
@@ -78,11 +79,24 @@ export default function SankeyChart({ metric = 'mass' }: SankeyChartProps) {
         const svg = d3.select(svgRef.current);
         svg.selectAll("*").remove();
 
-        const width = 800;
-        const height = 600;
+        // Larger canvas for better visualization
+        const width = 1200;
+        const height = 800;
         const margin = { top: 20, right: 20, bottom: 20, left: 20 };
 
         svg.attr("width", width).attr("height", height);
+
+        // Create a container group for zoom/pan
+        const g = svg.append("g");
+
+        // Add zoom behavior
+        const zoom = d3.zoom<SVGSVGElement, unknown>()
+            .scaleExtent([0.5, 3]) // Allow zoom from 50% to 300%
+            .on("zoom", (event) => {
+                g.attr("transform", event.transform);
+            });
+
+        svg.call(zoom);
 
         const sankeyGenerator = sankey<SankeyNode<SankeyNodeData, SankeyLinkData>, SankeyLink<SankeyNodeData, SankeyLinkData>>()
             .nodeId((d: SankeyNode<SankeyNodeData, SankeyLinkData>) => d.id as string)
@@ -107,7 +121,7 @@ export default function SankeyChart({ metric = 'mass' }: SankeyChartProps) {
         };
         const color = (id: string) => colorMap[id] || "#22c55e";
 
-        svg.append("g")
+        g.append("g")
             .selectAll("path")
             .data(links)
             .enter()
@@ -118,7 +132,7 @@ export default function SankeyChart({ metric = 'mass' }: SankeyChartProps) {
             .attr("stroke-width", (d: SankeyLink<SankeyNodeData, SankeyLinkData>) => Math.max(1, (d as SankeyLink<SankeyNodeData, SankeyLinkData> & { width?: number }).width ?? 1))
             .attr("opacity", 0.6);
 
-        svg.append("g")
+        g.append("g")
             .selectAll("rect")
             .data(nodes)
             .enter()
@@ -137,7 +151,7 @@ export default function SankeyChart({ metric = 'mass' }: SankeyChartProps) {
             .attr("opacity", 0.8);
 
         const textColor = getComputedStyle(document.documentElement).getPropertyValue('--foreground').trim() || '#0f172a';
-        svg.append("g")
+        g.append("g")
             .selectAll("text")
             .data(nodes)
             .enter()
@@ -180,7 +194,7 @@ export default function SankeyChart({ metric = 'mass' }: SankeyChartProps) {
             <h2 className="text-lg font-semibold text-[var(--brand-900)] mb-4 font-[family-name:var(--font-space-grotesk)]">
                 Ruokahävikin virtaus kategorioista tuotteisiin ({metricLabel})
             </h2>
-            <div className="overflow-x-auto bg-card rounded-lg p-4 border">
+            <div className="overflow-auto bg-card rounded-lg p-4 border max-h-[600px] cursor-grab active:cursor-grabbing">
                 <svg ref={svgRef} className="mx-auto block" />
             </div>
         </div>
