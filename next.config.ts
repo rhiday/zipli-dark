@@ -56,6 +56,11 @@ const nextConfig: NextConfig = {
         destination: '/dashboard',
         permanent: true,
       },
+      {
+        source: '/dashboard-2',
+        destination: '/dashboard',
+        permanent: true,
+      },
     ];
   },
 };

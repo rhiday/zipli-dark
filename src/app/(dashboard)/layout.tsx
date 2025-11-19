@@ -1,6 +1,8 @@
 "use client";
+/* eslint-disable react-hooks/set-state-in-effect */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -13,8 +15,40 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter();
   const [themeCustomizerOpen, setThemeCustomizerOpen] = React.useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const { config } = useSidebarConfig();
+
+  // Check authentication on mount
+  useEffect(() => {
+    const authToken = localStorage.getItem("auth_token");
+    
+    if (!authToken) {
+      // Not authenticated, redirect to login
+      router.replace("/sign-in");
+    } else {
+      // Authenticated, allow access
+      setIsAuthenticated(true);
+    }
+  }, [router]);
+
+  // Show loading state while checking auth
+  if (isAuthenticated === null) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
+          <p className="text-muted-foreground mt-2">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Don't render dashboard if not authenticated (will redirect)
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <SidebarProvider

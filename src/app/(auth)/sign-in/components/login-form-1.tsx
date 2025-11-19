@@ -1,16 +1,16 @@
 "use client"
+/* eslint-disable react-hooks/purity */
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import {
@@ -29,31 +29,66 @@ const loginFormSchema = z.object({
 
 type LoginFormValues = z.infer<typeof loginFormSchema>
 
+// Mock credentials
+const MOCK_CREDENTIALS = {
+  email: "demo@zipli.test",
+  password: "slush2025"
+}
+
 export function LoginForm1({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
-      email: "test@example.com",
-      password: "password",
+      email: MOCK_CREDENTIALS.email,
+      password: MOCK_CREDENTIALS.password,
     },
   })
 
+  const onSubmit = async (values: LoginFormValues) => {
+    setIsLoading(true)
+    setError(null)
+
+    // Simulate API call delay
+    await new Promise(resolve => setTimeout(resolve, 500))
+
+    // Mock authentication check
+    if (
+      values.email === MOCK_CREDENTIALS.email &&
+      values.password === MOCK_CREDENTIALS.password
+    ) {
+      // Generate token timestamp
+      const timestamp = Date.now()
+      // Store auth token in localStorage
+      localStorage.setItem("auth_token", `mock_token_${timestamp}`)
+      localStorage.setItem("user_email", values.email)
+      
+      // Redirect to dashboard
+      router.push("/dashboard");
+    } else {
+      setError("Invalid email or password. Use demo@zipli.test / slush2025")
+      setIsLoading(false)
+    }
+  }
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
-        <CardHeader className="text-center">
-          <CardTitle className="text-xl">Welcome back</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
+      <Card className="bg-black/20 border border-white/15 backdrop-blur-xl shadow-lg">
+        <CardContent className="pt-6">
           <Form {...form}>
-            <form action="/">
+            <form onSubmit={form.handleSubmit(onSubmit)}>
               <div className="grid gap-6">
+                {error && (
+                  <div className="rounded-md bg-destructive/15 p-3 text-sm text-destructive">
+                    {error}
+                  </div>
+                )}
                 <div className="grid gap-4">
                   <FormField
                     control={form.control}
@@ -64,8 +99,9 @@ export function LoginForm1({
                         <FormControl>
                           <Input
                             type="email"
-                            placeholder="test@example.com"
+                            placeholder="demo@zipli.test"
                             {...field}
+                            disabled={isLoading}
                           />
                         </FormControl>
                         <FormMessage />
@@ -87,24 +123,22 @@ export function LoginForm1({
                           </a>
                         </div>
                         <FormControl>
-                          <Input type="password" {...field} />
+                          <Input 
+                            type="password" 
+                            {...field}
+                            disabled={isLoading}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                  <Button type="submit" className="w-full cursor-pointer">
-                    Login
-                  </Button>
-
-                  <Button variant="outline" className="w-full cursor-pointer" type="button">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <path
-                        d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                    Login with Google
+                  <Button 
+                    type="submit" 
+                    className="w-full cursor-pointer"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "Logging in..." : "Login"}
                   </Button>
                 </div>
                 <div className="text-center text-sm">
@@ -118,10 +152,6 @@ export function LoginForm1({
           </Form>
         </CardContent>
       </Card>
-      <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Policy</a>.
-      </div>
     </div>
   )
 }

@@ -8,6 +8,7 @@ import {
   CircleUser,
 } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 import {
   DropdownMenu,
@@ -35,6 +36,16 @@ export function NavUser({
   }
 }) {
   const { isMobile } = useSidebar()
+  const router = useRouter()
+
+  const handleLogout = () => {
+    // Clear auth token and user email from localStorage
+    localStorage.removeItem("auth_token")
+    localStorage.removeItem("user_email")
+    
+    // Redirect to login page
+    router.push("/sign-in")
+  }
 
   return (
     <SidebarMenu>
@@ -98,11 +109,9 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem asChild className="cursor-pointer">
-              <Link href="/auth/sign-in">
-                <LogOut />
-                Log out
-              </Link>
+            <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}>
+              <LogOut />
+              Log out
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

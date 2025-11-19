@@ -1,35 +1,67 @@
-import { ChartAreaInteractive } from "./components/chart-area-interactive"
-import { DataTable } from "./components/data-table"
-import { SectionCards } from "./components/section-cards"
+"use client"
 
-import data from "./data/data.json"
-import pastPerformanceData from "./data/past-performance-data.json"
-import keyPersonnelData from "./data/key-personnel-data.json"
-import focusDocumentsData from "./data/focus-documents-data.json"
+import dynamic from 'next/dynamic'
+import { MetricsOverview } from "./components/metrics-overview"
+import { SalesChart } from "./components/sales-chart"
+import { RecentTransactions } from "./components/recent-transactions"
+import { QuickActions } from "./components/quick-actions"
+import { RevenueBreakdown } from "./components/revenue-breakdown"
+import { AchievementsBadge } from "./components/achievements-badge"
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 
-export default function Page() {
+// Dynamically import map component with SSR disabled to avoid mapbox-gl issues
+const FoodSurplusMap = dynamic(
+  () => import('@/components/map/food-surplus-map').then(mod => ({ default: mod.FoodSurplusMap })),
+  { ssr: false, loading: () => (
+    <div className="w-full h-[500px] rounded-lg border bg-muted/50 flex items-center justify-center">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-2"></div>
+        <p className="text-sm text-muted-foreground">Loading map...</p>
+      </div>
+    </div>
+  )}
+)
+
+export default function Dashboard2() {
   return (
-    <>
-      {/* Page Title and Description */}
-      <div className="px-4 lg:px-6">
-        <div className="flex flex-col gap-2">
-          <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
-          <p className="text-muted-foreground">Welcome to your admin dashboard</p>
+    <div className="flex-1 space-y-6 px-6 pt-0">
+        {/* Enhanced Header */}
+
+      <div className="flex flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-4">
+            <Avatar className="h-12 w-12">
+              <AvatarImage src="/avatar.png" alt="Olivia" />
+              <AvatarFallback>OL</AvatarFallback>
+            </Avatar>
+            <h1 className="text-2xl font-bold tracking-tight">Welcome back, Olivia</h1>
+          </div>
+          <QuickActions />
+        </div>
+
+        {/* Main Dashboard Grid */}
+        <div className="@container/main space-y-6">
+          {/* Top Row - Map View */}
+          <div>
+            <FoodSurplusMap />
+          </div>
+
+        {/* Second Row - Recent Donations & Key Metrics */}
+        <div className="grid gap-6 grid-cols-2">
+            <RecentTransactions />
+            <div className="space-y-3">
+              <AchievementsBadge />
+              <MetricsOverview />
+            </div>
+          </div>
+
+        {/* Third Row - Charts in 6-6 columns */}
+        <div className="grid gap-6 grid-cols-2">
+            <SalesChart />
+            <RevenueBreakdown />
+          </div>
+
+          {/* Fifth Row - Sankey removed (moved to Climate impact page) */}
         </div>
       </div>
-
-      <div className="@container/main px-4 lg:px-6 space-y-6">
-        <SectionCards />
-        <ChartAreaInteractive />
-      </div>
-      <div className="@container/main">
-        <DataTable
-          data={data}
-          pastPerformanceData={pastPerformanceData}
-          keyPersonnelData={keyPersonnelData}
-          focusDocumentsData={focusDocumentsData}
-        />
-      </div>
-    </>
   )
 }

@@ -1,4 +1,4 @@
-import { CustomerInsights } from "../../dashboard-2/components/customer-insights"
+import { CustomerInsights } from "../../dashboard/components/customer-insights"
 
 export default function BusinessImpactPage() {
   return (

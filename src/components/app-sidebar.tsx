@@ -33,7 +33,7 @@ const data = {
     {
       label: "Navigation",
       items: [
-        { title: "Dashboard", url: "/dashboard-2", icon: LayoutPanelLeft },
+        { title: "Dashboard", url: "/dashboard", icon: LayoutPanelLeft },
         { title: "Operations", url: "/daily-operations", icon: ListChecks },
         {
           title: "Impact metrics",
@@ -64,7 +64,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <Link href="/dashboard-2">
+              <Link href="/dashboard">
                 <div className="flex aspect-square size-12 items-center justify-center">
                   <Image 
                     src="/zipli-white.svg" 
