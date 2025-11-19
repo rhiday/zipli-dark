@@ -18,7 +18,7 @@ const chartConfig = {
   },
   restaurants: {
     label: "Restaurants",
-    color: "#026209", // Zipli Earth (dark green)
+    color: "#18E170", // Zipli Lime bright green (moved from cafes)
   },
   "student-restaurants": {
     label: "Student Restaurants", 
@@ -26,7 +26,7 @@ const chartConfig = {
   },
   cafes: {
     label: "Cafes",
-    color: "#18E170", // Zipli Lime (bright green)
+    color: "#3b82f6", // Blue (moved from supermarkets - smallest category)
   },
   "staff-restaurants": {
     label: "Staff Restaurants",
@@ -34,11 +34,11 @@ const chartConfig = {
   },
   producers: {
     label: "Producers",
-    color: "#84cc16", // Lime green
+    color: "#026209", // Zipli Earth deep green (moved from restaurants - largest category)
   },
   supermarkets: {
     label: "Supermarkets",
-    color: "#3b82f6", // Blue
+    color: "#84cc16", // Lime green (moved from producers)
   },
   hypermarkets: {
     label: "Hypermarkets",
