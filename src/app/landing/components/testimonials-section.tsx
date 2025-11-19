@@ -29,7 +29,7 @@ const testimonials: Testimonial[] = [
     image: 'https://notion-avatars.netlify.app/api/avatar?preset=female-1',
     quote: 'This platform has revolutionized how we handle surplus food. We\'ve reduced waste by 85% and built strong partnerships with local charities. Our customers love that we\'re making a difference.',
     rating: 5,
-    foodImage: '/logos/compass.png',
+    foodImage: '/avatars/sodexo.jpg',
   },
   {
     name: 'Jari Nieminen',
@@ -38,6 +38,7 @@ const testimonials: Testimonial[] = [
     quote:
       'The real-time matching with food banks is brilliant. End-of-day surplus goes straight to organizations that need it. We\'ve completed over 1,400 donations in just 30 days.',
     rating: 5,
+    foodImage: '/avatars/sodexo_2.webp',
   },
   {
     name: 'Leona Mäkinen',
@@ -55,6 +56,7 @@ const testimonials: Testimonial[] = [
     quote:
       'Managing food donations across multiple locations is seamless. The automated notifications ensure nothing goes to waste, and the impact reports show we\'re feeding hundreds of families weekly.',
     rating: 5,
+    foodImage: '/avatars/receiver 3.webp',
   },
   {
     name: 'Hanna Järvinen',
@@ -62,7 +64,7 @@ const testimonials: Testimonial[] = [
     image: 'https://notion-avatars.netlify.app/api/avatar?preset=female-3',
     quote: 'As a small café owner, I love how easy it is to donate leftover pastries and sandwiches. The platform connects me with local shelters in minutes. Zero waste feels incredible.',
     rating: 5,
-    foodImage: '/logos/roasberg.png',
+    foodImage: '/avatars/receiver 4.webp',
   },
   {
     name: 'Pekka Salminen',
@@ -79,7 +81,6 @@ const testimonials: Testimonial[] = [
     image: 'https://notion-avatars.netlify.app/api/avatar?preset=female-4',
     quote: 'The impact on our sustainability goals has been remarkable. Detailed analytics help us optimize donations and the recognition system motivates our kitchen teams across all locations.',
     rating: 5,
-    foodImage: '/logos/sodexo.png',
   },
   {
     name: 'Oskari Laaksonen',
@@ -88,6 +89,7 @@ const testimonials: Testimonial[] = [
     quote:
       'Fine dining creates surplus too. This platform lets us donate high-quality ingredients to culinary schools and food programs. Watching our waste metrics drop to near-zero is satisfying.',
     rating: 5,
+    foodImage: '/avatar.png',
   },
   {
     name: 'Johanna Rantanen',
@@ -104,7 +106,6 @@ const testimonials: Testimonial[] = [
     quote:
       'Fast food generates waste, but not anymore. We schedule daily pickups with youth programs and shelters. The app makes it effortless and our team loves being part of the solution.',
     rating: 5,
-    foodImage: '/logos/unicafe.png',
   },
   {
     name: 'Maija Toivonen',
