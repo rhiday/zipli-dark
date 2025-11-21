@@ -46,8 +46,8 @@ export function LoginForm1({
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
-      email: MOCK_CREDENTIALS.email,
-      password: MOCK_CREDENTIALS.password,
+      email: "",
+      password: "",
     },
   })
 
@@ -99,7 +99,7 @@ export function LoginForm1({
                         <FormControl>
                           <Input
                             type="email"
-                            placeholder="demo@zipli.test"
+                            placeholder="Enter your email"
                             {...field}
                             disabled={isLoading}
                           />
@@ -116,7 +116,7 @@ export function LoginForm1({
                         <div className="flex items-center">
                           <FormLabel>Password</FormLabel>
                           <a
-                            href="/auth/forgot-password"
+                            href="#"
                             className="ml-auto text-sm underline-offset-4 hover:underline"
                           >
                             Forgot your password?
@@ -143,7 +143,7 @@ export function LoginForm1({
                 </div>
                 <div className="text-center text-sm">
                   Don&apos;t have an account?{" "}
-                  <a href="/auth/sign-up" className="underline underline-offset-4">
+                  <a href="#" className="underline underline-offset-4">
                     Sign up
                   </a>
                 </div>
