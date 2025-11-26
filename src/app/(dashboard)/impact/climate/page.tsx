@@ -21,7 +21,9 @@ export default function ClimateImpactPage() {
         </div>
         
         {/* Bottom - Chart visualization */}
-        <div className="bg-card rounded-lg border p-6">
+        <div>
+          <h2 className="text-lg font-semibold mb-2">Climate impact of the latest donation</h2>
+          <div className="bg-card rounded-lg border p-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-4">
               <h2 className="text-lg font-semibold">
@@ -46,6 +48,7 @@ export default function ClimateImpactPage() {
           ) : (
             <CO2PieChart metric={metric} />
           )}
+          </div>
         </div>
       </div>
     </div>

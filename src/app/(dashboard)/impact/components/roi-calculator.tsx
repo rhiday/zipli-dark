@@ -80,7 +80,6 @@ export function ROICalculator() {
     <Card className="h-fit">
       <CardHeader>
         <CardTitle>Calculate CO2 emissions of a dish type</CardTitle>
-        <CardDescription>Quick estimate using Sankey dataset intensities</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="grid gap-4 md:grid-cols-3">

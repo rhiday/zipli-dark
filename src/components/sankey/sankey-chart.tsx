@@ -21,6 +21,21 @@ interface SankeyData {
     links: Array<SankeyLinkData>;
 }
 
+const LABELS: Record<string, string> = {
+    total: "Total",
+    beef: "Beef",
+    fish: "Fish",
+    pork: "Pork",
+    veg: "Vegetarian",
+    side: "Side",
+    casserole: "Casserole",
+    sauce: "Sauce",
+    soup: "Soup",
+    stew: "Stew",
+};
+
+const toLabel = (id: string) => LABELS[id] ?? (id.charAt(0).toUpperCase() + id.slice(1));
+
 type FlowMetric = 'mass' | 'co2eq';
 
 interface SankeyChartProps {
@@ -59,7 +74,7 @@ export default function SankeyChart({ metric = 'mass' }: SankeyChartProps) {
                 const nodes = json.nodes.map(n => {
                     const own = metric === 'mass' ? n.mass : n.co2eq;
                     const agg = Math.max(incoming.get(n.id) ?? 0, outgoing.get(n.id) ?? 0);
-                    return { id: n.id, name: n.id, value: (own ?? agg) || 0 };
+                    return { id: n.id, name: toLabel(n.id), value: (own ?? agg) || 0 };
                 });
 
                 setData({ nodes, links });
@@ -192,7 +207,7 @@ export default function SankeyChart({ metric = 'mass' }: SankeyChartProps) {
     return (
         <div className="w-full">
             <h2 className="text-lg font-semibold text-[var(--brand-900)] mb-4 font-[family-name:var(--font-space-grotesk)]">
-                Ruokahävikin virtaus kategorioista tuotteisiin ({metricLabel})
+                Surplus food: from categories to meal types ({metricLabel})
             </h2>
             <div className="overflow-auto bg-card rounded-lg p-4 border max-h-[600px] cursor-grab active:cursor-grabbing">
                 <svg ref={svgRef} className="mx-auto block" />
