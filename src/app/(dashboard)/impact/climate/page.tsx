@@ -14,8 +14,13 @@ export default function ClimateImpactPage() {
     <div className="px-6">
       <h1 className="text-2xl font-semibold">Climate impact</h1>
       
-      <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Left side - Chart visualization */}
+      <div className="mt-6 flex flex-col gap-6">
+        {/* Top - Calculator */}
+        <div>
+          <ROICalculator />
+        </div>
+        
+        {/* Bottom - Chart visualization */}
         <div className="bg-card rounded-lg border p-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-4">
@@ -41,11 +46,6 @@ export default function ClimateImpactPage() {
           ) : (
             <CO2PieChart metric={metric} />
           )}
-        </div>
-        
-        {/* Right side - Calculator */}
-        <div>
-          <ROICalculator />
         </div>
       </div>
     </div>
