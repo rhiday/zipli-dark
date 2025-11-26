@@ -95,11 +95,12 @@ export function LoginForm1({
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email</FormLabel>
+                        <FormLabel className="text-white/70">Email</FormLabel>
                         <FormControl>
                           <Input
                             type="email"
                             placeholder="Enter your email"
+                            className="border-white/30 focus-visible:border-white/30 focus-visible:ring-white/15"
                             {...field}
                             disabled={isLoading}
                           />
@@ -113,18 +114,12 @@ export function LoginForm1({
                     name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <div className="flex items-center">
-                          <FormLabel>Password</FormLabel>
-                          <a
-                            href="#"
-                            className="ml-auto text-sm underline-offset-4 hover:underline"
-                          >
-                            Forgot your password?
-                          </a>
-                        </div>
+                        <FormLabel className="text-white/70">Password</FormLabel>
                         <FormControl>
                           <Input 
                             type="password" 
+                            placeholder="Enter your password"
+                            className="border-white/30 focus-visible:border-white/30 focus-visible:ring-white/15"
                             {...field}
                             disabled={isLoading}
                           />
@@ -141,9 +136,9 @@ export function LoginForm1({
                     {isLoading ? "Logging in..." : "Login"}
                   </Button>
                 </div>
-                <div className="text-center text-sm">
+                <div className="text-center text-sm text-white/70">
                   Don&apos;t have an account?{" "}
-                  <a href="#" className="underline underline-offset-4">
+                  <a href="#" className="text-white/70 underline underline-offset-4">
                     Sign up
                   </a>
                 </div>
