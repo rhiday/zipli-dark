@@ -1,0 +1,236 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.9500, 60.2200]
+      },
+      "properties": {
+        "id": "sodexo-vilppulantie",
+        "name": "Sodexo Vilppulantie",
+        "type": "restaurant",
+        "cuisine": "Corporate Dining",
+        "address": "Vilppulantie 14, 00700 Helsinki",
+        "phone": "+358 10 540 7000",
+        "website": "https://www.sodexo.fi",
+        "donations": 2840,
+        "meals": 7100,
+        "lastDonation": "2025-01-20",
+        "status": "active",
+        "branchType": "corporate",
+        "capacity": 450,
+        "avgDailyMeals": 320
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.9494, 60.1692]
+      },
+      "properties": {
+        "id": "sodexo-university-main",
+        "name": "Sodexo Helsinki University Main Building",
+        "type": "student restaurant",
+        "cuisine": "Student Dining",
+        "address": "Fabianinkatu 33, 00100 Helsinki",
+        "phone": "+358 46 922 8855",
+        "website": "https://www.sodexo.fi/en/restaurants/helsinki-university-main-building",
+        "donations": 3420,
+        "meals": 8550,
+        "lastDonation": "2025-01-20",
+        "status": "active",
+        "branchType": "student",
+        "capacity": 600,
+        "avgDailyMeals": 450
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.9330, 60.1690]
+      },
+      "properties": {
+        "id": "sodexo-kamppi",
+        "name": "Sodexo Kamppi",
+        "type": "restaurant",
+        "cuisine": "Corporate Dining",
+        "address": "Kampinkuja 2, 00100 Helsinki",
+        "phone": "+358 10 540 7001",
+        "website": "https://www.sodexo.fi",
+        "donations": 2150,
+        "meals": 5375,
+        "lastDonation": "2025-01-19",
+        "status": "active",
+        "branchType": "corporate",
+        "capacity": 380,
+        "avgDailyMeals": 280
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.9330, 60.1990]
+      },
+      "properties": {
+        "id": "sodexo-pasila",
+        "name": "Sodexo Pasila",
+        "type": "restaurant",
+        "cuisine": "Corporate Dining",
+        "address": "Pasilankatu 1, 00240 Helsinki",
+        "phone": "+358 10 540 7002",
+        "website": "https://www.sodexo.fi",
+        "donations": 1890,
+        "meals": 4725,
+        "lastDonation": "2025-01-19",
+        "status": "active",
+        "branchType": "corporate",
+        "capacity": 320,
+        "avgDailyMeals": 240
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [25.0400, 60.3170]
+      },
+      "properties": {
+        "id": "sodexo-airport",
+        "name": "Sodexo Helsinki Airport",
+        "type": "restaurant",
+        "cuisine": "Airport Dining",
+        "address": "Lentoasemantie 1, 01530 Vantaa",
+        "phone": "+358 10 540 7003",
+        "website": "https://www.sodexo.fi",
+        "donations": 4560,
+        "meals": 11400,
+        "lastDonation": "2025-01-20",
+        "status": "active",
+        "branchType": "airport",
+        "capacity": 800,
+        "avgDailyMeals": 650
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [25.0900, 60.2200]
+      },
+      "properties": {
+        "id": "sodexo-viikki",
+        "name": "Sodexo Viikki",
+        "type": "student restaurant",
+        "cuisine": "Student Dining",
+        "address": "Viikinkaari 9, 00790 Helsinki",
+        "phone": "+358 10 540 7004",
+        "website": "https://www.sodexo.fi",
+        "donations": 2780,
+        "meals": 6950,
+        "lastDonation": "2025-01-20",
+        "status": "active",
+        "branchType": "student",
+        "capacity": 500,
+        "avgDailyMeals": 420
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.9450, 60.1710]
+      },
+      "properties": {
+        "id": "sodexo-pihlis",
+        "name": "Sodexo Pihlis",
+        "type": "restaurant",
+        "cuisine": "Corporate Dining",
+        "address": "Rautatientori 2, 00100 Helsinki",
+        "phone": "+358 10 540 7005",
+        "website": "https://www.sodexo.fi",
+        "donations": 1920,
+        "meals": 4800,
+        "lastDonation": "2025-01-18",
+        "status": "active",
+        "branchType": "corporate",
+        "capacity": 350,
+        "avgDailyMeals": 260
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.9500, 60.2500]
+      },
+      "properties": {
+        "id": "sodexo-marjala",
+        "name": "Sodexo Marjala",
+        "type": "restaurant",
+        "cuisine": "Corporate Dining",
+        "address": "Kamppi Center, Urho Kekkosen katu 1, 00100 Helsinki",
+        "phone": "+358 10 540 7006",
+        "website": "https://www.sodexo.fi",
+        "donations": 1680,
+        "meals": 4200,
+        "lastDonation": "2025-01-18",
+        "status": "active",
+        "branchType": "corporate",
+        "capacity": 300,
+        "avgDailyMeals": 220
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.8786, 60.2566]
+      },
+      "properties": {
+        "id": "sodexo-ladonlukko",
+        "name": "Sodexo Ladonlukko",
+        "type": "restaurant",
+        "cuisine": "Corporate Dining",
+        "address": "Latokartanonkaari 9, 00790 Helsinki",
+        "phone": "+358 10 540 7007",
+        "website": "https://www.sodexo.fi",
+        "donations": 1450,
+        "meals": 3625,
+        "lastDonation": "2025-01-17",
+        "status": "active",
+        "branchType": "corporate",
+        "capacity": 280,
+        "avgDailyMeals": 200
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.9600, 60.1800]
+      },
+      "properties": {
+        "id": "sodexo-kruununhaka",
+        "name": "Sodexo Kruununhaka",
+        "type": "restaurant",
+        "cuisine": "Corporate Dining",
+        "address": "Kruununhaka, 00170 Helsinki",
+        "phone": "+358 10 540 7008",
+        "website": "https://www.sodexo.fi",
+        "donations": 1320,
+        "meals": 3300,
+        "lastDonation": "2025-01-17",
+        "status": "active",
+        "branchType": "corporate",
+        "capacity": 250,
+        "avgDailyMeals": 180
+      }
+    }
+  ]
+}
+

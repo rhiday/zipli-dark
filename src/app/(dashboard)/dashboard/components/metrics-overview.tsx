@@ -168,7 +168,7 @@ export function MetricsOverview() {
       trend: "up" as const,
       icon: Package,
       footer: "Strong donation growth",
-      subfooter: "Helsinki restaurants leading"
+      subfooter: "Sodexo Helsinki branches leading"
     },
     {
       title: "Active Donors",

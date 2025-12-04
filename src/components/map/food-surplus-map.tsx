@@ -320,9 +320,9 @@ export function FoodSurplusMap() {
         // Load additional location data
         const extraFeatures: LocationData[] = []
 
-        // Load restaurants
+        // Load Sodexo restaurants
         try {
-          const restaurantsResponse = await fetch('/data/helsinkiresturants.json')
+          const restaurantsResponse = await fetch('/data/sodexo-helsinki-branches.json')
           if (restaurantsResponse.ok) {
             const restaurantsData = await restaurantsResponse.json()
             if (restaurantsData.features) {
@@ -331,14 +331,14 @@ export function FoodSurplusMap() {
                 ...f,
                 properties: {
                   ...f.properties,
-                  id: `hki-rest-${f.properties.id}`
+                  id: `sodexo-${f.properties.id}`
                 }
               }))
               extraFeatures.push(...restaurants)
             }
           }
         } catch (error) {
-          console.error('Failed to load restaurant data:', error)
+          console.error('Failed to load Sodexo restaurant data:', error)
         }
 
         // Load producers

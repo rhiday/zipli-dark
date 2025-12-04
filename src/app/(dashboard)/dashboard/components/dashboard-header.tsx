@@ -17,9 +17,9 @@ export function DashboardHeader() {
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle className="text-3xl font-bold">Business Dashboard</CardTitle>
+            <CardTitle className="text-3xl font-bold">Sodexo Helsinki Dashboard</CardTitle>
             <CardDescription className="text-base mt-2">
-              Comprehensive overview of your business performance and key metrics
+              Food surplus management across 10 Sodexo branches in Helsinki
             </CardDescription>
           </div>
           <div className="flex items-center space-x-2">

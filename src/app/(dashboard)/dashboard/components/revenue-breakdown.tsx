@@ -16,20 +16,24 @@ const chartConfig = {
   amount: {
     label: "Amount",
   },
-  restaurants: {
-    label: "Restaurants",
-    color: "#18E170", // Zipli Lime bright green (moved from cafes)
+  "sodexo-corporate": {
+    label: "Sodexo Corporate",
+    color: "#18E170", // Zipli Lime bright green
   },
-  "student-restaurants": {
-    label: "Student Restaurants", 
+  "sodexo-student": {
+    label: "Sodexo Student", 
     color: "#5A0057", // Zipli Plum (purple)
   },
-  cafes: {
-    label: "Cafes",
-    color: "#3b82f6", // Blue (moved from supermarkets - smallest category)
+  "sodexo-airport": {
+    label: "Sodexo Airport",
+    color: "#3b82f6", // Blue
   },
-  "staff-restaurants": {
-    label: "Staff Restaurants",
+  "other": {
+    label: "Other",
+    color: "#FFA5BD", // Zipli Rose (pink)
+  },
+  restaurants: {
+    label: "Other Restaurants",
     color: "#FFA5BD", // Zipli Rose (pink)
   },
   producers: {
@@ -164,14 +168,23 @@ export function RevenueBreakdown() {
         // Calculate total and percentages
         const total = Object.values(categoryTotals).reduce((sum, val) => sum + val, 0)
         
-        // Transform into chart format
+        // Transform into chart format with proper category mapping
         const chartData = Object.entries(categoryTotals)
-          .map(([category, amount]) => ({
-            category: category.toLowerCase().replace(/ /g, '-'),
-            value: Math.round((amount / total) * 100),
-            amount: Math.floor(amount * multiplier),
-            fill: `var(--color-${category.toLowerCase().replace(/ /g, '-')})`
-          }))
+          .map(([category, amount]) => {
+            // Map category names to chart config keys
+            let chartCategory = category.toLowerCase().replace(/ /g, '-')
+            // Ensure Sodexo categories are properly formatted
+            if (category === 'Sodexo Corporate') chartCategory = 'sodexo-corporate'
+            if (category === 'Sodexo Student') chartCategory = 'sodexo-student'
+            if (category === 'Sodexo Airport') chartCategory = 'sodexo-airport'
+            
+            return {
+              category: chartCategory,
+              value: Math.round((amount / total) * 100),
+              amount: Math.floor(amount * multiplier),
+              fill: chartConfig[chartCategory as keyof typeof chartConfig]?.color || '#888'
+            }
+          })
           .sort((a, b) => b.amount - a.amount) // Sort by amount descending
         
         setDonationSourcesData(chartData)

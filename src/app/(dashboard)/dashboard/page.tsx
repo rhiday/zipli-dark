@@ -33,7 +33,7 @@ export default function Dashboard2() {
               <AvatarImage src="/avatar.png" alt="Olivia" />
               <AvatarFallback>OL</AvatarFallback>
             </Avatar>
-            <h1 className="text-2xl font-bold tracking-tight">Welcome back, Olivia</h1>
+            <h1 className="text-2xl font-bold tracking-tight">Sodexo Helsinki Food Surplus Dashboard</h1>
           </div>
           <QuickActions />
         </div>

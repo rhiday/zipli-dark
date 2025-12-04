@@ -111,7 +111,7 @@ export function RecentTransactions() {
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
           <div>
             <CardTitle>Recent Donations</CardTitle>
-            <CardDescription>Latest food donations in Helsinki</CardDescription>
+            <CardDescription>Latest food donations from Sodexo Helsinki branches</CardDescription>
           </div>
         </CardHeader>
         <CardContent>
