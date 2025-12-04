@@ -100,7 +100,7 @@ export function LoginForm1({
                           <Input
                             type="email"
                             placeholder="Enter your email"
-                            className="border-white/30 focus-visible:border-white/30 focus-visible:ring-white/15"
+                            className="bg-white/10 border-white/30 focus-visible:border-white/30 focus-visible:ring-white/15 text-white placeholder:text-white/50"
                             {...field}
                             disabled={isLoading}
                           />
@@ -119,7 +119,7 @@ export function LoginForm1({
                           <Input 
                             type="password" 
                             placeholder="Enter your password"
-                            className="border-white/30 focus-visible:border-white/30 focus-visible:ring-white/15"
+                            className="bg-white/10 border-white/30 focus-visible:border-white/30 focus-visible:ring-white/15 text-white placeholder:text-white/50"
                             {...field}
                             disabled={isLoading}
                           />

@@ -178,11 +178,16 @@ export function RevenueBreakdown() {
             if (category === 'Sodexo Student') chartCategory = 'sodexo-student'
             if (category === 'Sodexo Airport') chartCategory = 'sodexo-airport'
             
+            const configEntry = chartConfig[chartCategory as keyof typeof chartConfig]
+            const fillColor = (configEntry && 'color' in configEntry) 
+              ? configEntry.color 
+              : '#888'
+            
             return {
               category: chartCategory,
               value: Math.round((amount / total) * 100),
               amount: Math.floor(amount * multiplier),
-              fill: chartConfig[chartCategory as keyof typeof chartConfig]?.color || '#888'
+              fill: fillColor
             }
           })
           .sort((a, b) => b.amount - a.amount) // Sort by amount descending
