@@ -42,7 +42,7 @@ export default function Dashboard2() {
         <div className="@container/main space-y-6">
           {/* Top Row - Map View */}
           <div>
-            <FoodSurplusMap />
+            <FoodSurplusMap dataFilter="sodexo" />
           </div>
 
         {/* Second Row - Recent Donations & Key Metrics */}

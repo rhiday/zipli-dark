@@ -252,7 +252,13 @@ function MapLegend({ showHeatmap, onToggleHeatmap }: { showHeatmap: boolean, onT
   )
 }
 
-export function FoodSurplusMap() {
+type DataFilter = 'all' | 'sodexo' | 'donors' | 'receivers' | 'producers' | 'shops'
+
+interface FoodSurplusMapProps {
+  dataFilter?: DataFilter
+}
+
+export function FoodSurplusMap({ dataFilter = 'all' }: FoodSurplusMapProps) {
   const [selectedLocation, setSelectedLocation] = useState<LocationData | null>(null)
   const [restaurantData, setRestaurantData] = useState<{
     type?: string;
@@ -273,117 +279,129 @@ export function FoodSurplusMap() {
       try {
         setLoading(true)
         setError(null)
-        const response = await fetch('/data/dashboard-data.json')
-        if (!response.ok) {
-          throw new Error(`Failed to load data: ${response.status}`)
-        }
-        const data = await response.json()
         
-        // Transform donors and receivers into GeoJSON format
-        const donorFeatures = (data.donors || []).map((donor: DonorData) => ({
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: donor.coordinates
-          },
-          properties: {
-            id: donor.id,
-            name: donor.name,
-            type: donor.type,
-            cuisine: donor.category,
-            donations: donor.totalDonations,
-            meals: donor.totalMeals,
-            lastDonation: donor.lastDonation,
-            markerType: 'donor'
-          }
-        }))
+        const allFeatures: LocationData[] = []
 
-        const receiverFeatures = (data.receivers || []).map((receiver: ReceiverData) => ({
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: receiver.coordinates
-          },
-          properties: {
-            id: receiver.id,
-            name: receiver.name,
-            type: receiver.type,
-            cuisine: receiver.organization,
-            capacity: receiver.capacity,
-            receivedDonations: receiver.receivedDonations,
-            mealsDistributed: receiver.mealsDistributed,
-            lastReceived: receiver.lastReceived,
-            markerType: 'receiver'
-          }
-        }))
-
-        // Load additional location data
-        const extraFeatures: LocationData[] = []
-
-        // Load Sodexo restaurants
-        try {
-          const restaurantsResponse = await fetch('/data/sodexo-helsinki-branches.json')
-          if (restaurantsResponse.ok) {
-            const restaurantsData = await restaurantsResponse.json()
-            if (restaurantsData.features) {
-              // Add prefix to ensure unique IDs
-              const restaurants = (restaurantsData.features as LocationData[]).map(f => ({
-                ...f,
-                properties: {
-                  ...f.properties,
-                  id: `sodexo-${f.properties.id}`
-                }
-              }))
-              extraFeatures.push(...restaurants)
+        // Only load Sodexo data if filter is 'sodexo' or 'all'
+        if (dataFilter === 'sodexo' || dataFilter === 'all') {
+          try {
+            const restaurantsResponse = await fetch('/data/sodexo-helsinki-branches.json')
+            if (restaurantsResponse.ok) {
+              const restaurantsData = await restaurantsResponse.json()
+              if (restaurantsData.features) {
+                const restaurants = (restaurantsData.features as LocationData[]).map(f => ({
+                  ...f,
+                  properties: {
+                    ...f.properties,
+                    id: `sodexo-${f.properties.id}`,
+                    markerType: 'donor'
+                  }
+                }))
+                allFeatures.push(...restaurants)
+              }
             }
+          } catch (error) {
+            console.error('Failed to load Sodexo restaurant data:', error)
           }
-        } catch (error) {
-          console.error('Failed to load Sodexo restaurant data:', error)
         }
 
-        // Load producers
-        try {
-          const producersResponse = await fetch('/data/foodproducers.json')
-          if (producersResponse.ok) {
-            const producersData = await producersResponse.json()
-            if (producersData.features) {
-              // Add prefix to ensure unique IDs
-              const producers = (producersData.features as LocationData[]).map(f => ({
-                ...f,
-                properties: {
-                  ...f.properties,
-                  id: `prod-${f.properties.id}`
+        // Skip other data sources if only showing Sodexo
+        if (dataFilter !== 'sodexo') {
+          const response = await fetch('/data/dashboard-data.json')
+          if (!response.ok) {
+            throw new Error(`Failed to load data: ${response.status}`)
+          }
+          const data = await response.json()
+          
+          // Transform donors into GeoJSON format
+          if (dataFilter === 'all' || dataFilter === 'donors') {
+            const donorFeatures = (data.donors || []).map((donor: DonorData) => ({
+              type: 'Feature',
+              geometry: {
+                type: 'Point',
+                coordinates: donor.coordinates
+              },
+              properties: {
+                id: donor.id,
+                name: donor.name,
+                type: donor.type,
+                cuisine: donor.category,
+                donations: donor.totalDonations,
+                meals: donor.totalMeals,
+                lastDonation: donor.lastDonation,
+                markerType: 'donor'
+              }
+            }))
+            allFeatures.push(...donorFeatures)
+          }
+
+          // Transform receivers into GeoJSON format
+          if (dataFilter === 'all' || dataFilter === 'receivers') {
+            const receiverFeatures = (data.receivers || []).map((receiver: ReceiverData) => ({
+              type: 'Feature',
+              geometry: {
+                type: 'Point',
+                coordinates: receiver.coordinates
+              },
+              properties: {
+                id: receiver.id,
+                name: receiver.name,
+                type: receiver.type,
+                cuisine: receiver.organization,
+                capacity: receiver.capacity,
+                receivedDonations: receiver.receivedDonations,
+                mealsDistributed: receiver.mealsDistributed,
+                lastReceived: receiver.lastReceived,
+                markerType: 'receiver'
+              }
+            }))
+            allFeatures.push(...receiverFeatures)
+          }
+
+          // Load producers
+          if (dataFilter === 'all' || dataFilter === 'producers') {
+            try {
+              const producersResponse = await fetch('/data/foodproducers.json')
+              if (producersResponse.ok) {
+                const producersData = await producersResponse.json()
+                if (producersData.features) {
+                  const producers = (producersData.features as LocationData[]).map(f => ({
+                    ...f,
+                    properties: {
+                      ...f.properties,
+                      id: `prod-${f.properties.id}`
+                    }
+                  }))
+                  allFeatures.push(...producers)
                 }
-              }))
-              extraFeatures.push(...producers)
+              }
+            } catch (error) {
+              console.error('Failed to load producer data:', error)
             }
           }
-        } catch (error) {
-          console.error('Failed to load producer data:', error)
-        }
 
-        // Load shops
-        try {
-          const shopsResponse = await fetch('/data/shopshelsinki.json')
-          if (shopsResponse.ok) {
-            const shopsData = await shopsResponse.json()
-            if (shopsData.features) {
-              // Add prefix to ensure unique IDs
-              const shops = (shopsData.features as LocationData[]).map(f => ({
-                ...f,
-                properties: {
-                  ...f.properties,
-                  id: `shop-${f.properties.id}`
+          // Load shops
+          if (dataFilter === 'all' || dataFilter === 'shops') {
+            try {
+              const shopsResponse = await fetch('/data/shopshelsinki.json')
+              if (shopsResponse.ok) {
+                const shopsData = await shopsResponse.json()
+                if (shopsData.features) {
+                  const shops = (shopsData.features as LocationData[]).map(f => ({
+                    ...f,
+                    properties: {
+                      ...f.properties,
+                      id: `shop-${f.properties.id}`
+                    }
+                  }))
+                  allFeatures.push(...shops)
                 }
-              }))
-              extraFeatures.push(...shops)
+              }
+            } catch (error) {
+              console.error('Failed to load shop data:', error)
             }
           }
-        } catch (error) {
-          console.error('Failed to load shop data:', error)
         }
-
-        const allFeatures: LocationData[] = [...donorFeatures, ...receiverFeatures, ...extraFeatures]
         
         setRestaurantData({
           type: 'FeatureCollection',
@@ -434,7 +452,7 @@ export function FoodSurplusMap() {
       }
     }
     loadLocations()
-  }, [])
+  }, [dataFilter])
 
   const handleMarkerClick = useCallback((e: { originalEvent: { stopPropagation: () => void } }, location: LocationData) => {
     e.originalEvent.stopPropagation()

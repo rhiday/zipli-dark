@@ -121,12 +121,12 @@ export default function SocialImpactPage() {
         <Card>
           <CardHeader className="pb-3">
             <CardDescription>
-              Total Meals provided
+              Number of people fed yesterday
             </CardDescription>
             <CardTitle className="text-4xl font-bold">{metrics.totalMeals.toLocaleString()}</CardTitle>
             <div className="flex items-center gap-2 text-sm text-green-600">
               <TrendingUp className="h-4 w-4" />
-              <span>+9.2%</span>
+              <span>+9% food to humans, not waste</span>
             </div>
           </CardHeader>
         </Card>
@@ -134,12 +134,12 @@ export default function SocialImpactPage() {
         <Card>
           <CardHeader className="pb-3">
             <CardDescription>
-              Organisations helped
+              Organisations helped yesterday
             </CardDescription>
             <CardTitle className="text-4xl font-bold">{metrics.orgsHelped.toLocaleString()}</CardTitle>
             <div className="flex items-center gap-2 text-sm text-green-600">
               <TrendingUp className="h-4 w-4" />
-              <span>+9.2%</span>
+              <span>+5% more diversity in supported communities </span>
             </div>
           </CardHeader>
         </Card>
