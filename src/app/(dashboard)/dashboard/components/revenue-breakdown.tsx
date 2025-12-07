@@ -37,15 +37,15 @@ const chartConfig = {
     color: "#FFA5BD", // Zipli Rose (pink)
   },
   producers: {
-    label: "Producers",
+    label: "Sodexo Daycare",
     color: "#026209", // Zipli Earth deep green (moved from restaurants - largest category)
   },
   supermarkets: {
-    label: "Supermarkets",
+    label: "Sodexo Senior Care",
     color: "#84cc16", // Lime green (moved from producers)
   },
   hypermarkets: {
-    label: "Hypermarkets",
+    label: "Sodexo School",
     color: "#8b5cf6", // Purple
   },
 }
