@@ -27,7 +27,7 @@ const data = {
   user: {
     name: "Demo User",
     email: "demo@zipli.test",
-    avatar: "",
+    avatar: "/avatar.png",
   },
   navGroups: [
     {

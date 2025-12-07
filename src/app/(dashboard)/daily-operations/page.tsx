@@ -5,7 +5,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
-import { Calendar, Filter, TrendingUp } from "lucide-react"
+import { Calendar, Filter, TrendingUp, Download } from "lucide-react"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 interface Donation {
   id: string
@@ -22,6 +29,7 @@ interface Receiver {
   organization: string
   type: string
   requestsCount: number
+  receivedDonations?: number
   image?: string
 }
 
@@ -38,6 +46,7 @@ export default function DailyOperationsPage() {
   const [receivers, setReceivers] = useState<Receiver[]>([])
   const [metrics, setMetrics] = useState({ totalMeals: 0, orgsHelped: 0 })
   const [loading, setLoading] = useState(true)
+  const [timeRange, setTimeRange] = useState("30")
 
   useEffect(() => {
     const loadData = async () => {
@@ -164,8 +173,32 @@ export default function DailyOperationsPage() {
           {/* Recipient Organizations */}
           <Card>
             <CardHeader>
-              <CardTitle>Recipient organisation</CardTitle>
-              <CardDescription>Active food bank partners</CardDescription>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle>Recipient organisation</CardTitle>
+                  <CardDescription className="mt-1">Top 5 food receivers and kilos donated</CardDescription>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4 text-muted-foreground" />
+                    <Select value={timeRange} onValueChange={setTimeRange}>
+                      <SelectTrigger size="sm" className="w-[100px]">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="7">7 days</SelectItem>
+                        <SelectItem value="30">30 days</SelectItem>
+                        <SelectItem value="90">90 days</SelectItem>
+                        <SelectItem value="365">1 year</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <Button variant="outline" size="sm">
+                    <Download className="h-4 w-4 mr-2" />
+                    Export
+                  </Button>
+                </div>
+              </div>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
@@ -196,7 +229,7 @@ export default function DailyOperationsPage() {
                         </div>
                       </div>
                       <Badge variant="outline">
-                        {receiver.requestsCount} requests
+                        {receiver.receivedDonations || receiver.requestsCount} kg
                       </Badge>
                     </div>
                   )

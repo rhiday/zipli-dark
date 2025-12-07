@@ -58,10 +58,6 @@ export function CustomerInsights() {
 
   return (
     <Card className="h-fit">
-      <CardHeader>
-        <CardTitle>Receiver Impact</CardTitle>
-        <CardDescription>Charity and food bank impact metrics</CardDescription>
-      </CardHeader>
       <CardContent>
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-3 bg-muted/50 p-1 rounded-lg h-12">
