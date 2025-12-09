@@ -76,10 +76,11 @@ export function AnalysisDonutChart({ data, metric }: AnalysisDonutChartProps) {
                 ))}
               </Pie>
               <Tooltip
-                formatter={(value: number, _name: string, props: { payload: typeof chartData[0] }) => {
-                  const item = props.payload
+                formatter={(value, _name, props) => {
+                  const item = props.payload as typeof chartData[0] | undefined
+                  if (!item) return [`${value} ${unit}`, metric === "co2" ? "CO₂ Saved" : "Surplus Mass"]
                   return [
-                    `${value.toFixed(1)} ${unit} surplus (${item.leftoverRate.toFixed(0)}% leftover rate)`,
+                    `${Number(value).toFixed(1)} ${unit} surplus (${item.leftoverRate.toFixed(0)}% leftover rate)`,
                     metric === "co2" ? "CO₂ Saved" : "Surplus Mass",
                   ]
                 }}
