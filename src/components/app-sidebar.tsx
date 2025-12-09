@@ -43,6 +43,7 @@ const data = {
             { title: "Business impact", url: "/impact/business" },
             { title: "Social impact", url: "/impact/social" },
             { title: "Climate impact", url: "/impact/climate" },
+            { title: "Impact analyzer", url: "/impact/analyzer" },
           ],
         },
       ],

@@ -208,26 +208,6 @@ export default function CO2AnalyzerPage() {
           <div className="grid md:grid-cols-2 gap-6">
             <Card 
               className="cursor-pointer transition-all hover:border-primary hover:shadow-md"
-              onClick={() => handleModeSelect("upload")}
-            >
-              <CardContent className="p-8 flex flex-col items-center text-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/30 mb-4">
-                  <Upload className="h-8 w-8 text-blue-600 dark:text-blue-400" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Upload File</h3>
-                <p className="text-muted-foreground">
-                  Upload your own menu data in Excel, CSV, or JSON format
-                </p>
-                <div className="flex flex-wrap justify-center gap-2 mt-4">
-                  <span className="rounded-full bg-muted px-3 py-1 text-xs font-medium">.xlsx</span>
-                  <span className="rounded-full bg-muted px-3 py-1 text-xs font-medium">.csv</span>
-                  <span className="rounded-full bg-muted px-3 py-1 text-xs font-medium">.json</span>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card 
-              className="cursor-pointer transition-all hover:border-primary hover:shadow-md"
               onClick={() => handleModeSelect("scrape")}
             >
               <CardContent className="p-8 flex flex-col items-center text-center">
@@ -246,6 +226,26 @@ export default function CO2AnalyzerPage() {
                     onError={(e) => { e.currentTarget.style.display = 'none' }}
                   />
                   <span className="text-xs text-muted-foreground">Sodexo Finland</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card 
+              className="cursor-pointer transition-all hover:border-primary hover:shadow-md"
+              onClick={() => handleModeSelect("upload")}
+            >
+              <CardContent className="p-8 flex flex-col items-center text-center">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/30 mb-4">
+                  <Upload className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">Upload File</h3>
+                <p className="text-muted-foreground">
+                  Upload your own menu data in Excel, CSV, or JSON format
+                </p>
+                <div className="flex flex-wrap justify-center gap-2 mt-4">
+                  <span className="rounded-full bg-muted px-3 py-1 text-xs font-medium">.xlsx</span>
+                  <span className="rounded-full bg-muted px-3 py-1 text-xs font-medium">.csv</span>
+                  <span className="rounded-full bg-muted px-3 py-1 text-xs font-medium">.json</span>
                 </div>
               </CardContent>
             </Card>

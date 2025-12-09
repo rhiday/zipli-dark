@@ -20,7 +20,7 @@ export default function ClimateImpactPage() {
         <Button asChild>
           <Link href="/demo/co2-analyzer">
             <Upload className="size-4" />
-            Upload Menu
+            Analyze your impact
           </Link>
         </Button>
       </div>
