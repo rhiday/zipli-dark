@@ -5,6 +5,9 @@ import { CO2PieChart } from "@/components/climate/co2-pie-chart"
 import { ROICalculator } from "../components/roi-calculator"
 import { useState } from "react"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Button } from "@/components/ui/button"
+import { Upload } from "lucide-react"
+import Link from "next/link"
 
 export default function ClimateImpactPage() {
   const [metric, setMetric] = useState<"co2eq" | "mass">("co2eq")
@@ -12,7 +15,15 @@ export default function ClimateImpactPage() {
   
   return (
     <div className="px-6">
+      <div className="flex items-center justify-between">
       <h1 className="text-2xl font-semibold">Climate impact</h1>
+        <Button asChild>
+          <Link href="/demo/co2-analyzer">
+            <Upload className="size-4" />
+            Upload Menu
+          </Link>
+        </Button>
+      </div>
       
       <div className="mt-6 flex flex-col gap-6">
         {/* Top - Calculator */}
