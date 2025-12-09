@@ -305,15 +305,16 @@ export function FoodSurplusMap({ dataFilter = 'all' }: FoodSurplusMapProps) {
           }
         }
 
-        // Skip other data sources if only showing Sodexo
-        if (dataFilter !== 'sodexo') {
+        // Load dashboard data for non-Sodexo donors and all receivers
+        // When filter is 'sodexo', we still need to load receivers to show where food goes
+        if (dataFilter !== 'sodexo' || dataFilter === 'sodexo') {
           const response = await fetch('/data/dashboard-data.json')
           if (!response.ok) {
             throw new Error(`Failed to load data: ${response.status}`)
           }
           const data = await response.json()
           
-          // Transform donors into GeoJSON format
+          // Transform donors into GeoJSON format (skip for sodexo filter since we loaded sodexo-helsinki-branches.json)
           if (dataFilter === 'all' || dataFilter === 'donors') {
             const donorFeatures = (data.donors || []).map((donor: DonorData) => ({
               type: 'Feature',
@@ -336,7 +337,8 @@ export function FoodSurplusMap({ dataFilter = 'all' }: FoodSurplusMapProps) {
           }
 
           // Transform receivers into GeoJSON format
-          if (dataFilter === 'all' || dataFilter === 'receivers') {
+          // Always load receivers for 'sodexo' filter to show where donations go
+          if (dataFilter === 'all' || dataFilter === 'receivers' || dataFilter === 'sodexo') {
             const receiverFeatures = (data.receivers || []).map((receiver: ReceiverData) => ({
               type: 'Feature',
               geometry: {
