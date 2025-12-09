@@ -100,7 +100,6 @@ A: The surplus CO2 value, with tree/car equivalents.`
       model: openai('gpt-4o-mini'),
       system: systemPrompt,
       prompt: message,
-      maxTokens: 600,
     })
 
     return Response.json({ response: result.text })
