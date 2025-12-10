@@ -186,7 +186,7 @@ function LocationPopup({ location, onClose }: LocationPopupProps) {
           ) : (
             <div className="grid grid-cols-[auto_1fr] gap-4 items-center">
               <div className="flex items-center justify-center">
-                <DonationGauge donations={properties.receivedDonations ?? 0} meals={properties.mealsDistributed ?? 0} size="sm" showLabel={false} />
+                <DonationGauge donations={properties.receivedDonations ?? 0} meals={properties.mealsDistributed ?? 0} size="sm" showLabel={false} type="receiver" />
               </div>
 
               <div className="space-y-2">

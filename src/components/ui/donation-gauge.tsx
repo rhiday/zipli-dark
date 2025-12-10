@@ -8,6 +8,7 @@ interface DonationGaugeProps {
   meals: number
   size?: 'sm' | 'md' | 'lg'
   showLabel?: boolean
+  type?: 'donor' | 'receiver'
 }
 
 function calculatePotential(donations: number, meals: number): number {
@@ -23,9 +24,11 @@ function getPotentialColor(score: number): string {
   return 'hsl(0, 84%, 60%)' // red
 }
 
-export function DonationGauge({ donations, meals, size = 'md', showLabel = true }: DonationGaugeProps) {
+export function DonationGauge({ donations, meals, size = 'md', showLabel = true, type = 'donor' }: DonationGaugeProps) {
   const potential = calculatePotential(donations, meals)
   const color = getPotentialColor(potential)
+  
+  const scoreLabel = type === 'receiver' ? 'Recipient Score' : 'Donation Score'
 
   const chartData = [
     {
@@ -93,7 +96,7 @@ export function DonationGauge({ donations, meals, size = 'md', showLabel = true 
             dominantBaseline="middle"
             className={`fill-muted-foreground ${textSizes[size].label}`}
           >
-            Donation Score
+            {scoreLabel}
           </text>
         </RadialBarChart>
       </ChartContainer>
