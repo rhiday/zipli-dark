@@ -1,0 +1,102 @@
+[
+  {
+    "id": "story-001",
+    "title": "Sodexo Donates Fresh Produce to Local Food Bank",
+    "excerpt": "A heartwarming story of corporate partnership bringing fresh vegetables to families in need.",
+    "imageUrl": "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&q=80",
+    "photoConsent": "signed",
+    "storyConsent": "verbal",
+    "approvalStatus": "Approved for Web & Print",
+    "createdAt": "2023-11-15",
+    "category": "corporate",
+    "channels": ["linkedin", "facebook", "newsletter"]
+  },
+  {
+    "id": "story-002",
+    "title": "Volunteers Share Warm Meals with Families in Need",
+    "excerpt": "Local volunteers prepare and distribute nutritious meals to community members.",
+    "imageUrl": "https://images.unsplash.com/photo-1547592180-85f173990554?w=800&q=80",
+    "photoConsent": null,
+    "storyConsent": null,
+    "consentNote": "Approved for Web",
+    "approvalStatus": "Approved for Social Media Only",
+    "createdAt": "2023-11-10",
+    "category": "volunteer",
+    "channels": ["instagram", "facebook"]
+  },
+  {
+    "id": "story-003",
+    "title": "Saving Surplus Food: From Our Kitchen to Your Table",
+    "excerpt": "How rescued food finds new life feeding hungry families across the region.",
+    "imageUrl": "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=800&q=80",
+    "photoConsent": null,
+    "storyConsent": null,
+    "consentNote": "Approved for All Channels",
+    "approvalStatus": "Approved for Web & Print",
+    "createdAt": "2023-11-08",
+    "category": "impact",
+    "channels": ["linkedin", "facebook", "instagram", "newsletter"]
+  },
+  {
+    "id": "story-004",
+    "title": "New Partnership Expands Reach of Food Rescue Program",
+    "excerpt": "Strategic collaboration between organizations amplifies community impact.",
+    "imageUrl": "https://images.unsplash.com/photo-1560439514-4e9645039924?w=800&q=80",
+    "photoConsent": "signed",
+    "storyConsent": "written",
+    "approvalStatus": "Approved for External Communications",
+    "createdAt": "2023-10-28",
+    "category": "partnership",
+    "channels": ["linkedin", "newsletter"]
+  },
+  {
+    "id": "story-005",
+    "title": "Nourishing Futures: Impact on School Lunch Programs",
+    "excerpt": "Surplus food donations transform school cafeterias and student nutrition.",
+    "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80",
+    "photoConsent": null,
+    "storyConsent": null,
+    "consentNote": "Approved for Web",
+    "approvalStatus": "Limited to Educational Use",
+    "createdAt": "2023-10-20",
+    "category": "education",
+    "channels": ["facebook", "newsletter"]
+  },
+  {
+    "id": "story-006",
+    "title": "Volunteer Spotlight: Making a Difference, One Meal at a Time",
+    "excerpt": "Meet the dedicated volunteers behind our food rescue success.",
+    "imageUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80",
+    "photoConsent": "signed",
+    "storyConsent": "verbal",
+    "approvalStatus": "Approved for Internal Use Only",
+    "createdAt": "2023-10-15",
+    "category": "volunteer",
+    "channels": ["newsletter"]
+  },
+  {
+    "id": "story-007",
+    "title": "Sustainable Practices: Reducing Waste, Feeding Communities",
+    "excerpt": "Environmental impact meets social good in our food rescue initiatives.",
+    "imageUrl": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&q=80",
+    "photoConsent": null,
+    "storyConsent": null,
+    "consentNote": "Approved for All Channels",
+    "approvalStatus": "Approved for Web & Print",
+    "createdAt": "2023-10-05",
+    "category": "sustainability",
+    "channels": ["linkedin", "facebook", "instagram", "newsletter"]
+  },
+  {
+    "id": "story-008",
+    "title": "Local Impact: Empowering Communities Through Food",
+    "excerpt": "How local markets and food banks collaborate for maximum community benefit.",
+    "imageUrl": "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800&q=80",
+    "photoConsent": "signed",
+    "storyConsent": null,
+    "approvalStatus": "Approved for Regional Marketing",
+    "createdAt": "2023-09-30",
+    "category": "community",
+    "channels": ["facebook", "instagram"]
+  }
+]
