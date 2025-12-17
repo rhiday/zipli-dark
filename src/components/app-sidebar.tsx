@@ -7,6 +7,7 @@ import {
   MessageCircle,
   ListChecks,
   Megaphone,
+  BookOpen,
 } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
@@ -36,7 +37,7 @@ const data = {
         { title: "Dashboard", url: "/dashboard", icon: LayoutPanelLeft },
         { title: "Operations", url: "/daily-operations", icon: ListChecks },
         {
-          title: "Impact metrics",
+          title: "Impact",
           url: "#",
           icon: BarChart3,
           items: [
@@ -50,9 +51,19 @@ const data = {
     },
     {
       label: "Communication",
+      collapsibleLabel: { title: "Communication", icon: MessageCircle },
       items: [
         { title: "Feedback", url: "/communication/feedback", icon: Megaphone },
         { title: "Messaging", url: "/communication/messaging", icon: MessageCircle },
+      ],
+    },
+    {
+      label: "Stories",
+      collapsibleLabel: { title: "Stories", icon: BookOpen },
+      items: [
+        { title: "Stories library", url: "/stories/library" },
+        { title: "Campaign builder", url: "/stories/campaign-builder" },
+        { title: "Brand settings", url: "/stories/brand-settings" },
       ],
     },
   ],
@@ -82,7 +93,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         {data.navGroups.map((group) => (
-          <NavMain key={group.label} label={group.label} items={group.items} />
+          <NavMain
+            key={group.label}
+            label={group.collapsibleLabel ? undefined : group.label}
+            collapsibleLabel={group.collapsibleLabel}
+            items={group.items}
+          />
         ))}
       </SidebarContent>
       <SidebarFooter>
