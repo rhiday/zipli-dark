@@ -19,7 +19,7 @@ export function StoryCard({ story, onClick }: StoryCardProps) {
 
   return (
     <Card 
-      className="group relative overflow-hidden bg-card border-border hover:border-primary/50 transition-colors cursor-pointer"
+      className="group relative overflow-hidden bg-card border-border hover:border-primary/50 transition-colors cursor-pointer p-0"
       onClick={onClick}
     >
       {/* Image Container */}

@@ -72,11 +72,11 @@ export const CAMPAIGN_PRESETS: { id: CampaignPreset; label: string; description:
   },
 ]
 
-export const CHANNEL_LABELS: Record<CampaignChannel, { label: string; icon: string }> = {
-  facebook: { label: 'Facebook', icon: '📘' },
-  instagram: { label: 'Instagram', icon: '📸' },
-  email: { label: 'Email', icon: '✉️' },
-  linkedin: { label: 'LinkedIn', icon: '💼' },
+export const CHANNEL_LABELS: Record<CampaignChannel, { label: string }> = {
+  facebook: { label: 'Facebook' },
+  instagram: { label: 'Instagram' },
+  email: { label: 'Email' },
+  linkedin: { label: 'LinkedIn' },
 }
 
 export const DEFAULT_PRIVACY: PrivacySettings = {

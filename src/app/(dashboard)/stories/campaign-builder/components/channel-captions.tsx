@@ -57,7 +57,7 @@ export function ChannelCaptions({ asset, onAssetChange }: ChannelCaptionsProps) 
           <TabsList className="w-full grid grid-cols-4">
             {channels.map((channel) => (
               <TabsTrigger key={channel} value={channel} className="text-xs">
-                {CHANNEL_LABELS[channel].icon} {CHANNEL_LABELS[channel].label}
+                {CHANNEL_LABELS[channel].label}
               </TabsTrigger>
             ))}
           </TabsList>
