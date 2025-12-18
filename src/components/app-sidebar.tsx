@@ -24,52 +24,85 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
-const data = {
-  user: {
-    name: "Demo User",
-    email: "demo@zipli.test",
-    avatar: "/avatar.png",
-  },
-  navGroups: [
-    {
-      label: "Navigation",
-      items: [
-        { title: "Dashboard", url: "/dashboard", icon: LayoutPanelLeft },
-        {
-          title: "Operations",
-          url: "#",
-          icon: ListChecks,
-          items: [
-            { title: "Daily operations", url: "/daily-operations", icon: ListChecks },
-            { title: "Feedback", url: "/communication/feedback", icon: Megaphone },
-          ],
-        },
-        {
-          title: "Impact",
-          url: "#",
-          icon: BarChart3,
-          items: [
-            { title: "Business impact", url: "/impact/business" },
-            { title: "Social impact", url: "/impact/social" },
-            { title: "Climate impact", url: "/impact/climate" },
-            { title: "Impact analyzer", url: "/impact/analyzer" },
-          ],
-        },
-      ],
+const getNavData = () => {
+  // Get user email from localStorage, fallback to demo user
+  const userEmail = typeof window !== "undefined" ? localStorage.getItem("user_email") : null
+  const displayName = userEmail ? getUserDisplayName(userEmail) : "Demo User"
+  
+  return {
+    user: {
+      name: displayName,
+      email: userEmail || "demo@zipli.test",
+      avatar: "/avatar.png",
     },
-    {
-      label: "Stories",
-      collapsibleLabel: { title: "Stories", icon: BookOpen },
-      items: [
-{ title: "Templates", url: "/stories/templates" },
-        { title: "Story builder", url: "/stories/builder" },
-        { title: "Brand settings", url: "/stories/brand-settings" },
-      ],
-    },
-  ],
+    navGroups: [
+      {
+        label: "Navigation",
+        items: [
+          { title: "Dashboard", url: "/dashboard", icon: LayoutPanelLeft },
+          {
+            title: "Operations",
+            url: "#",
+            icon: ListChecks,
+            items: [
+              { title: "Daily operations", url: "/daily-operations", icon: ListChecks },
+              { title: "Feedback", url: "/communication/feedback", icon: Megaphone },
+            ],
+          },
+          {
+            title: "Impact",
+            url: "#",
+            icon: BarChart3,
+            items: [
+              { title: "Business impact", url: "/impact/business" },
+              { title: "Social impact", url: "/impact/social" },
+              { title: "Climate impact", url: "/impact/climate" },
+              { title: "Impact analyzer", url: "/impact/analyzer" },
+            ],
+          },
+        ],
+      },
+      {
+        label: "Stories",
+        collapsibleLabel: { title: "Stories", icon: BookOpen },
+        items: [
+          { title: "Templates", url: "/stories/templates" },
+          { title: "Story builder", url: "/stories/builder" },
+          { title: "Brand settings", url: "/stories/brand-settings" },
+        ],
+      },
+    ],
+  }
+}
+
+// Helper function to get display name from email
+function getUserDisplayName(email: string): string {
+  if (email === "sodexo@zipli.test") {
+    return "Sodexo User"
+  }
+  if (email === "demo@zipli.test") {
+    return "Demo User"
+  }
+  // For other emails, use the part before @ as name
+  return email.split("@")[0].charAt(0).toUpperCase() + email.split("@")[0].slice(1)
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const [navData, setNavData] = React.useState(() => getNavData())
+
+  // Update user data when component mounts and localStorage changes
+  React.useEffect(() => {
+    setNavData(getNavData())
+    
+    // Listen for storage changes (e.g., when user logs in/out)
+    const handleStorageChange = () => {
+      setNavData(getNavData())
+    }
+    
+    window.addEventListener('storage', handleStorageChange)
+    return () => window.removeEventListener('storage', handleStorageChange)
+  }, [])
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -92,7 +125,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        {data.navGroups.map((group) => (
+        {navData.navGroups.map((group) => (
           <NavMain
             key={group.label}
             label={group.collapsibleLabel ? undefined : group.label}
@@ -102,7 +135,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         ))}
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={navData.user} />
       </SidebarFooter>
     </Sidebar>
   )
