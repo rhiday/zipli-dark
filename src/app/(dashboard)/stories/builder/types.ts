@@ -1,4 +1,4 @@
-import type { Story } from "../library/types"
+import type { Story } from "../templates/types"
 
 export type CampaignChannel = 'facebook' | 'instagram' | 'email' | 'linkedin'
 

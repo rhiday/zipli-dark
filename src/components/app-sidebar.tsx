@@ -62,8 +62,8 @@ const data = {
       label: "Stories",
       collapsibleLabel: { title: "Stories", icon: BookOpen },
       items: [
-        { title: "Stories library", url: "/stories/library" },
-        { title: "Campaign builder", url: "/stories/campaign-builder" },
+{ title: "Templates", url: "/stories/templates" },
+        { title: "Story builder", url: "/stories/builder" },
         { title: "Brand settings", url: "/stories/brand-settings" },
       ],
     },

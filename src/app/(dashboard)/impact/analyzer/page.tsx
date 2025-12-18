@@ -8,7 +8,7 @@ export default function ImpactAnalyzerPage() {
   const router = useRouter()
 
   useEffect(() => {
-    router.replace("/demo/co2-analyzer")
+    router.replace("/impact/co2-analyzer")
   }, [router])
 
   return (

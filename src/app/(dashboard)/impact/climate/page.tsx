@@ -18,7 +18,7 @@ export default function ClimateImpactPage() {
       <div className="flex items-center justify-between">
       <h1 className="text-2xl font-semibold">Climate impact</h1>
         <Button asChild>
-          <Link href="/demo/co2-analyzer">
+          <Link href="/impact/co2-analyzer">
             <Upload className="size-4" />
             Analyze your impact
           </Link>

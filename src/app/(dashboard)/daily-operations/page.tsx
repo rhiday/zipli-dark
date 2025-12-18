@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic'
 import { MetricsOverview } from "../dashboard/components/metrics-overview"
 import { SalesChart } from "../dashboard/components/sales-chart"
 import { RecentTransactions } from "../dashboard/components/recent-transactions"
-import { QuickActions } from "../dashboard/components/quick-actions"
 import { RevenueBreakdown } from "../dashboard/components/revenue-breakdown"
 import { AchievementsBadge } from "../dashboard/components/achievements-badge"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
@@ -28,16 +27,13 @@ export default function DailyOperationsPage() {
     <div className="flex-1 space-y-6 px-6 pt-0">
         {/* Enhanced Header */}
 
-      <div className="flex flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
-            <Avatar className="h-12 w-12">
-              <AvatarImage src="/avatar.png" alt="Olivia" />
-              <AvatarFallback>OL</AvatarFallback>
-            </Avatar>
-            <h1 className="text-2xl font-bold tracking-tight">Sodexo Helsinki Food Surplus Dashboard</h1>
-          </div>
-          <QuickActions />
-        </div>
+      <div className="flex items-center gap-4">
+        <Avatar className="h-12 w-12">
+          <AvatarImage src="/avatar.png" alt="Olivia" />
+          <AvatarFallback>OL</AvatarFallback>
+        </Avatar>
+        <h1 className="text-2xl font-bold tracking-tight">Sodexo Helsinki Food Surplus Dashboard</h1>
+      </div>
 
         {/* Main Dashboard Grid */}
         <div className="@container/main space-y-6">

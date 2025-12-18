@@ -16,7 +16,7 @@ export default function Dashboard() {
         {/* Action Cards */}
         <div className="grid gap-6 md:grid-cols-3">
           {/* Create Story */}
-          <Link href="/stories/library">
+<Link href="/stories/templates">
             <Card className="h-full cursor-pointer transition-all hover:shadow-lg hover:border-primary/50">
               <CardHeader className="items-center text-center pb-4">
                 <div className="w-full flex justify-center mb-3">

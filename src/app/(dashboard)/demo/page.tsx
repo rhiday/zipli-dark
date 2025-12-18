@@ -169,43 +169,30 @@ export default function CO2AnalyzerPage() {
   }
 
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <div className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-10">
-        <div className="container flex h-14 items-center px-6">
-          <Button variant="ghost" size="sm" asChild>
-            <Link href="/impact/climate">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Climate Impact
-            </Link>
-          </Button>
-        </div>
+    <div className="flex-1 space-y-6 px-6">
+      {/* Page Title */}
+      <div>
+        <h1 className="text-2xl font-semibold flex items-center gap-3">
+          <Sparkles className="h-6 w-6 text-primary" />
+          CO₂ Menu Analyzer
+        </h1>
+        <p className="text-sm text-muted-foreground mt-1">
+          Upload your menu file or estimate emissions directly from restaurant menus
+        </p>
       </div>
 
-      <div className="container px-6 py-8 max-w-6xl mx-auto">
-        {/* Page Title */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold flex items-center gap-3">
-            <Sparkles className="h-8 w-8 text-primary" />
-            CO₂ Menu Analyzer
-          </h1>
-          <p className="text-muted-foreground mt-2">
-            Upload your menu file or estimate emissions directly from restaurant menus
-          </p>
-        </div>
+      {/* Error Alert */}
+      {error && (
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertTitle>Error</AlertTitle>
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
 
-        {/* Error Alert */}
-        {error && (
-          <Alert variant="destructive" className="mb-6">
-            <AlertCircle className="h-4 w-4" />
-            <AlertTitle>Error</AlertTitle>
-            <AlertDescription>{error}</AlertDescription>
-          </Alert>
-        )}
-
-        {/* Step: Choose Mode */}
-        {step === "choose-mode" && (
-          <div className="grid md:grid-cols-2 gap-6">
+      {/* Step: Choose Mode */}
+      {step === "choose-mode" && (
+      <div className="grid md:grid-cols-2 gap-6">
             <Card 
               className="cursor-pointer transition-all hover:border-primary hover:shadow-md"
               onClick={() => handleModeSelect("scrape")}
@@ -250,11 +237,11 @@ export default function CO2AnalyzerPage() {
               </CardContent>
             </Card>
           </div>
-        )}
+      )}
 
-        {/* Step: Upload */}
+      {/* Step: Upload */}
         {step === "upload" && (
-          <div className="space-y-6">
+      <div className="space-y-6">
             <div className="flex items-center gap-2 mb-4">
               <Button variant="ghost" size="sm" onClick={handleClear}>
                 <ArrowLeft className="h-4 w-4 mr-2" />
@@ -301,11 +288,11 @@ export default function CO2AnalyzerPage() {
               </CardContent>
             </Card>
           </div>
-        )}
+      )}
 
-        {/* Step: Scrape - Restaurant Selection */}
+      {/* Step: Scrape - Restaurant Selection */}
         {step === "scrape" && (
-          <div className="space-y-6">
+      <div className="space-y-6">
             <div className="flex items-center gap-2 mb-4">
               <Button variant="ghost" size="sm" onClick={handleClear}>
                 <ArrowLeft className="h-4 w-4 mr-2" />
@@ -386,11 +373,11 @@ export default function CO2AnalyzerPage() {
               </CardContent>
             </Card>
           </div>
-        )}
+      )}
 
-        {/* Step: Preview */}
+      {/* Step: Preview */}
         {step === "preview" && parsedData && (
-          <div className="space-y-6">
+      <div className="space-y-6">
             <div className="flex items-center gap-2 mb-4">
               <Button variant="ghost" size="sm" onClick={handleClear}>
                 <ArrowLeft className="h-4 w-4 mr-2" />
@@ -441,9 +428,9 @@ export default function CO2AnalyzerPage() {
               </Button>
             </div>
           </div>
-        )}
+      )}
 
-        {/* Step: Analyzing */}
+      {/* Step: Analyzing */}
         {step === "analyzing" && (
           <Card>
             <CardContent className="flex flex-col items-center justify-center py-16">
@@ -455,11 +442,11 @@ export default function CO2AnalyzerPage() {
               </p>
             </CardContent>
           </Card>
-        )}
+      )}
 
-        {/* Step: Results */}
+      {/* Step: Results */}
         {step === "results" && analysisResult && (
-          <div className="space-y-6">
+      <div className="space-y-6">
             {/* Actions */}
             <div className="flex items-center justify-between">
               <Button variant="outline" onClick={handleClear}>
@@ -495,8 +482,7 @@ export default function CO2AnalyzerPage() {
             {/* Insights */}
             <InsightsPanel data={analysisResult} />
           </div>
-        )}
-      </div>
+      )}
     </div>
   )
 }
