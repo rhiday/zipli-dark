@@ -97,7 +97,7 @@ export function Chat({
 
   return (
     <TooltipProvider delayDuration={0}>
-      <div className="h-full min-h-[600px] max-h-[calc(100vh-200px)] flex rounded-lg border overflow-hidden bg-background">
+      <div className="h-full min-h-[600px] max-h-[calc(100vh-120px)] flex rounded-lg border overflow-hidden bg-background">
         {/* Mobile Sidebar Overlay */}
         {isSidebarOpen && (
           <div
@@ -108,7 +108,7 @@ export function Chat({
 
         {/* Conversations Sidebar - Responsive */}
         <div className={`
-          w-100 border-r bg-background flex-shrink-0
+          w-100 border-r bg-background flex-shrink-0 h-full flex flex-col
           ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
           lg:relative lg:block
           fixed inset-y-0 left-0 z-50

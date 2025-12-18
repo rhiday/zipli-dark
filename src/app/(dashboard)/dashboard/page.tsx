@@ -6,7 +6,7 @@ import Link from "next/link"
 
 export default function Dashboard() {
   return (
-    <div className="flex-1 px-6 pt-0">
+    <div className="flex-1 px-6 pt-12">
       <div className="max-w-5xl mx-auto space-y-8">
         {/* Header */}
         <div className="text-center space-y-2">
@@ -14,7 +14,7 @@ export default function Dashboard() {
         </div>
 
         {/* Action Cards */}
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-3 pt-4">
           {/* Create Story */}
 <Link href="/stories/templates">
             <Card className="h-full cursor-pointer transition-all hover:shadow-lg hover:border-primary/50">

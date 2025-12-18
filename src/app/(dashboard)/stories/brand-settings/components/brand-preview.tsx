@@ -20,19 +20,16 @@ export function BrandPreview({ settings }: BrandPreviewProps) {
         {/* Logo Preview */}
         <div className="space-y-2">
           <h3 className="text-sm font-medium">Logo</h3>
-          <div 
-            className="h-24 rounded-lg flex items-center justify-center"
-            style={{ backgroundColor: settings.colors.primary }}
-          >
+          <div className="h-16 rounded-lg flex items-center justify-center bg-white border border-border px-3 py-2">
             {settings.logoUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img 
                 src={settings.logoUrl} 
                 alt="Brand logo" 
-                className="max-h-16 max-w-full object-contain"
+                className="max-h-12 max-w-full object-contain"
               />
             ) : (
-              <span className="text-white/50 text-sm">Logo will appear here</span>
+              <span className="text-muted-foreground text-sm">Logo will appear here</span>
             )}
           </div>
         </div>

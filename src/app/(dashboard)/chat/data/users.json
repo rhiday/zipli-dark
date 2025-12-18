@@ -1,52 +1,52 @@
 [
   {
     "id": "1",
-    "name": "Sarah Mitchell",
-    "email": "sarah.mitchell@example.com",
+    "name": "Tarja Siik",
+    "email": "tarja.siik@sodexo.com",
     "avatar": "/avatars/01.png",
     "status": "online",
-    "lastSeen": "2024-01-15T10:30:00Z",
-    "role": "Project Manager",
-    "department": "Product"
+    "lastSeen": "2025-01-15T13:30:00Z",
+    "role": "Kitchen Manager",
+    "department": "Sodexo Vilppulantie"
   },
   {
     "id": "2",
-    "name": "Alex Thompson",
-    "email": "alex.thompson@example.com",
+    "name": "Mikko Järvinen",
+    "email": "mikko.jarvinen@sodexo.com",
     "avatar": "/avatars/02.png",
     "status": "away",
-    "lastSeen": "2024-01-15T09:45:00Z",
-    "role": "Senior Developer",
-    "department": "Engineering"
+    "lastSeen": "2025-01-15T09:45:00Z",
+    "role": "Kitchen Operator",
+    "department": "Sodexo Kamppi"
   },
   {
     "id": "3",
-    "name": "Emily Rodriguez",
-    "email": "emily.rodriguez@example.com",
+    "name": "Anna Kovalainen",
+    "email": "anna.kovalainen@sodexo.com",
     "avatar": "/avatars/03.png",
     "status": "online",
-    "lastSeen": "2024-01-15T10:25:00Z",
-    "role": "UX Designer",
-    "department": "Design"
+    "lastSeen": "2025-01-15T10:25:00Z",
+    "role": "Operations Manager",
+    "department": "Sodexo Airport"
   },
   {
     "id": "4",
-    "name": "David Kim",
-    "email": "david.kim@example.com",
+    "name": "Maria Hakkarainen",
+    "email": "maria.hakkarainen@sodexo.com",
     "avatar": "/avatars/04.png",
     "status": "offline",
-    "lastSeen": "2024-01-14T18:30:00Z",
-    "role": "Marketing Lead",
-    "department": "Marketing"
+    "lastSeen": "2025-01-14T18:30:00Z",
+    "role": "Kitchen Manager",
+    "department": "Sodexo Pihlis"
   },
   {
     "id": "5",
-    "name": "Lisa Chen",
-    "email": "lisa.chen@example.com",
+    "name": "Jyrki Brandt",
+    "email": "jyrki.brandt@etappiry.net",
     "avatar": "/avatars/05.png",
     "status": "online",
-    "lastSeen": "2024-01-15T10:20:00Z",
-    "role": "QA Engineer",
-    "department": "Engineering"
+    "lastSeen": "2025-01-15T10:20:00Z",
+    "role": "Food Coordinator",
+    "department": "Kohtaamispaikka Tsänssi"
   }
 ]

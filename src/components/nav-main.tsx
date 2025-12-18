@@ -53,8 +53,6 @@ export function NavMain({
   const pathname = usePathname()
 
   const shouldBeOpen = (item: (typeof items)[number]) => {
-    // Always keep Impact open
-    if (item.title === "Impact") return true
     if (item.isActive) return true
 
     // Open if this is a parent of the current route

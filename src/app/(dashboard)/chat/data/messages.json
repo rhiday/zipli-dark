@@ -3,7 +3,7 @@
     {
       "id": "msg-1-1",
       "content": "Hey! How's the new dashboard coming along?",
-      "timestamp": "2024-01-15T10:15:00Z",
+      "timestamp": "2025-01-15T13:15:00Z",
       "senderId": "1",
       "type": "text",
       "isEdited": false,
@@ -13,7 +13,7 @@
     {
       "id": "msg-1-2",
       "content": "It's going great! We've implemented the new design system and it looks fantastic.",
-      "timestamp": "2024-01-15T10:17:00Z",
+      "timestamp": "2025-01-15T13:17:00Z",
       "senderId": "current-user",
       "type": "text",
       "isEdited": false,
@@ -23,7 +23,7 @@
     {
       "id": "msg-1-3",
       "content": "That's awesome! Can you share a preview?",
-      "timestamp": "2024-01-15T10:18:00Z",
+      "timestamp": "2025-01-15T13:18:00Z",
       "senderId": "1",
       "type": "text",
       "isEdited": false,
@@ -33,7 +33,7 @@
     {
       "id": "msg-1-4",
       "content": "Thanks for the quick update! The dashboard looks amazing 🎉",
-      "timestamp": "2024-01-15T10:30:00Z",
+      "timestamp": "2025-01-15T13:30:00Z",
       "senderId": "1",
       "type": "text",
       "isEdited": false,
@@ -44,9 +44,9 @@
   "conv-2": [
     {
       "id": "msg-2-1",
-      "content": "Hey team! The component library update is ready",
-      "timestamp": "2024-01-15T09:00:00Z",
-      "senderId": "2",
+      "content": "Good morning team! Vilppulantie has 87kg ready for donation today",
+      "timestamp": "2025-01-19T08:00:00Z",
+      "senderId": "1",
       "type": "text",
       "isEdited": false,
       "reactions": [],
@@ -54,9 +54,9 @@
     },
     {
       "id": "msg-2-2",
-      "content": "Awesome work Alex! 🚀",
-      "timestamp": "2024-01-15T09:05:00Z",
-      "senderId": "3",
+      "content": "Great! Kamppi also has 65kg available. Red Cross Helsinki can pick up both?",
+      "timestamp": "2025-01-19T08:05:00Z",
+      "senderId": "2",
       "type": "text",
       "isEdited": false,
       "reactions": [],
@@ -64,19 +64,59 @@
     },
     {
       "id": "msg-2-3",
-      "content": "I've tested the new Button and Input components, they work perfectly",
-      "timestamp": "2024-01-15T09:10:00Z",
-      "senderId": "5",
+      "content": "Airport location is also doing well - 125kg available for Helsinki Food Bank",
+      "timestamp": "2025-01-19T08:10:00Z",
+      "senderId": "3",
       "type": "text",
       "isEdited": false,
-      "reactions": [{"emoji": "✅", "users": ["2", "3"], "count": 2}],
+      "reactions": [{"emoji": "✅", "users": ["1", "2"], "count": 2}],
       "replyTo": null
     },
     {
       "id": "msg-2-4",
-      "content": "Great! I'll start integrating them into the main app",
-      "timestamp": "2024-01-15T09:15:00Z",
+      "content": "Excellent work everyone! We're exceeding our monthly targets 🎉",
+      "timestamp": "2025-01-19T08:15:00Z",
       "senderId": "current-user",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [{"emoji": "👏", "users": ["1", "2", "3"], "count": 3}],
+      "replyTo": null
+    },
+    {
+      "id": "msg-2-5",
+      "content": "University Main Building also has surplus from lunch service - 98kg",
+      "timestamp": "2025-01-19T12:30:00Z",
+      "senderId": "1",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null
+    },
+    {
+      "id": "msg-2-6",
+      "content": "Perfect timing! Kohtaamispaikka Tsänssi was just asking for donations",
+      "timestamp": "2025-01-19T12:35:00Z",
+      "senderId": "current-user",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null
+    },
+    {
+      "id": "msg-2-7",
+      "content": "I'll coordinate the pickup schedule. Usual time slots 14:00-16:00?",
+      "timestamp": "2025-01-19T12:40:00Z",
+      "senderId": "2",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [{"emoji": "👍", "users": ["current-user"], "count": 1}],
+      "replyTo": null
+    },
+    {
+      "id": "msg-2-8",
+      "content": "Ready for pickup at Kamppi - 65kg available",
+      "timestamp": "2025-01-19T14:15:00Z",
+      "senderId": "2",
       "type": "text",
       "isEdited": false,
       "reactions": [],
@@ -86,18 +126,18 @@
   "conv-3": [
     {
       "id": "msg-3-1",
-      "content": "Hi! I've completed the wireframes for the new user onboarding flow",
-      "timestamp": "2024-01-15T09:30:00Z",
+      "content": "Weekly donation report: Airport exceeded targets again! 125kg this week",
+      "timestamp": "2025-01-12T09:30:00Z",
       "senderId": "3",
       "type": "text",
       "isEdited": false,
-      "reactions": [],
+      "reactions": [{"emoji": "🎆", "users": ["1", "2"], "count": 2}],
       "replyTo": null
     },
     {
       "id": "msg-3-2",
-      "content": "That's fantastic Emily! When can we review them?",
-      "timestamp": "2024-01-15T09:32:00Z",
+      "content": "Fantastic work Anna! What's your secret at the airport location?",
+      "timestamp": "2025-01-12T09:32:00Z",
       "senderId": "current-user",
       "type": "text",
       "isEdited": false,
@@ -106,30 +146,50 @@
     },
     {
       "id": "msg-3-3",
-      "content": "How about tomorrow at 2 PM? I'll share my screen and walk through the designs",
-      "timestamp": "2024-01-15T09:35:00Z",
+      "content": "Better portion control and timing! We adjust portions based on passenger flow forecasts",
+      "timestamp": "2025-01-12T09:35:00Z",
       "senderId": "3",
       "type": "text",
       "isEdited": false,
-      "reactions": [{"emoji": "👍", "users": ["current-user"], "count": 1}],
+      "reactions": [{"emoji": "💡", "users": ["current-user", "2"], "count": 2}],
       "replyTo": null
     },
     {
       "id": "msg-3-4",
-      "content": "Perfect! Looking forward to it",
-      "timestamp": "2024-01-15T09:40:00Z",
-      "senderId": "current-user",
+      "content": "Smart approach! I'll try implementing that at Kamppi",
+      "timestamp": "2025-01-12T09:40:00Z",
+      "senderId": "2",
       "type": "text",
       "isEdited": false,
       "reactions": [],
+      "replyTo": null
+    },
+    {
+      "id": "msg-3-5",
+      "content": "Vilppulantie is also doing well - consistent 80-90kg weekly donations",
+      "timestamp": "2025-01-12T10:15:00Z",
+      "senderId": "1",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [{"emoji": "👏", "users": ["3"], "count": 1}],
+      "replyTo": null
+    },
+    {
+      "id": "msg-3-6",
+      "content": "Airport location exceeded donation target this week!",
+      "timestamp": "2025-01-12T23:45:00Z",
+      "senderId": "3",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [{"emoji": "🎉", "users": ["current-user"], "count": 1}],
       "replyTo": null
     }
   ],
   "conv-4": [
     {
       "id": "msg-4-1",
-      "content": "Hi! I've been working on the wireframes for the new feature",
-      "timestamp": "2025-08-10T14:15:00Z",
+      "content": "Hi! Airport kitchen has exceptional surplus today - over 140kg ready",
+      "timestamp": "2025-01-15T12:15:00Z",
       "senderId": "3",
       "type": "text",
       "isEdited": false,
@@ -138,8 +198,8 @@
     },
     {
       "id": "msg-4-2",
-      "content": "That's great! I'd love to take a look at them",
-      "timestamp": "2025-08-10T14:18:00Z",
+      "content": "Wow! That's fantastic Anna. Do we have receivers lined up?",
+      "timestamp": "2025-01-15T12:18:00Z",
       "senderId": "current-user",
       "type": "text",
       "isEdited": false,
@@ -148,20 +208,30 @@
     },
     {
       "id": "msg-4-3",
-      "content": "Let's review the wireframes together tomorrow",
-      "timestamp": "2025-08-10T16:30:00Z",
+      "content": "Yes! Helsinki Food Bank confirmed pickup at 14:30. Perfect timing for their evening distribution",
+      "timestamp": "2025-01-15T13:18:00Z",
       "senderId": "3",
       "type": "text",
       "isEdited": false,
       "reactions": [{"emoji": "👍", "users": ["current-user"], "count": 1}],
+      "replyTo": null
+    },
+    {
+      "id": "msg-4-4",
+      "content": "Excellent coordination! Your airport team is really setting the standard 🏆",
+      "timestamp": "2025-01-15T13:20:00Z",
+      "senderId": "current-user",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [{"emoji": "😊", "users": ["3"], "count": 1}],
       "replyTo": null
     }
   ],
   "conv-5": [
     {
       "id": "msg-5-1",
-      "content": "I've been testing the new feature and it looks good overall",
-      "timestamp": "2025-08-06T13:45:00Z",
+      "content": "Hi! We're running community dinner tonight and could use additional donations. Expecting 60+ people",
+      "timestamp": "2025-01-06T13:45:00Z",
       "senderId": "5",
       "type": "text",
       "isEdited": false,
@@ -170,8 +240,8 @@
     },
     {
       "id": "msg-5-2",
-      "content": "Thanks for testing it! Any issues you found?",
-      "timestamp": "2025-08-06T14:10:00Z",
+      "content": "Let me check with our locations! What time do you need pickup by?",
+      "timestamp": "2025-01-06T14:10:00Z",
       "senderId": "current-user",
       "type": "text",
       "isEdited": false,
@@ -180,20 +250,40 @@
     },
     {
       "id": "msg-5-3",
-      "content": "Found a few edge cases in the new feature",
-      "timestamp": "2025-08-06T14:20:00Z",
+      "content": "Before 16:00 would be perfect. Need time to prep for 18:00 service",
+      "timestamp": "2025-01-06T14:20:00Z",
       "senderId": "5",
       "type": "text",
       "isEdited": false,
       "reactions": [],
+      "replyTo": null
+    },
+    {
+      "id": "msg-5-4",
+      "content": "Great news! Pasila has 58kg available and Vilppulantie has 42kg. Both ready for 15:30 pickup",
+      "timestamp": "2025-01-06T14:25:00Z",
+      "senderId": "current-user",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [{"emoji": "🙏", "users": ["5"], "count": 1}],
+      "replyTo": null
+    },
+    {
+      "id": "msg-5-5",
+      "content": "Amazing! That's exactly what we needed. Our volunteers will be there. Thank you so much! 🙏",
+      "timestamp": "2025-01-06T14:30:00Z",
+      "senderId": "5",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [{"emoji": "❤️", "users": ["current-user"], "count": 1}],
       "replyTo": null
     }
   ],
   "conv-6": [
     {
       "id": "msg-6-1",
-      "content": "Hey! I've finished the code review for the latest PR",
-      "timestamp": "2025-01-15T16:30:00Z",
+      "content": "Morning! Kamppi kitchen prep complete. Expecting good donation volume today - lunch rush forecast is high",
+      "timestamp": "2025-01-15T07:30:00Z",
       "senderId": "2",
       "type": "text",
       "isEdited": false,
@@ -202,8 +292,8 @@
     },
     {
       "id": "msg-6-2",
-      "content": "Thanks for the quick review! Any feedback?",
-      "timestamp": "2025-01-15T17:15:00Z",
+      "content": "Perfect! Red Cross mentioned they have increased demand this week. Your timing is great",
+      "timestamp": "2025-01-15T08:15:00Z",
       "senderId": "current-user",
       "type": "text",
       "isEdited": false,
@@ -212,7 +302,27 @@
     },
     {
       "id": "msg-6-3",
-      "content": "Code review completed, looks good to merge! 👍",
+      "content": "Update: 72kg ready for pickup! Can coordinate with Red Cross for their usual 15:00 slot?",
+      "timestamp": "2025-01-15T14:30:00Z",
+      "senderId": "2",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [{"emoji": "👍", "users": ["current-user"], "count": 1}],
+      "replyTo": null
+    },
+    {
+      "id": "msg-6-4",
+      "content": "Confirmed! They're very happy with the consistent quality from Kamppi location 🙏",
+      "timestamp": "2025-01-15T14:35:00Z",
+      "senderId": "current-user",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [{"emoji": "😊", "users": ["2"], "count": 1}],
+      "replyTo": null
+    },
+    {
+      "id": "msg-6-5",
+      "content": "Great to hear! Our team takes pride in maintaining food safety standards even for donations",
       "timestamp": "2025-01-15T17:45:00Z",
       "senderId": "2",
       "type": "text",

@@ -17,11 +17,11 @@ export interface BrandSettings {
 }
 
 export const DEFAULT_BRAND_SETTINGS: BrandSettings = {
-  logoUrl: null,
+  logoUrl: '/logos/sodexo.png',
   colors: {
-    primary: '#115e59',
-    secondary: '#475569',
-    accent: '#f97316',
+    primary: '#e11d48', // Sodexo red
+    secondary: '#2563eb', // Sodexo blue  
+    accent: '#f97316', // Orange accent
   },
   typography: {
     headlineFont: 'Arial',

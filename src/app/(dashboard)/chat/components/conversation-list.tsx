@@ -87,7 +87,7 @@ export function ConversationList({
   }
 
   return (
-    <div className="flex flex-col h-full overflow-hidden">
+    <div className="flex flex-col h-full overflow-hidden flex-1">
       {/* Header - Hidden on mobile (handled by parent) */}
       <div className="hidden lg:flex items-center justify-between h-16 px-4 border-b flex-shrink-0">
         <h2 className="text-lg font-semibold">Messages</h2>
@@ -134,8 +134,8 @@ export function ConversationList({
       </div>
 
       {/* Conversations */}
-      <ScrollArea className="flex-1">
-        <div className="p-2">
+      <ScrollArea className="flex-1 overflow-hidden">
+        <div className="p-2 space-y-1">
           {sortedConversations.map((conversation) => (
             <div
               key={conversation.id}
