@@ -79,7 +79,7 @@ export function LoginForm1({
       // Redirect to dashboard
       router.push("/dashboard");
     } else {
-      setError("Invalid email or password. Use demo@zipli.test / slush2025 or sodexo@zipli.test / !bIk-g2pu-XsGo9")
+      setError("Invalid email or password")
       setIsLoading(false)
     }
   }
