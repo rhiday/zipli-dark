@@ -11,49 +11,28 @@ type ThemeProviderProps = {
   storageKey?: string
 }
 
-export function ThemeProvider({
-  children,
-  defaultTheme = "system",
-  storageKey = "vite-ui-theme",
-  ...props
-}: ThemeProviderProps) {
-  const [theme, setTheme] = React.useState<Theme>(
-    () => (typeof window !== "undefined" && localStorage.getItem(storageKey) as Theme) || defaultTheme
-  )
-
+/**
+ * Zipli currently enforces dark mode globally (no system mode, no user toggle).
+ */
+export function ThemeProvider({ children }: ThemeProviderProps) {
   React.useEffect(() => {
     if (typeof window === "undefined") return
 
     const root = window.document.documentElement
-
     root.classList.remove("light", "dark")
+    root.classList.add("dark")
+  }, [])
 
-    if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light"
-
-      root.classList.add(systemTheme)
-      return
-    }
-
-    root.classList.add(theme)
-  }, [theme])
-
-  const value = {
-    theme,
-    setTheme: (theme: Theme) => {
-      if (typeof window !== "undefined") {
-        localStorage.setItem(storageKey, theme)
-      }
-      setTheme(theme)
-    },
-  }
+  const value = React.useMemo(
+    () => ({
+      theme: "dark" as Theme,
+      // Intentionally a no-op while dark mode is enforced.
+      setTheme: (_theme: Theme) => {},
+    }),
+    []
+  )
 
   return (
-    <ThemeProviderContext.Provider {...props} value={value}>
-      {children}
-    </ThemeProviderContext.Provider>
+    <ThemeProviderContext.Provider value={value}>{children}</ThemeProviderContext.Provider>
   )
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft, Save } from "lucide-react"
@@ -20,6 +20,8 @@ import type { Story } from "../library/types"
 export default function CampaignBuilderPage() {
   const searchParams = useSearchParams()
   const storyId = searchParams.get("storyId")
+  const templateId = searchParams.get("templateId")
+  const [templateTitle, setTemplateTitle] = useState<string | null>(null)
 
   // Find story from ID if provided
   const initialStory = storyId 
@@ -42,6 +44,7 @@ export default function CampaignBuilderPage() {
     setSelectedPreset,
     setEmotionalTone,
     generateCampaign,
+    generateFromTemplate,
   } = useCampaignBuilder(initialStory)
 
   // Update story when URL param changes
@@ -53,6 +56,46 @@ export default function CampaignBuilderPage() {
       }
     }
   }, [storyId, story, setStory])
+
+  const loadingMessages = useMemo(
+    () => [
+      "Fetching donation data…",
+      "Calculating impact…",
+      "Generating content…",
+    ],
+    []
+  )
+
+  const [loadingMessageIndex, setLoadingMessageIndex] = useState(0)
+
+  // Rotate loading message while template generation is running
+  useEffect(() => {
+    if (!templateId) return
+    if (!isGenerating) return
+
+    setLoadingMessageIndex(0)
+    const id = window.setInterval(() => {
+      setLoadingMessageIndex((i) => (i + 1) % loadingMessages.length)
+    }, 1800)
+
+    return () => window.clearInterval(id)
+  }, [templateId, isGenerating, loadingMessages.length])
+
+  // Generate from template when templateId is provided
+  useEffect(() => {
+    if (templateId && !asset.headline) {
+      const templateNames: Record<string, string> = {
+        "impact-report": "Impact Report",
+        "climate-champion": "Climate Champion",
+        "community-heroes": "Community Heroes",
+        "business-impact": "Business Impact",
+        "food-journey": "Food Journey",
+        "monthly-highlights": "Monthly Highlights",
+      }
+      setTemplateTitle(templateNames[templateId] || "Custom Template")
+      generateFromTemplate(templateId)
+    }
+  }, [templateId, asset.headline, generateFromTemplate])
 
   const handleSave = () => {
     // TODO: Implement save functionality
@@ -76,6 +119,11 @@ export default function CampaignBuilderPage() {
                 Building campaign for: {story.title}
               </p>
             )}
+            {templateTitle && !story && (
+              <p className="text-sm text-muted-foreground">
+                Using template: {templateTitle}
+              </p>
+            )}
           </div>
         </div>
         <Button onClick={handleSave} disabled={!asset.headline}>
@@ -91,49 +139,61 @@ export default function CampaignBuilderPage() {
         </Alert>
       )}
 
-      {/* 3-Column Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left Column - Quick Presets & AI Generation */}
-        <div className="lg:col-span-3 space-y-4">
-          <QuickPresets
-            selectedPreset={selectedPreset}
-            onPresetSelect={setSelectedPreset}
-            isGenerating={isGenerating}
-          />
-          <EmotionalTone
-            value={emotionalTone}
-            onChange={setEmotionalTone}
-          />
-          <AIPromptInput
-            prompt={prompt}
-            onPromptChange={setPrompt}
-            onGenerate={generateCampaign}
-            isGenerating={isGenerating}
-            hasStory={!!story}
-          />
+      {templateId && isGenerating && !asset.headline ? (
+        <div className="flex min-h-[60vh] items-center justify-center">
+          <div className="text-center">
+            <div className="mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-b-2 border-primary" />
+            <p className="text-sm font-medium">{loadingMessages[loadingMessageIndex]}</p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Building your campaign from the selected template
+            </p>
+          </div>
         </div>
+      ) : (
+        /* 3-Column Layout */
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          {/* Left Column - Quick Presets & AI Generation */}
+          <div className="lg:col-span-3 space-y-4">
+            <QuickPresets
+              selectedPreset={selectedPreset}
+              onPresetSelect={setSelectedPreset}
+              isGenerating={isGenerating}
+            />
+            <EmotionalTone
+              value={emotionalTone}
+              onChange={setEmotionalTone}
+            />
+            <AIPromptInput
+              prompt={prompt}
+              onPromptChange={setPrompt}
+              onGenerate={generateCampaign}
+              isGenerating={isGenerating}
+              hasStory={!!story}
+            />
+          </div>
 
-        {/* Center Column - Asset Content */}
-        <div className="lg:col-span-5">
-          <AssetContentPanel
-            asset={asset}
-            onAssetChange={setAsset}
-          />
-        </div>
+          {/* Center Column - Asset Content */}
+          <div className="lg:col-span-5">
+            <AssetContentPanel
+              asset={asset}
+              onAssetChange={setAsset}
+            />
+          </div>
 
-        {/* Right Column - Privacy, Captions, Preview */}
-        <div className="lg:col-span-4 space-y-4">
-          <PrivacyConsentPanel
-            privacy={privacy}
-            onPrivacyChange={setPrivacy}
-          />
-          <ChannelCaptions
-            asset={asset}
-            onAssetChange={setAsset}
-          />
-          <CampaignPreview asset={asset} />
+          {/* Right Column - Privacy, Captions, Preview */}
+          <div className="lg:col-span-4 space-y-4">
+            <PrivacyConsentPanel
+              privacy={privacy}
+              onPrivacyChange={setPrivacy}
+            />
+            <ChannelCaptions
+              asset={asset}
+              onAssetChange={setAsset}
+            />
+            <CampaignPreview asset={asset} />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }

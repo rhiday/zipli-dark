@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react'
-import { Palette, RotateCcw, Settings, X, Dices, Upload, ExternalLink, Sun, Moon } from 'lucide-react'
+import { Palette, RotateCcw, Settings, X, Dices, Upload, ExternalLink } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import { Label } from '@/components/ui/label'
@@ -9,7 +9,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Separator } from '@/components/ui/separator'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { useThemeManager } from '@/hooks/use-theme-manager'
-import { useCircularTransition } from '@/hooks/use-circular-transition'
 import { colorThemes, tweakcnThemes } from '@/config/theme-data'
 import { radiusOptions, baseColors } from '@/config/theme-customizer-constants'
 import { ColorPicker } from '@/components/color-picker'
@@ -36,7 +35,6 @@ export function LandingThemeCustomizer({ open, onOpenChange }: LandingThemeCusto
     handleColorChange
   } = useThemeManager()
 
-  const { toggleTheme } = useCircularTransition()
 
   const [selectedTheme, setSelectedTheme] = React.useState("default")
   const [selectedTweakcnTheme, setSelectedTweakcnTheme] = React.useState("")
@@ -96,15 +94,6 @@ export function LandingThemeCustomizer({ open, onOpenChange }: LandingThemeCusto
     applyRadius(radius)
   }
 
-  const handleLightMode = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (isDarkMode === false) return
-    toggleTheme(event)
-  }
-
-  const handleDarkMode = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (isDarkMode === true) return
-    toggleTheme(event)
-  }
 
   // Re-apply themes when theme mode changes
   React.useEffect(() => {
@@ -154,32 +143,6 @@ export function LandingThemeCustomizer({ open, onOpenChange }: LandingThemeCusto
           </SheetHeader>
 
           <div className="flex-1 overflow-y-auto p-4 space-y-6">
-            {/* Mode Section */}
-            <div className="space-y-3">
-              <Label className="text-sm font-medium">Mode</Label>
-              <div className="grid grid-cols-2 gap-2">
-                <Button
-                  variant={!isDarkMode ? "secondary" : "outline"}
-                  size="sm"
-                  onClick={handleLightMode}
-                  className="cursor-pointer mode-toggle-button relative overflow-hidden"
-                >
-                  <Sun className="h-4 w-4 mr-1 transition-transform duration-300" />
-                  Light
-                </Button>
-                <Button
-                  variant={isDarkMode ? "secondary" : "outline"}
-                  size="sm"
-                  onClick={handleDarkMode}
-                  className="cursor-pointer mode-toggle-button relative overflow-hidden"
-                >
-                  <Moon className="h-4 w-4 mr-1 transition-transform duration-300" />
-                  Dark
-                </Button>
-              </div>
-            </div>
-
-            <Separator />
 
             {/* Shadcn UI Theme Presets */}
             <div className="space-y-3">

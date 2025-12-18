@@ -66,12 +66,13 @@ export function AssetContentPanel({ asset, onAssetChange }: AssetContentPanelPro
         <div className="space-y-2">
           <Label>Image Visual</Label>
           {asset.imageUrl ? (
-            <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-border">
+            <div className="relative w-full overflow-hidden rounded-lg border border-border">
               <Image
                 src={asset.imageUrl}
                 alt="Campaign visual"
-                fill
-                className="object-cover"
+                width={800}
+                height={600}
+                className="w-full h-auto object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>

@@ -4,7 +4,6 @@ import * as React from "react"
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { CommandSearch, SearchTrigger } from "@/components/command-search"
-import { ModeToggle } from "@/components/mode-toggle"
 
 export function SiteHeader() {
   const [searchOpen, setSearchOpen] = React.useState(false)
@@ -32,9 +31,6 @@ export function SiteHeader() {
           />
           <div className="flex-1 max-w-sm">
             <SearchTrigger onClick={() => setSearchOpen(true)} />
-          </div>
-          <div className="ml-auto flex items-center gap-2">
-            <ModeToggle />
           </div>
         </div>
       </header>

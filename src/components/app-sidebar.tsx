@@ -35,7 +35,16 @@ const data = {
       label: "Navigation",
       items: [
         { title: "Dashboard", url: "/dashboard", icon: LayoutPanelLeft },
-        { title: "Operations", url: "/daily-operations", icon: ListChecks },
+        {
+          title: "Operations",
+          url: "#",
+          icon: ListChecks,
+          items: [
+            { title: "Daily operations", url: "/daily-operations", icon: ListChecks },
+            { title: "Feedback", url: "/communication/feedback", icon: Megaphone },
+            { title: "Messaging", url: "/communication/messaging", icon: MessageCircle },
+          ],
+        },
         {
           title: "Impact",
           url: "#",
@@ -47,14 +56,6 @@ const data = {
             { title: "Impact analyzer", url: "/impact/analyzer" },
           ],
         },
-      ],
-    },
-    {
-      label: "Communication",
-      collapsibleLabel: { title: "Communication", icon: MessageCircle },
-      items: [
-        { title: "Feedback", url: "/communication/feedback", icon: Megaphone },
-        { title: "Messaging", url: "/communication/messaging", icon: MessageCircle },
       ],
     },
     {

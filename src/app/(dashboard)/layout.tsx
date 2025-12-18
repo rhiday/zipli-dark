@@ -9,6 +9,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { ThemeCustomizer, ThemeCustomizerTrigger } from "@/components/theme-customizer";
 import { useSidebarConfig } from "@/hooks/use-sidebar-config";
+import { OnboardingModal } from "@/components/onboarding-modal";
 
 export default function DashboardLayout({
   children,
@@ -18,6 +19,7 @@ export default function DashboardLayout({
   const router = useRouter();
   const [themeCustomizerOpen, setThemeCustomizerOpen] = React.useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const { config } = useSidebarConfig();
 
   // Check authentication on mount
@@ -30,8 +32,24 @@ export default function DashboardLayout({
     } else {
       // Authenticated, allow access
       setIsAuthenticated(true);
+      
+      // Check if onboarding has been completed
+      const onboardingCompleted = localStorage.getItem("onboarding_completed");
+      if (!onboardingCompleted) {
+        setShowOnboarding(true);
+      }
     }
   }, [router]);
+
+  const handleOnboardingComplete = () => {
+    localStorage.setItem("onboarding_completed", "true");
+    setShowOnboarding(false);
+  };
+
+  // Disable onboarding for now
+  React.useEffect(() => {
+    setShowOnboarding(false);
+  }, []);
 
   // Show loading state while checking auth
   if (isAuthenticated === null) {
@@ -105,6 +123,12 @@ export default function DashboardLayout({
         open={themeCustomizerOpen}
         onOpenChange={setThemeCustomizerOpen}
       />
+
+      {/* Onboarding Modal - Disabled for now */}
+      {/* <OnboardingModal 
+        open={showOnboarding} 
+        onComplete={handleOnboardingComplete} 
+      /> */}
     </SidebarProvider>
   );
 }

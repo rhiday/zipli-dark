@@ -1,13 +1,12 @@
 "use client"
 
-import { Palette, Dices, Upload, ExternalLink, Sun, Moon } from 'lucide-react'
+import { Palette, Dices, Upload, ExternalLink } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { useThemeManager } from '@/hooks/use-theme-manager'
-import { useCircularTransition } from '@/hooks/use-circular-transition'
 import { colorThemes, tweakcnThemes } from '@/config/theme-data'
 import { radiusOptions, baseColors } from '@/config/theme-customizer-constants'
 import { ColorPicker } from '@/components/color-picker'
@@ -46,7 +45,6 @@ export function ThemeTab({
     handleColorChange
   } = useThemeManager()
 
-  const { toggleTheme } = useCircularTransition()
 
   const handleRandomShadcn = () => {
     // Apply a random shadcn theme
@@ -73,15 +71,6 @@ export function ThemeTab({
     applyRadius(radius)
   }
 
-  const handleLightMode = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (isDarkMode === false) return
-    toggleTheme(event)
-  }
-
-  const handleDarkMode = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (isDarkMode === true) return
-    toggleTheme(event)
-  }
 
   return (
     <div className="p-4 space-y-6">
@@ -222,32 +211,6 @@ export function ThemeTab({
 
       <Separator />
 
-      {/* Mode Section */}
-      <div className="space-y-3">
-        <Label className="text-sm font-medium">Mode</Label>
-        <div className="grid grid-cols-2 gap-2">
-          <Button
-            variant={!isDarkMode ? "secondary" : "outline"}
-            size="sm"
-            onClick={handleLightMode}
-            className="cursor-pointer"
-          >
-            <Sun className="h-4 w-4 mr-1" />
-            Light
-          </Button>
-          <Button
-            variant={isDarkMode ? "secondary" : "outline"}
-            size="sm"
-            onClick={handleDarkMode}
-            className="cursor-pointer"
-          >
-            <Moon className="h-4 w-4 mr-1" />
-            Dark
-          </Button>
-        </div>
-      </div>
-
-      <Separator />
 
       {/* Import Theme Button */}
       <div className="space-y-3">

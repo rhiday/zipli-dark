@@ -17,6 +17,17 @@ const nextConfig: NextConfig = {
   
   // Image optimization (using remotePatterns instead of deprecated domains)
   images: {
+    localPatterns: [
+      // Allow local images under /public/images
+      {
+        pathname: '/images/**',
+      },
+      // Also allow cache-busting query strings like ?v=1
+      {
+        pathname: '/images/**',
+        search: '*',
+      },
+    ],
     remotePatterns: [
       {
         protocol: 'https',

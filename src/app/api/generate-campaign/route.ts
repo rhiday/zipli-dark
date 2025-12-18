@@ -33,7 +33,7 @@ const CampaignAssetSchema = z.object({
   headline: z.string().describe('Emotional, catchy headline (max 80 chars)'),
   pullQuote: z.string().describe('Memorable quote capturing the story essence, in quotation marks'),
   humanStory: z.string().describe('2-3 paragraph narrative (150-250 words)'),
-  imageUrl: z.string().describe('Keep the original image URL if provided, or empty string'),
+  imageUrl: z.string().describe('Always provide empty string "" for this field'),
   channelCaptions: z.array(z.object({
     channel: z.enum(['facebook', 'instagram', 'email', 'linkedin']),
     caption: z.string().describe('Platform-appropriate caption'),
@@ -49,7 +49,11 @@ const PrivacySettingsSchema = z.object({
 
 const GenerateCampaignResponseSchema = z.object({
   asset: CampaignAssetSchema,
-  suggestedPrivacy: PrivacySettingsSchema,
+  suggestedPrivacy: PrivacySettingsSchema.optional().default({
+    anonymizedStory: true,
+    explicitConsent: false,
+    personalDataApproved: false,
+  }),
 })
 
 export type GenerateCampaignAPIResponse = z.infer<typeof GenerateCampaignResponseSchema>
@@ -130,19 +134,32 @@ ${prompt || 'Generate a compelling marketing campaign based on this story.'}
 2. Create platform-specific captions for Facebook, Instagram, LinkedIn, and Email
 3. Include relevant hashtags for each platform
 4. Suggest appropriate privacy settings based on the consent status
-5. Keep the original image URL if provided`
+5. For imageUrl field: use empty string "" (we will handle images separately)`
 
-    const result = await generateObject({
-      model: openai('gpt-4o-mini'),
-      schema: GenerateCampaignResponseSchema,
-      system: SYSTEM_PROMPT,
-      prompt: userPrompt,
-    })
+    let result
+    try {
+      result = await generateObject({
+        model: openai('gpt-4o-mini'),
+        schema: GenerateCampaignResponseSchema,
+        system: SYSTEM_PROMPT,
+        prompt: userPrompt,
+      })
+    } catch (validationError) {
+      console.error('AI response validation error:', validationError)
+      if (validationError instanceof Error) {
+        console.error('Validation error details:', validationError.message)
+      }
+      throw new Error('The AI generated content that did not match the expected format. Please try again.')
+    }
 
     // Ensure we have a valid response
     if (!result.object) {
+      console.error('No object generated from AI')
       throw new Error('No object generated: could not parse the response')
     }
+
+    // Log the generated object for debugging
+    console.log('Generated campaign object:', JSON.stringify(result.object, null, 2))
 
     return Response.json(result.object)
   } catch (error) {

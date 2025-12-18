@@ -16,6 +16,17 @@ export interface Story {
   category: StoryCategory
 }
 
+export interface StoryTemplate {
+  id: string
+  title: string
+  description: string
+  category: StoryCategory
+  imageUrl: string
+  dataPoints: string[]
+  suggestedChannels: Channel[]
+  color: 'cyan' | 'green' | 'orange' | 'blue' | 'purple' | 'indigo'
+}
+
 export type SortOption = 'newest' | 'oldest' | 'title'
 
 export interface StoryFilters {
