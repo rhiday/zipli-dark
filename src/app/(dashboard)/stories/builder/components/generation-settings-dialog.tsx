@@ -19,6 +19,7 @@ export type DataCategory =
   | "partners"
   | "operations"
   | "business"
+  | "trends"
 
 export const DATA_CATEGORIES: { id: DataCategory; label: string; description: string }[] = [
   { id: "feedback", label: "Customer feedback", description: "Reviews, testimonials" },
@@ -27,6 +28,7 @@ export const DATA_CATEGORIES: { id: DataCategory; label: string; description: st
   { id: "partners", label: "Partner network", description: "Organizations, distributions" },
   { id: "operations", label: "Operational data", description: "Locations, logistics" },
   { id: "business", label: "Business metrics", description: "Costs, efficiency" },
+  { id: "trends", label: "Trends & growth", description: "Growth patterns, top performers" },
 ]
 
 interface GenerationSettingsDialogProps {
