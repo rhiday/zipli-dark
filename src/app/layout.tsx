@@ -6,8 +6,8 @@ import { SidebarConfigProvider } from "@/contexts/sidebar-context";
 import { inter } from "@/lib/fonts";
 
 export const metadata: Metadata = {
-  title: "Food rescue dashboard",
-  description: "Zipli — Food surplus management dashboard",
+  title: "Zipli - Food rescue dashboard",
+  description: "Improve sustainability and reduce food waste",
   icons: {
     icon: '/zipli-white.svg',
   },
