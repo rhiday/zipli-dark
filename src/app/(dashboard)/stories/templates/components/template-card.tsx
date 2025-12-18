@@ -32,15 +32,19 @@ const badgeColorStyles = {
 export function TemplateCard({ template, onClick }: TemplateCardProps) {
   return (
     <Card 
-      className="group relative overflow-hidden bg-card border-border hover:border-primary/50 transition-all hover:shadow-lg p-0"
+      className="group relative overflow-hidden bg-card border-border hover:border-primary/50 transition-all hover:shadow-lg p-0 flex flex-col h-full"
     >
       {/* Background Image with Overlay */}
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative h-52 overflow-hidden flex-shrink-0">
         <Image
           src={template.imageUrl}
           alt={template.title}
           fill
-          className="object-cover"
+          className={`object-cover ${
+            template.id === 'business-impact' || template.id === 'food-journey' 
+              ? 'object-center' 
+              : 'object-top'
+          }`}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className={`absolute inset-0 bg-gradient-to-br ${colorStyles[template.color]}`} />
@@ -51,14 +55,14 @@ export function TemplateCard({ template, onClick }: TemplateCardProps) {
         <CardTitle className="text-xl">
           {template.title}
         </CardTitle>
-        <CardDescription className="text-sm">
+        <CardDescription className="text-sm min-h-[40px]">
           {template.description}
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="space-y-3 pb-4">
+      <CardContent className="flex flex-col flex-1 pb-4">
         {/* Data Points */}
-        <div>
+        <div className="flex-1">
           <p className="text-xs font-medium text-muted-foreground mb-2">Includes:</p>
           <div className="space-y-1.5">
             {template.dataPoints.slice(0, 2).map((point, index) => (
@@ -73,7 +77,7 @@ export function TemplateCard({ template, onClick }: TemplateCardProps) {
         {/* Select Template Button */}
         <Button 
           onClick={onClick}
-          className="w-full cursor-pointer"
+          className="w-full cursor-pointer mt-4"
           size="sm"
         >
           Select template

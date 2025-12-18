@@ -42,7 +42,6 @@ const data = {
           items: [
             { title: "Daily operations", url: "/daily-operations", icon: ListChecks },
             { title: "Feedback", url: "/communication/feedback", icon: Megaphone },
-            { title: "Messaging", url: "/communication/messaging", icon: MessageCircle },
           ],
         },
         {

@@ -10,6 +10,7 @@ import { AssetContentPanel } from "./components/asset-content-panel"
 import { PrivacyConsentPanel } from "./components/privacy-consent-panel"
 import { ChannelCaptions } from "./components/channel-captions"
 import { CampaignPreview } from "./components/campaign-preview"
+import { ConfiguratorPanel } from "./components/configurator-panel"
 import { GenerationSettingsDialog, DataCategory, DATA_CATEGORIES } from "./components/generation-settings-dialog"
 import { useCampaignBuilder } from "./use-campaign-builder"
 import storiesData from "../templates/data/stories.json"
@@ -109,6 +110,9 @@ export default function StoryBuilderPage() {
   // Determine button text - only show "Regenerate" after AI has generated content
   const generateButtonText = hasGenerated ? "Regenerate" : "Generate with AI"
 
+  // Determine if we should show the configurator or the content panels
+  const showConfigurator = !hasGenerated && !asset.headline
+
   return (
     <div className="flex-1 space-y-4 sm:space-y-6 px-4 sm:px-6">
       {/* Page Header */}
@@ -128,18 +132,21 @@ export default function StoryBuilderPage() {
             )}
           </div>
         </div>
+        {/* Header buttons - always show Generate button */}
         <div className="flex items-center gap-2 ml-11 sm:ml-0">
-          <Button 
-            variant="outline" 
-            size="icon"
-            onClick={() => setSettingsOpen(true)}
-            className="shrink-0"
-          >
-            <Settings2 className="h-4 w-4" />
-          </Button>
+          {!showConfigurator && (
+            <Button 
+              variant="outline" 
+              size="icon"
+              onClick={() => setSettingsOpen(true)}
+              className="shrink-0"
+            >
+              <Settings2 className="h-4 w-4" />
+            </Button>
+          )}
           <Button 
             onClick={handleGenerate} 
-            disabled={isGenerating}
+            disabled={isGenerating || selectedCategories.length === 0}
             size="sm"
             className="sm:size-default"
           >
@@ -161,17 +168,31 @@ export default function StoryBuilderPage() {
         </Alert>
       )}
 
-      {isGenerating && !asset.headline ? (
+      {/* Show Configurator Panel before generation */}
+      {showConfigurator && !isGenerating && (
+        <ConfiguratorPanel
+          emotionalTone={emotionalTone}
+          onEmotionalToneChange={setEmotionalTone}
+          selectedCategories={selectedCategories}
+          onCategoriesChange={setSelectedCategories}
+        />
+      )}
+
+      {/* Loading State */}
+      {isGenerating && !asset.headline && (
         <div className="flex min-h-[60vh] items-center justify-center">
           <div className="text-center">
+            <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-muted-foreground" />
             <p className="text-lg font-medium">{loadingMessages[loadingMessageIndex]}</p>
             <p className="mt-2 text-sm text-muted-foreground">
               Building your story from the selected template
             </p>
           </div>
         </div>
-      ) : (
-        /* 2-Column Layout */
+      )}
+
+      {/* Content Panels - Only show after generation */}
+      {!showConfigurator && !isGenerating && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left Column - Asset Content */}
           <div>
@@ -196,7 +217,7 @@ export default function StoryBuilderPage() {
         </div>
       )}
 
-      {/* Settings Dialog */}
+      {/* Settings Dialog - For regeneration */}
       <GenerationSettingsDialog
         open={settingsOpen}
         onOpenChange={setSettingsOpen}

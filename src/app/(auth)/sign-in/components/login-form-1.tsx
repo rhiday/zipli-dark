@@ -30,10 +30,16 @@ const loginFormSchema = z.object({
 type LoginFormValues = z.infer<typeof loginFormSchema>
 
 // Mock credentials
-const MOCK_CREDENTIALS = {
-  email: "demo@zipli.test",
-  password: "slush2025"
-}
+const MOCK_CREDENTIALS = [
+  {
+    email: "demo@zipli.test",
+    password: "slush2025"
+  },
+  {
+    email: "sodexo@zipli.test",
+    password: "!bIk-g2pu-XsGo9"
+  }
+]
 
 export function LoginForm1({
   className,
@@ -59,10 +65,11 @@ export function LoginForm1({
     await new Promise(resolve => setTimeout(resolve, 500))
 
     // Mock authentication check
-    if (
-      values.email === MOCK_CREDENTIALS.email &&
-      values.password === MOCK_CREDENTIALS.password
-    ) {
+    const validCredential = MOCK_CREDENTIALS.find(
+      cred => cred.email === values.email && cred.password === values.password
+    )
+    
+    if (validCredential) {
       // Generate token timestamp
       const timestamp = Date.now()
       // Store auth token in localStorage
@@ -72,7 +79,7 @@ export function LoginForm1({
       // Redirect to dashboard
       router.push("/dashboard");
     } else {
-      setError("Invalid email or password. Use demo@zipli.test / slush2025")
+      setError("Invalid email or password. Use demo@zipli.test / slush2025 or sodexo@zipli.test / !bIk-g2pu-XsGo9")
       setIsLoading(false)
     }
   }

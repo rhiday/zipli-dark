@@ -13,20 +13,20 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Button } from "@/components/ui/button"
 
 export type DataCategory = 
+  | "feedback"
   | "impact"
   | "climate"
   | "partners"
   | "operations"
   | "business"
-  | "trends"
 
 export const DATA_CATEGORIES: { id: DataCategory; label: string; description: string }[] = [
+  { id: "feedback", label: "Customer feedback", description: "Reviews, testimonials" },
   { id: "impact", label: "Impact metrics", description: "Meals saved, families helped" },
   { id: "climate", label: "Climate data", description: "CO₂ reduced, waste diverted" },
   { id: "partners", label: "Partner network", description: "Organizations, distributions" },
   { id: "operations", label: "Operational data", description: "Locations, logistics" },
   { id: "business", label: "Business metrics", description: "Costs, efficiency" },
-  { id: "trends", label: "Trends & growth", description: "Monthly progress" },
 ]
 
 interface GenerationSettingsDialogProps {

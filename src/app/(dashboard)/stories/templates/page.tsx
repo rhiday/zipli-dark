@@ -43,7 +43,7 @@ const STORY_TEMPLATES: StoryTemplate[] = [
     title: "Business Impact",
     description: "Demonstrate corporate responsibility and cost savings",
     category: "corporate",
-    imageUrl: "/images/sodexo_3.jpg?v=1",
+    imageUrl: "/images/business_impact.jpg",
     dataPoints: ["Cost savings", "Operational efficiency", "CSR achievements", "Brand value"],
     suggestedChannels: ["linkedin", "newsletter", "blog"],
     color: "blue"
@@ -53,7 +53,7 @@ const STORY_TEMPLATES: StoryTemplate[] = [
     title: "Food Journey",
     description: "Tell the story from surplus to table",
     category: "impact",
-    imageUrl: "/images/sodexo_5.jpg",
+    imageUrl: "/images/monthly_highlights.jpeg",
     dataPoints: ["Donation sources", "Distribution network", "Recipient stories", "Impact timeline"],
     suggestedChannels: ["instagram", "facebook", "blog"],
     color: "purple"
@@ -63,11 +63,11 @@ const STORY_TEMPLATES: StoryTemplate[] = [
     title: "Monthly Highlights",
     description: "Share key metrics and achievements",
     category: "impact",
-    imageUrl: "/images/sodexo_4.jpg",
+    imageUrl: "/images/food_journey.webp",
     dataPoints: ["Monthly metrics", "Top performers", "Milestones reached", "Growth trends"],
     suggestedChannels: ["linkedin", "newsletter", "twitter"],
     color: "indigo"
-  },
+  }
 ]
 
 export default function StoriesLibraryPage() {
@@ -90,25 +90,28 @@ router.push(`/stories/builder?templateId=${template.id}`)
         </p>
       </div>
 
-      {/* Create from scratch */}
-      <div className="flex justify-center py-4 sm:py-6">
-        <Button asChild size="default" className="sm:size-lg">
-          <Link href="/stories/builder">
-            <PenLine className="h-4 w-4 mr-2" />
-            Create from scratch
-          </Link>
-        </Button>
-      </div>
-
-      {/* Divider with text */}
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
+      {/* Create from scratch and template divider */}
+      <div className="relative flex items-center py-4 sm:py-6">
+        {/* Left side - divider with text */}
+        <div className="flex-1 relative">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t" />
+          </div>
+          <div className="relative flex justify-start">
+            <span className="bg-background pr-4 text-lg font-medium text-muted-foreground">
+              Choose from a template
+            </span>
+          </div>
         </div>
-        <div className="relative flex justify-center">
-          <span className="bg-background px-4 text-sm text-muted-foreground">
-            Or, choose from a template
-          </span>
+        
+        {/* Right side - Create button */}
+        <div className="ml-6">
+          <Button asChild size="default" className="sm:size-lg">
+            <Link href="/stories/builder">
+              <PenLine className="h-4 w-4 mr-2" />
+              Create from scratch
+            </Link>
+          </Button>
         </div>
       </div>
 
