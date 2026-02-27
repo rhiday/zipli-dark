@@ -1,0 +1,189 @@
+import type {
+  User,
+  LoginRequest,
+  LoginResponse,
+  CreateUserRequest,
+  UpdateUserRequest,
+  ChangePasswordRequest,
+  DeleteAccountRequest,
+  ApiError,
+} from './types';
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8002';
+
+class ApiClient {
+  private baseUrl: string;
+  private token: string | null = null;
+
+  constructor(baseUrl: string = API_BASE_URL) {
+    this.baseUrl = baseUrl;
+    // Load token from localStorage on initialization
+    if (typeof window !== 'undefined') {
+      this.token = localStorage.getItem('auth_token');
+    }
+  }
+
+  setToken(token: string | null) {
+    this.token = token;
+    if (token && typeof window !== 'undefined') {
+      localStorage.setItem('auth_token', token);
+    } else if (typeof window !== 'undefined') {
+      localStorage.removeItem('auth_token');
+    }
+  }
+
+  getToken(): string | null {
+    return this.token;
+  }
+
+  private async request<T>(
+    endpoint: string,
+    options: RequestInit = {}
+  ): Promise<T> {
+    // Ensure token is loaded from localStorage (in case it was set elsewhere)
+    if (!this.token && typeof window !== 'undefined') {
+      this.token = localStorage.getItem('auth_token');
+    }
+
+    const url = `${this.baseUrl}${endpoint}`;
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    };
+
+    if (this.token) {
+      headers['Authorization'] = `Bearer ${this.token}`;
+    }
+
+    try {
+      console.log('[API Client] Making request:', {
+        url,
+        method: options.method || 'GET',
+        hasToken: !!this.token,
+      });
+
+      const response = await fetch(url, {
+        ...options,
+        headers,
+      });
+
+      console.log('[API Client] Response:', {
+        status: response.status,
+        statusText: response.statusText,
+        ok: response.ok,
+      });
+
+      // Handle 204 No Content responses
+      if (response.status === 204) {
+        return undefined as T;
+      }
+
+      // Check if response has content before trying to parse JSON
+      const contentType = response.headers.get('content-type');
+      let data: any;
+      
+      if (contentType && contentType.includes('application/json')) {
+        try {
+          data = await response.json();
+        } catch (jsonError) {
+          // If JSON parsing fails, create error from response text
+          const text = await response.text();
+          throw {
+            message: text || 'Invalid JSON response',
+            statusCode: response.status,
+            error: 'ParseError',
+          } as ApiError;
+        }
+      } else {
+        // Non-JSON response
+        const text = await response.text();
+        data = { message: text || 'An error occurred' };
+      }
+
+      if (!response.ok) {
+        const error: ApiError = {
+          message: data.message || data.error || 'An error occurred',
+          statusCode: response.status,
+          error: data.error,
+        };
+        throw error;
+      }
+
+      return data;
+    } catch (error) {
+      // If it's already an ApiError, re-throw it
+      if (error && typeof error === 'object' && 'statusCode' in error) {
+        throw error;
+      }
+      
+      // Handle network errors
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        console.error('[API Client] Network error:', error);
+        throw {
+          message: `Network error: Could not connect to server at ${url}. Is the backend running on ${this.baseUrl}?`,
+          statusCode: 0,
+          error: 'NetworkError',
+        } as ApiError;
+      }
+      
+      // Generic error
+      throw {
+        message: error instanceof Error ? error.message : 'An unexpected error occurred',
+        statusCode: 0,
+        error: 'UnknownError',
+      } as ApiError;
+    }
+  }
+
+  // Auth endpoints
+  async login(credentials: LoginRequest): Promise<LoginResponse> {
+    const response = await this.request<LoginResponse>('/login', {
+      method: 'POST',
+      body: JSON.stringify(credentials),
+    });
+    this.setToken(response.access_token);
+    return response;
+  }
+
+  async register(userData: CreateUserRequest): Promise<User> {
+    return this.request<User>('/users', {
+      method: 'POST',
+      body: JSON.stringify(userData),
+    });
+  }
+
+  // User endpoints
+  async getCurrentUser(): Promise<User> {
+    return this.request<User>('/users/me', {
+      method: 'GET',
+    });
+  }
+
+  async updateProfile(updates: UpdateUserRequest): Promise<User> {
+    return this.request<User>('/users/me', {
+      method: 'PATCH',
+      body: JSON.stringify(updates),
+    });
+  }
+
+  async changePassword(passwordData: ChangePasswordRequest): Promise<void> {
+    return this.request<void>('/users/me/password', {
+      method: 'PATCH',
+      body: JSON.stringify(passwordData),
+    });
+  }
+
+  async deleteAccount(passwordData: DeleteAccountRequest): Promise<void> {
+    return this.request<void>('/users/me', {
+      method: 'DELETE',
+      body: JSON.stringify(passwordData),
+    });
+  }
+
+  logout() {
+    this.setToken(null);
+  }
+}
+
+// Export singleton instance
+export const apiClient = new ApiClient();
