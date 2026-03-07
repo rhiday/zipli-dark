@@ -79,7 +79,13 @@ class ApiClient {
       });
 
       const response = await fetch(url, {
-        ...options,
+        method: options.method,
+        body: options.body,
+        cache: options.cache,
+        credentials: options.credentials,
+        mode: options.mode,
+        redirect: options.redirect,
+        signal: options.signal,
         headers: normalizedHeaders,
       });
 
