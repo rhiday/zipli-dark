@@ -46,13 +46,29 @@ class ApiClient {
     }
 
     const url = `${this.baseUrl}${endpoint}`;
-    const headers: Record<string, string> = {
+    
+    // Normalize headers to Record<string, string>
+    const normalizedHeaders: Record<string, string> = {
       'Content-Type': 'application/json',
-      ...(options.headers as Record<string, string>),
     };
 
+    // Handle different HeadersInit types
+    if (options.headers) {
+      if (options.headers instanceof Headers) {
+        options.headers.forEach((value, key) => {
+          normalizedHeaders[key] = value;
+        });
+      } else if (Array.isArray(options.headers)) {
+        options.headers.forEach(([key, value]) => {
+          normalizedHeaders[key] = value;
+        });
+      } else {
+        Object.assign(normalizedHeaders, options.headers);
+      }
+    }
+
     if (this.token) {
-      headers['Authorization'] = `Bearer ${this.token}`;
+      normalizedHeaders['Authorization'] = `Bearer ${this.token}`;
     }
 
     try {
@@ -64,7 +80,7 @@ class ApiClient {
 
       const response = await fetch(url, {
         ...options,
-        headers,
+        headers: normalizedHeaders,
       });
 
       console.log('[API Client] Response:', {
@@ -80,12 +96,12 @@ class ApiClient {
 
       // Check if response has content before trying to parse JSON
       const contentType = response.headers.get('content-type');
-      let data: any;
+      let data: unknown;
       
       if (contentType && contentType.includes('application/json')) {
         try {
           data = await response.json();
-        } catch (jsonError) {
+        } catch {
           // If JSON parsing fails, create error from response text
           const text = await response.text();
           throw {
@@ -101,15 +117,16 @@ class ApiClient {
       }
 
       if (!response.ok) {
+        const errorData = data as { message?: string; error?: string };
         const error: ApiError = {
-          message: data.message || data.error || 'An error occurred',
+          message: errorData.message || errorData.error || 'An error occurred',
           statusCode: response.status,
-          error: data.error,
+          error: errorData.error,
         };
         throw error;
       }
 
-      return data;
+      return data as T;
     } catch (error) {
       // If it's already an ApiError, re-throw it
       if (error && typeof error === 'object' && 'statusCode' in error) {
