@@ -377,12 +377,13 @@ export function DataTable({
     [keyPersonnel]
   )
 
-  const focusDocumentsIds = React.useMemo<UniqueIdentifier[]>(
-    () => focusDocuments?.map(({ id }) => id) || [],
-    [focusDocuments]
-  )
+const focusDocumentsIds = React.useMemo<UniqueIdentifier[]>(
+  () => focusDocuments?.map(({ id }) => id) || [],
+  [focusDocuments]
+)
 
-  const pastPerformanceTable = useReactTable({
+// eslint-disable-next-line react-hooks/incompatible-library
+const pastPerformanceTable = useReactTable({
     data: pastPerformance,
     columns,
     state: {
@@ -405,9 +406,10 @@ export function DataTable({
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
-  })
+})
 
-  const keyPersonnelTable = useReactTable({
+// eslint-disable-next-line react-hooks/incompatible-library
+const keyPersonnelTable = useReactTable({
     data: keyPersonnel,
     columns,
     state: {
@@ -455,9 +457,10 @@ export function DataTable({
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
-  })
+})
 
-  const table = useReactTable({
+// eslint-disable-next-line react-hooks/incompatible-library
+const table = useReactTable({
     data,
     columns,
     state: {
