@@ -166,7 +166,7 @@ class ApiClient {
 
   // Auth endpoints
   async login(credentials: LoginRequest): Promise<LoginResponse> {
-    const response = await this.request<LoginResponse>('/login', {
+    const response = await this.request<LoginResponse>('/api/auth/login', {
       method: 'POST',
       body: JSON.stringify(credentials),
     });
@@ -175,7 +175,7 @@ class ApiClient {
   }
 
   async register(userData: CreateUserRequest): Promise<User> {
-    return this.request<User>('/users', {
+    return this.request<User>('/api/users', {
       method: 'POST',
       body: JSON.stringify(userData),
     });
@@ -183,27 +183,27 @@ class ApiClient {
 
   // User endpoints
   async getCurrentUser(): Promise<User> {
-    return this.request<User>('/users/me', {
+    return this.request<User>('/api/users/me', {
       method: 'GET',
     });
   }
 
   async updateProfile(updates: UpdateUserRequest): Promise<User> {
-    return this.request<User>('/users/me', {
+    return this.request<User>('/api/users/me', {
       method: 'PATCH',
       body: JSON.stringify(updates),
     });
   }
 
   async changePassword(passwordData: ChangePasswordRequest): Promise<void> {
-    return this.request<void>('/users/me/password', {
+    return this.request<void>('/api/users/me/password', {
       method: 'PATCH',
       body: JSON.stringify(passwordData),
     });
   }
 
   async deleteAccount(passwordData: DeleteAccountRequest): Promise<void> {
-    return this.request<void>('/users/me', {
+    return this.request<void>('/api/users/me', {
       method: 'DELETE',
       body: JSON.stringify(passwordData),
     });
