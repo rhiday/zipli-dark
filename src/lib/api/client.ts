@@ -9,7 +9,13 @@ import type {
   ApiError,
 } from './types';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8002';
+// Prefer explicit env var. In production, fall back to the deployed backend URL,
+// and in dev fall back to the local NestJS server on port 8002.
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  (process.env.NODE_ENV === 'production'
+    ? 'https://accountsettings-production.up.railway.app'
+    : 'http://localhost:8002');
 
 class ApiClient {
   private baseUrl: string;
