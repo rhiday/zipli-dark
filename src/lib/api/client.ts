@@ -166,7 +166,7 @@ class ApiClient {
 
   // Auth endpoints
   async login(credentials: LoginRequest): Promise<LoginResponse> {
-    const response = await this.request<LoginResponse>('/api/auth/login', {
+    const response = await this.request<LoginResponse>('/api/login', {
       method: 'POST',
       body: JSON.stringify(credentials),
     });
