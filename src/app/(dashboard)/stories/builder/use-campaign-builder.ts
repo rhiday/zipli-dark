@@ -129,12 +129,12 @@ export function useCampaignBuilder(initialStory: Story | null = null) {
     try {
       // Map template IDs to their image URLs
       const templateImages: Record<string, string> = {
-        "impact-report": "/images/sodexo_2.jpg",
-        "climate-champion": "/images/sodexo_6.jpg",
-        "community-heroes": "/images/sodexo_7.jpg",
-        "business-impact": "/images/sodexo_3.jpg?v=1",
-        "food-journey": "/images/sodexo_5.jpg",
-        "monthly-highlights": "/images/sodexo_4.jpg",
+        "impact-report": "/images/suppilog_2.jpg",
+        "climate-champion": "/images/suppilog_6.jpg",
+        "community-heroes": "/images/suppilog_7.jpg",
+        "business-impact": "/images/suppilog_3.jpg?v=1",
+        "food-journey": "/images/suppilog_5.jpg",
+        "monthly-highlights": "/images/suppilog_4.jpg",
       }
 
       // Fetch real dashboard data
@@ -195,7 +195,7 @@ export function useCampaignBuilder(initialStory: Story | null = null) {
         
         if (categories.includes("operations")) {
           sections.push(`## Operational Data:
-- Active Sodexo locations: ${activeDonors} restaurants across Helsinki
+- Active Suppilog locations: ${activeDonors} restaurants across Helsinki
 - Locations: Vilppulantie, University Main Building, Kamppi, Pasila, Helsinki Airport, Viikki
 - Recent donations: ${recentDonations || "Daily pickups from all locations"}`)
         }
@@ -232,40 +232,40 @@ export function useCampaignBuilder(initialStory: Story | null = null) {
 
       // Build template-specific prompts with selected data categories
       const templatePrompts: Record<string, string> = {
-        "impact-report": `You are creating a monthly Impact Report for Sodexo Finland's food rescue program in Helsinki.
+        "impact-report": `You are creating a monthly Impact Report for Suppilog Finland's food rescue program in Helsinki.
 
 ${dataSection}
 
 ## Context:
-Sodexo operates multiple locations in Helsinki that donate surplus food daily to local food banks and shelters.
+Suppilog operates multiple locations in Helsinki that donate surplus food daily to local food banks and shelters.
 
 ## Story Requirements:
 - Focus on: ${categoryNames}
 - Use warm, community-focused tone that emphasizes both scale and personal impact
-- Make it feel authentic to Sodexo's operations in Finland
-- DO NOT use generic phrases like "our mission" - be specific about Sodexo's food rescue program
+- Make it feel authentic to Suppilog's operations in Finland
+- DO NOT use generic phrases like "our mission" - be specific about Suppilog's food rescue program
 - Only include data points from the categories provided above`,
 
-        "climate-champion": `You are creating a Climate Impact story for Sodexo Finland's environmental sustainability achievements.
+        "climate-champion": `You are creating a Climate Impact story for Suppilog Finland's environmental sustainability achievements.
 
 ${dataSection}
 
 ## Context:
-Sodexo's Helsinki network transforms surplus food into meals instead of waste, preventing massive CO₂ emissions from food decomposition in landfills.
+Suppilog's Helsinki network transforms surplus food into meals instead of waste, preventing massive CO₂ emissions from food decomposition in landfills.
 
 ## Story Requirements:
 - Focus on: ${categoryNames}
 - Use inspiring, action-oriented tone
-- Position Sodexo as a climate leader in corporate food service
+- Position Suppilog as a climate leader in corporate food service
 - Make environmental impact feel concrete and measurable
 - Only include data points from the categories provided above`,
 
-        "community-heroes": `You are celebrating the partner organizations that receive food donations from Sodexo Helsinki.
+        "community-heroes": `You are celebrating the partner organizations that receive food donations from Suppilog Helsinki.
 
 ${dataSection}
 
 ## Context:
-These organizations collect surplus food daily from Sodexo locations across Helsinki and distribute it to vulnerable community members.
+These organizations collect surplus food daily from Suppilog locations across Helsinki and distribute it to vulnerable community members.
 
 ## Story Requirements:
 - Focus on: ${categoryNames}
@@ -273,12 +273,12 @@ These organizations collect surplus food daily from Sodexo locations across Hels
 - Make the volunteers and staff feel appreciated and recognized
 - Only include data points from the categories provided above`,
 
-        "business-impact": `You are creating a Corporate Social Responsibility (CSR) report for Sodexo Finland's business leadership.
+        "business-impact": `You are creating a Corporate Social Responsibility (CSR) report for Suppilog Finland's business leadership.
 
 ${dataSection}
 
 ## Context:
-Sodexo Finland has built a systematic food rescue program across Helsinki locations, turning operational surplus into measurable social and environmental impact.
+Suppilog Finland has built a systematic food rescue program across Helsinki locations, turning operational surplus into measurable social and environmental impact.
 
 ## Story Requirements:
 - Focus on: ${categoryNames}
@@ -286,12 +286,12 @@ Sodexo Finland has built a systematic food rescue program across Helsinki locati
 - Frame as both good business AND good citizenship
 - Only include data points from the categories provided above`,
 
-        "food-journey": `You are telling the story of how surplus food travels from Sodexo kitchens to community tables.
+        "food-journey": `You are telling the story of how surplus food travels from Suppilog kitchens to community tables.
 
 ${dataSection}
 
 ## Context:
-Every day, surplus food from Sodexo's Helsinki network gets collected by food banks and distributed to families.
+Every day, surplus food from Suppilog's Helsinki network gets collected by food banks and distributed to families.
 
 ## Story Requirements:
 - Focus on: ${categoryNames}
@@ -299,12 +299,12 @@ Every day, surplus food from Sodexo's Helsinki network gets collected by food ba
 - Make readers feel the transformation from "surplus" to "sustenance"
 - Only include data points from the categories provided above`,
 
-        "monthly-highlights": `You are creating a monthly celebration of Sodexo Helsinki's food rescue achievements.
+        "monthly-highlights": `You are creating a monthly celebration of Suppilog Helsinki's food rescue achievements.
 
 ${dataSection}
 
 ## Context:
-Sodexo Helsinki has achieved significant milestones in their food rescue program this month.
+Suppilog Helsinki has achieved significant milestones in their food rescue program this month.
 
 ## Story Requirements:
 - Focus on: ${categoryNames}

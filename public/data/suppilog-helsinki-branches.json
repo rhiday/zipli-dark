@@ -1,0 +1,245 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.9500, 60.1670]
+      },
+      "properties": {
+        "id": "suppilog-ravintola-kappeli",
+        "name": "Ravintola Kappeli",
+        "type": "restaurant",
+        "cuisine": "Fine Dining",
+        "address": "Eteläesplanadi 1, 00130 Helsinki",
+        "phone": "+358 10 766 3880",
+        "donations": 980,
+        "meals": 2940,
+        "lastDonation": "2026-03-18",
+        "status": "active",
+        "branchType": "fine-dining",
+        "capacity": 200,
+        "avgDailyMeals": 180,
+        "monthlyOrders": 8200,
+        "wasteRatio": 20
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.9460, 60.1680]
+      },
+      "properties": {
+        "id": "suppilog-ravintola-savoy",
+        "name": "Ravintola Savoy",
+        "type": "restaurant",
+        "cuisine": "Fine Dining",
+        "address": "Eteläesplanadi 14, 00130 Helsinki",
+        "phone": "+358 9 6128 5300",
+        "donations": 930,
+        "meals": 2790,
+        "lastDonation": "2026-03-18",
+        "status": "active",
+        "branchType": "fine-dining",
+        "capacity": 120,
+        "avgDailyMeals": 95,
+        "monthlyOrders": 6500,
+        "wasteRatio": 14
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.9550, 60.1660]
+      },
+      "properties": {
+        "id": "suppilog-ravintola-sea-horse",
+        "name": "Ravintola Sea Horse",
+        "type": "restaurant",
+        "cuisine": "Casual Dining",
+        "address": "Kapteeninkatu 11, 00140 Helsinki",
+        "phone": "+358 9 628 169",
+        "donations": 800,
+        "meals": 2400,
+        "lastDonation": "2026-03-17",
+        "status": "active",
+        "branchType": "casual",
+        "capacity": 150,
+        "avgDailyMeals": 130,
+        "monthlyOrders": 5400,
+        "wasteRatio": 20
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.9330, 60.1690]
+      },
+      "properties": {
+        "id": "suppilog-ravintola-demo",
+        "name": "Ravintola Demo",
+        "type": "restaurant",
+        "cuisine": "Casual Dining",
+        "address": "Uudenmaankatu 9-11, 00120 Helsinki",
+        "phone": "+358 10 322 9520",
+        "donations": 720,
+        "meals": 2160,
+        "lastDonation": "2026-03-17",
+        "status": "active",
+        "branchType": "casual",
+        "capacity": 180,
+        "avgDailyMeals": 150,
+        "monthlyOrders": 7100,
+        "wasteRatio": 20
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.9400, 60.1640]
+      },
+      "properties": {
+        "id": "suppilog-ravintola-juuri",
+        "name": "Ravintola Juuri",
+        "type": "restaurant",
+        "cuisine": "Nordic Kitchen",
+        "address": "Korkeavuorenkatu 27, 00130 Helsinki",
+        "phone": "+358 9 635 732",
+        "donations": 870,
+        "meals": 2610,
+        "lastDonation": "2026-03-18",
+        "status": "active",
+        "branchType": "nordic",
+        "capacity": 80,
+        "avgDailyMeals": 70,
+        "monthlyOrders": 4800,
+        "wasteRatio": 12
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.9330, 60.1990]
+      },
+      "properties": {
+        "id": "suppilog-ravintola-farang",
+        "name": "Ravintola Farang",
+        "type": "restaurant",
+        "cuisine": "Asian Fusion",
+        "address": "Ainonkatu 3, 00100 Helsinki",
+        "phone": "+358 10 322 9530",
+        "donations": 650,
+        "meals": 1950,
+        "lastDonation": "2026-03-18",
+        "status": "active",
+        "branchType": "asian",
+        "capacity": 100,
+        "avgDailyMeals": 85,
+        "monthlyOrders": 5800,
+        "wasteRatio": 20
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.9450, 60.1710]
+      },
+      "properties": {
+        "id": "suppilog-ravintola-grotesk",
+        "name": "Ravintola Grotesk",
+        "type": "restaurant",
+        "cuisine": "Bistro",
+        "address": "Ludviginkatu 10, 00130 Helsinki",
+        "phone": "+358 10 470 2972",
+        "donations": 550,
+        "meals": 1650,
+        "lastDonation": "2026-03-16",
+        "status": "active",
+        "branchType": "bistro",
+        "capacity": 90,
+        "avgDailyMeals": 75,
+        "monthlyOrders": 4200,
+        "wasteRatio": 18
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.9350, 60.1630]
+      },
+      "properties": {
+        "id": "suppilog-ravintola-pastis",
+        "name": "Ravintola Pastis",
+        "type": "restaurant",
+        "cuisine": "French",
+        "address": "Pieni Roobertinkatu 2, 00130 Helsinki",
+        "phone": "+358 9 644 599",
+        "donations": 450,
+        "meals": 1350,
+        "lastDonation": "2026-03-16",
+        "status": "active",
+        "branchType": "french",
+        "capacity": 60,
+        "avgDailyMeals": 50,
+        "monthlyOrders": 3600,
+        "wasteRatio": 15
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.9600, 60.1800]
+      },
+      "properties": {
+        "id": "suppilog-ravintola-ora",
+        "name": "Ravintola Ora",
+        "type": "restaurant",
+        "cuisine": "Fine Dining",
+        "address": "Huvilakatu 28, 00150 Helsinki",
+        "phone": "+358 44 981 7799",
+        "donations": 380,
+        "meals": 1140,
+        "lastDonation": "2026-03-15",
+        "status": "active",
+        "branchType": "fine-dining",
+        "capacity": 30,
+        "avgDailyMeals": 28,
+        "monthlyOrders": 3200,
+        "wasteRatio": 12
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [24.9480, 60.1700]
+      },
+      "properties": {
+        "id": "suppilog-ravintola-finnjavel",
+        "name": "Ravintola Finnjävel",
+        "type": "restaurant",
+        "cuisine": "Nordic Kitchen",
+        "address": "Ainonkatu 3, 00100 Helsinki",
+        "phone": "+358 50 525 3369",
+        "donations": 300,
+        "meals": 900,
+        "lastDonation": "2026-03-15",
+        "status": "active",
+        "branchType": "nordic",
+        "capacity": 70,
+        "avgDailyMeals": 60,
+        "monthlyOrders": 3900,
+        "wasteRatio": 18
+      }
+    }
+  ]
+}

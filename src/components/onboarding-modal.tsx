@@ -37,9 +37,9 @@ const ONBOARDING_STEPS = [
   {
     icon: MapPin,
     title: "Track Surplus Locations",
-    description: "The interactive map shows all Sodexo locations and partner receivers in real-time. Click on markers to see donation history and current status.",
+    description: "The interactive map shows all Suppilog restaurant locations and partner receivers in real-time. Click on markers to see donation history and current status.",
     stats: [
-      { label: "Sodexo Locations", value: "10", icon: Building2 },
+      { label: "Suppilog Restaurants", value: "10", icon: Building2 },
       { label: "Food Banks", value: "5", icon: Heart },
     ],
     highlight: "All locations across Helsinki visible at a glance",

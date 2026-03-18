@@ -19,7 +19,7 @@
     "id": "conv-2",
     "type": "group",
     "participants": ["2", "3", "5"],
-    "name": "Sodexo Operations",
+    "name": "Suppilog Operations",
     "avatar": "/avatars/team-alpha.png",
     "lastMessage": {
       "id": "msg-2-8",

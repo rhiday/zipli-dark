@@ -16,37 +16,29 @@ const chartConfig = {
   amount: {
     label: "Amount",
   },
-  "sodexo-corporate": {
-    label: "Sodexo Corporate",
+  "fine-dining": {
+    label: "Fine Dining",
     color: "#18E170", // Zipli Lime bright green
   },
-  "sodexo-student": {
-    label: "Sodexo Student", 
+  "casual-dining": {
+    label: "Casual Dining",
     color: "#5A0057", // Zipli Plum (purple)
   },
-  "sodexo-airport": {
-    label: "Sodexo Airport",
+  "nordic-kitchen": {
+    label: "Nordic Kitchen",
     color: "#3b82f6", // Blue
+  },
+  "bistro-&-french": {
+    label: "Bistro & French",
+    color: "#FFA5BD", // Zipli Rose (pink)
+  },
+  "asian-fusion": {
+    label: "Asian Fusion",
+    color: "#026209", // Zipli Earth deep green
   },
   "other": {
     label: "Other",
-    color: "#FFA5BD", // Zipli Rose (pink)
-  },
-  restaurants: {
-    label: "Other Restaurants",
-    color: "#FFA5BD", // Zipli Rose (pink)
-  },
-  producers: {
-    label: "Sodexo Daycare",
-    color: "#026209", // Zipli Earth deep green (moved from restaurants - largest category)
-  },
-  supermarkets: {
-    label: "Sodexo Senior Care",
-    color: "#84cc16", // Lime green (moved from producers)
-  },
-  hypermarkets: {
-    label: "Sodexo School",
-    color: "#8b5cf6", // Purple
+    color: "#84cc16", // Lime green
   },
 }
 
@@ -173,10 +165,12 @@ export function RevenueBreakdown() {
           .map(([category, amount]) => {
             // Map category names to chart config keys
             let chartCategory = category.toLowerCase().replace(/ /g, '-')
-            // Ensure Sodexo categories are properly formatted
-            if (category === 'Sodexo Corporate') chartCategory = 'sodexo-corporate'
-            if (category === 'Sodexo Student') chartCategory = 'sodexo-student'
-            if (category === 'Sodexo Airport') chartCategory = 'sodexo-airport'
+            // Ensure categories are properly formatted
+            if (category === 'Fine Dining') chartCategory = 'fine-dining'
+            if (category === 'Casual Dining') chartCategory = 'casual-dining'
+            if (category === 'Nordic Kitchen') chartCategory = 'nordic-kitchen'
+            if (category === 'Bistro & French') chartCategory = 'bistro-&-french'
+            if (category === 'Asian Fusion') chartCategory = 'asian-fusion'
             
             const configEntry = chartConfig[chartCategory as keyof typeof chartConfig]
             const fillColor = (configEntry && 'color' in configEntry) 

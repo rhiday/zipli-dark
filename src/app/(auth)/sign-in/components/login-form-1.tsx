@@ -36,8 +36,8 @@ const MOCK_CREDENTIALS = [
     password: "slush2025"
   },
   {
-    email: "sodexo@zipli.test",
-    password: "!bIk-g2pu-XsGo9"
+    email: "suppilog@zipli.test",
+    password: "seulo2026"
   }
 ]
 

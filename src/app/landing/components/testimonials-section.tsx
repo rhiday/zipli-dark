@@ -77,7 +77,7 @@ const testimonials: Testimonial[] = [
   },
   {
     name: 'Riikka Heikkinen',
-    role: 'Sustainability Manager, Sodexo Finland',
+    role: 'Sustainability Manager, Suppilog Finland',
     image: 'https://notion-avatars.netlify.app/api/avatar?preset=female-4',
     quote: 'The impact on our sustainability goals has been remarkable. Detailed analytics help us optimize donations and the recognition system motivates our kitchen teams across all locations.',
     rating: 5,

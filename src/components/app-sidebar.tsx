@@ -8,6 +8,7 @@ import {
   ListChecks,
   Megaphone,
   BookOpen,
+  Calculator,
 } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
@@ -40,6 +41,7 @@ const getNavData = () => {
         label: "Navigation",
         items: [
           { title: "Dashboard", url: "/dashboard", icon: LayoutPanelLeft },
+          { title: "Savings Calculator", url: "/calculator", icon: Calculator },
           {
             title: "Operations",
             url: "#",
@@ -77,8 +79,8 @@ const getNavData = () => {
 
 // Helper function to get display name from email
 function getUserDisplayName(email: string): string {
-  if (email === "sodexo@zipli.test") {
-    return "Sodexo User"
+  if (email === "suppilog@zipli.test") {
+    return "Suppilog User"
   }
   if (email === "demo@zipli.test") {
     return "Demo User"

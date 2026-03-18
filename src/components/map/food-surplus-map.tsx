@@ -252,7 +252,7 @@ function MapLegend({ showHeatmap, onToggleHeatmap }: { showHeatmap: boolean, onT
   )
 }
 
-type DataFilter = 'all' | 'sodexo' | 'donors' | 'receivers' | 'producers' | 'shops'
+type DataFilter = 'all' | 'suppilog' | 'donors' | 'receivers' | 'producers' | 'shops'
 
 interface FoodSurplusMapProps {
   dataFilter?: DataFilter
@@ -282,10 +282,10 @@ export function FoodSurplusMap({ dataFilter = 'all' }: FoodSurplusMapProps) {
         
         const allFeatures: LocationData[] = []
 
-        // Only load Sodexo data if filter is 'sodexo' or 'all'
-        if (dataFilter === 'sodexo' || dataFilter === 'all') {
+        // Only load Suppilog data if filter is 'suppilog' or 'all'
+        if (dataFilter === 'suppilog' || dataFilter === 'all') {
           try {
-            const restaurantsResponse = await fetch('/data/sodexo-helsinki-branches.json')
+            const restaurantsResponse = await fetch('/data/suppilog-helsinki-branches.json')
             if (restaurantsResponse.ok) {
               const restaurantsData = await restaurantsResponse.json()
               if (restaurantsData.features) {
@@ -293,7 +293,7 @@ export function FoodSurplusMap({ dataFilter = 'all' }: FoodSurplusMapProps) {
                   ...f,
                   properties: {
                     ...f.properties,
-                    id: `sodexo-${f.properties.id}`,
+                    id: `suppilog-${f.properties.id}`,
                     markerType: 'donor'
                   }
                 }))
@@ -306,15 +306,15 @@ export function FoodSurplusMap({ dataFilter = 'all' }: FoodSurplusMapProps) {
         }
 
         // Load dashboard data for non-Sodexo donors and all receivers
-        // When filter is 'sodexo', we still need to load receivers to show where food goes
-        if (dataFilter !== 'sodexo' || dataFilter === 'sodexo') {
+        // When filter is 'suppilog', we still need to load receivers to show where food goes
+        if (dataFilter !== 'suppilog' || dataFilter === 'suppilog') {
           const response = await fetch('/data/dashboard-data.json')
           if (!response.ok) {
             throw new Error(`Failed to load data: ${response.status}`)
           }
           const data = await response.json()
           
-          // Transform donors into GeoJSON format (skip for sodexo filter since we loaded sodexo-helsinki-branches.json)
+          // Transform donors into GeoJSON format (skip for suppilog filter since we loaded suppilog-helsinki-branches.json)
           if (dataFilter === 'all' || dataFilter === 'donors') {
             const donorFeatures = (data.donors || []).map((donor: DonorData) => ({
               type: 'Feature',
@@ -337,8 +337,8 @@ export function FoodSurplusMap({ dataFilter = 'all' }: FoodSurplusMapProps) {
           }
 
           // Transform receivers into GeoJSON format
-          // Always load receivers for 'sodexo' filter to show where donations go
-          if (dataFilter === 'all' || dataFilter === 'receivers' || dataFilter === 'sodexo') {
+          // Always load receivers for 'suppilog' filter to show where donations go
+          if (dataFilter === 'all' || dataFilter === 'receivers' || dataFilter === 'suppilog') {
             const receiverFeatures = (data.receivers || []).map((receiver: ReceiverData) => ({
               type: 'Feature',
               geometry: {

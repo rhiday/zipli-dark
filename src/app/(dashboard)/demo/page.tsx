@@ -86,7 +86,7 @@ export default function CO2AnalyzerPage() {
     setIsFetchingMenu(true)
     
     try {
-      const res = await fetch("/api/fetch-sodexo-menu", {
+      const res = await fetch("/api/fetch-suppilog-menu", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ restaurantId, period }),
@@ -110,7 +110,7 @@ export default function CO2AnalyzerPage() {
         rows: payload.data.rows,
         summary: payload.summary,
         fileName: `${restaurant?.name || restaurantId}-menu.json`,
-        sheetName: "Sodexo Menu",
+        sheetName: "Suppilog Menu",
         totalRows: payload.data.rows.length,
       })
       setStep("preview")
@@ -203,16 +203,16 @@ export default function CO2AnalyzerPage() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Estimate from Menu</h3>
                 <p className="text-muted-foreground">
-                  Fetch menu data automatically from Sodexo restaurants
+                  Fetch menu data automatically from Suppilog restaurants
                 </p>
                 <div className="flex items-center gap-2 mt-4">
                   <img 
-                    src="/logos/sodexo.png" 
-                    alt="Sodexo" 
+                    src="/logos/suppilog.png" 
+                    alt="Suppilog" 
                     className="h-6 w-auto opacity-70"
                     onError={(e) => { e.currentTarget.style.display = 'none' }}
                   />
-                  <span className="text-xs text-muted-foreground">Sodexo Finland</span>
+                  <span className="text-xs text-muted-foreground">Suppilog Finland</span>
                 </div>
               </CardContent>
             </Card>
@@ -349,7 +349,7 @@ export default function CO2AnalyzerPage() {
 
                 <div className="rounded-lg border bg-muted/50 p-4">
                   <p className="text-sm text-muted-foreground">
-                    <strong>How it works:</strong> We fetch the weekly menu data directly from Sodexo&apos;s 
+                    <strong>How it works:</strong> We fetch the weekly menu data directly from Suppilog&apos;s 
                     public API. The AI will then categorize each dish and estimate CO₂ emissions based 
                     on typical portion sizes and ingredients.
                   </p>

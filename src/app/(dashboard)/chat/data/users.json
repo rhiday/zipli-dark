@@ -2,42 +2,42 @@
   {
     "id": "1",
     "name": "Tarja Siik",
-    "email": "tarja.siik@sodexo.com",
+    "email": "tarja.siik@suppilog.fi",
     "avatar": "/avatars/01.png",
     "status": "online",
-    "lastSeen": "2025-01-15T13:30:00Z",
+    "lastSeen": "2026-03-18T13:30:00Z",
     "role": "Kitchen Manager",
-    "department": "Sodexo Vilppulantie"
+    "department": "Ravintola Kappeli"
   },
   {
     "id": "2",
     "name": "Mikko Järvinen",
-    "email": "mikko.jarvinen@sodexo.com",
+    "email": "mikko.jarvinen@suppilog.fi",
     "avatar": "/avatars/02.png",
     "status": "away",
-    "lastSeen": "2025-01-15T09:45:00Z",
+    "lastSeen": "2026-03-18T09:45:00Z",
     "role": "Kitchen Operator",
-    "department": "Sodexo Kamppi"
+    "department": "Ravintola Sea Horse"
   },
   {
     "id": "3",
     "name": "Anna Kovalainen",
-    "email": "anna.kovalainen@sodexo.com",
+    "email": "anna.kovalainen@suppilog.fi",
     "avatar": "/avatars/03.png",
     "status": "online",
-    "lastSeen": "2025-01-15T10:25:00Z",
+    "lastSeen": "2026-03-18T10:25:00Z",
     "role": "Operations Manager",
-    "department": "Sodexo Airport"
+    "department": "Ravintola Juuri"
   },
   {
     "id": "4",
     "name": "Maria Hakkarainen",
-    "email": "maria.hakkarainen@sodexo.com",
+    "email": "maria.hakkarainen@suppilog.fi",
     "avatar": "/avatars/04.png",
     "status": "offline",
-    "lastSeen": "2025-01-14T18:30:00Z",
+    "lastSeen": "2026-03-17T18:30:00Z",
     "role": "Kitchen Manager",
-    "department": "Sodexo Pihlis"
+    "department": "Ravintola Grotesk"
   },
   {
     "id": "5",
@@ -45,7 +45,7 @@
     "email": "jyrki.brandt@etappiry.net",
     "avatar": "/avatars/05.png",
     "status": "online",
-    "lastSeen": "2025-01-15T10:20:00Z",
+    "lastSeen": "2026-03-18T10:20:00Z",
     "role": "Food Coordinator",
     "department": "Kohtaamispaikka Tsänssi"
   }

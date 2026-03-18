@@ -17,10 +17,10 @@ export interface BrandSettings {
 }
 
 export const DEFAULT_BRAND_SETTINGS: BrandSettings = {
-  logoUrl: '/logos/sodexo.png',
+  logoUrl: '/logos/suppilog.png',
   colors: {
-    primary: '#e11d48', // Sodexo red
-    secondary: '#2563eb', // Sodexo blue  
+    primary: '#6b21a8', // Suppilog purple
+    secondary: '#2563eb', // Suppilog blue
     accent: '#f97316', // Orange accent
   },
   typography: {
