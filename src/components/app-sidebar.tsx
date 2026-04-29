@@ -66,9 +66,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuButton size="lg" asChild>
               <Link href="/dashboard">
                 <div className="flex aspect-square size-12 items-center justify-center">
-                  <Image 
-                    src="/zipli-white.svg" 
-                    alt="Zipli" 
+                  <Image
+                    src="/zipli.png"
+                    alt="Zipli"
                     width={40}
                     height={40}
                     className="object-contain"

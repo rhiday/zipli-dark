@@ -22,7 +22,7 @@ export function QuickActions() {
     <div className="flex items-center space-x-2">
       <LogDonationDialog
         trigger={
-          <Button className="cursor-pointer">
+          <Button className="cursor-pointer !bg-[#99F870] !border-[#99F870] !text-[#021D13] hover:!bg-[#99F870]/90">
             <Plus className="h-4 w-4 mr-2" />
             Log Donation
           </Button>

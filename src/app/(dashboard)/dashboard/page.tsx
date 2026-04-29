@@ -30,10 +30,10 @@ export default function Dashboard2() {
       <div className="flex flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <Avatar className="h-12 w-12">
-              <AvatarImage src="/avatar.png" alt="Olivia" />
-              <AvatarFallback>OL</AvatarFallback>
+              <AvatarImage src="/avatar.png" alt="Anni" />
+              <AvatarFallback>AN</AvatarFallback>
             </Avatar>
-            <h1 className="text-2xl font-bold tracking-tight">Welcome back, Olivia</h1>
+            <h1 className="text-2xl font-bold tracking-tight">Welcome back, Anni</h1>
           </div>
           <QuickActions />
         </div>

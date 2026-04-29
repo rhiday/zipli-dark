@@ -566,7 +566,7 @@ export function FoodSurplusMap() {
         onClick={() => setSelectedLocation(null)}
         mapboxAccessToken={MAPBOX_TOKEN}
         style={{ width: '100%', height: '100%' }}
-        mapStyle="mapbox://styles/mapbox/dark-v11"
+        mapStyle="mapbox://styles/mapbox/light-v11"
         padding={{ left: 200, right: 50, top: 50, bottom: 50 }}
       >
         {/* Circle layer - rendered when heatmap toggled on */}
