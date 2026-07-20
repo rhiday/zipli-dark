@@ -1,7 +1,7 @@
 "use client";
 /* eslint-disable react-hooks/set-state-in-effect */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SiteHeader } from "@/components/site-header";
@@ -9,6 +9,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { ThemeCustomizer, ThemeCustomizerTrigger } from "@/components/theme-customizer";
 import { useSidebarConfig } from "@/hooks/use-sidebar-config";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function DashboardLayout({
   children,
@@ -17,24 +18,18 @@ export default function DashboardLayout({
 }) {
   const router = useRouter();
   const [themeCustomizerOpen, setThemeCustomizerOpen] = React.useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const { isAuthenticated, isLoading } = useAuth();
   const { config } = useSidebarConfig();
 
-  // Check authentication on mount
+  // Redirect to login if not authenticated
   useEffect(() => {
-    const authToken = localStorage.getItem("auth_token");
-    
-    if (!authToken) {
-      // Not authenticated, redirect to login
+    if (!isLoading && !isAuthenticated) {
       router.replace("/sign-in");
-    } else {
-      // Authenticated, allow access
-      setIsAuthenticated(true);
     }
-  }, [router]);
+  }, [isAuthenticated, isLoading, router]);
 
   // Show loading state while checking auth
-  if (isAuthenticated === null) {
+  if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">

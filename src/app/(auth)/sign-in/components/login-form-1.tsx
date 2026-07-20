@@ -21,25 +21,21 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import { useAuth } from "@/contexts/AuthContext"
 
 const loginFormSchema = z.object({
   email: z.string().email("Invalid email address"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
+  password: z.string().min(1, "Password is required"),
 })
 
 type LoginFormValues = z.infer<typeof loginFormSchema>
-
-// Mock credentials
-const MOCK_CREDENTIALS = {
-  email: "demo@zipli.test",
-  password: "slush2025"
-}
 
 export function LoginForm1({
   className,
   ...props
 }: React.ComponentProps<"div">) {
   const router = useRouter()
+  const { login } = useAuth()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -55,24 +51,18 @@ export function LoginForm1({
     setIsLoading(true)
     setError(null)
 
-    // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 500))
-
-    // Mock authentication check
-    if (
-      values.email === MOCK_CREDENTIALS.email &&
-      values.password === MOCK_CREDENTIALS.password
-    ) {
-      // Generate token timestamp
-      const timestamp = Date.now()
-      // Store auth token in localStorage
-      localStorage.setItem("auth_token", `mock_token_${timestamp}`)
-      localStorage.setItem("user_email", values.email)
-      
-      // Redirect to dashboard
-      router.push("/dashboard");
-    } else {
-      setError("Invalid email or password. Use demo@zipli.test / slush2025")
+    try {
+      await login({
+        email: values.email,
+        password: values.password,
+      })
+      // Login successful - wait a moment for auth state to update, then redirect
+      setTimeout(() => {
+        router.push("/dashboard")
+      }, 200)
+    } catch (err) {
+      // Error is already handled by AuthContext with toast notification
+      setError("Invalid email or password. Please try again.")
       setIsLoading(false)
     }
   }
@@ -138,7 +128,7 @@ export function LoginForm1({
                 </div>
                 <div className="text-center text-sm text-white/70">
                   Don&apos;t have an account?{" "}
-                  <a href="#" className="text-white/70 underline underline-offset-4">
+                  <a href="/sign-up" className="text-white/70 underline underline-offset-4 hover:text-white">
                     Sign up
                   </a>
                 </div>
